@@ -235,7 +235,7 @@ Sub lblLinija_Click
 End Sub
 
 Sub ProvjeraDatumaNaDatoteci
-'	File.Delete(Starter.SourceFolder, Starter.indeks & "lnk1")
+	File.Delete(Starter.SourceFolder, Starter.indeks & "lnk1")
 	If File.Exists(Starter.SourceFolder, Starter.indeks & "lnk1") Then
 		DateTime.DateFormat = "dd"'.MM.yyyy"
 		Log(DateTime.Date(File.LastModified(Starter.SourceFolder, Starter.indeks & "lnk1")))

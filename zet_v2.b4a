@@ -223,6 +223,8 @@ Sub trazi_Click
 End Sub
 
 Sub osvjezi_Click
+	Msgbox("Osvježavanje linija još ne radi dobro!", "Info")
+
 	Dim l As String = "http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251"
 	' autobus dnevne linije -> http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251
 	'
@@ -233,7 +235,7 @@ Sub osvjezi_Click
 	j.Download(l) 'link
 	Wait For (j) JobDone(j As HttpJob)
 	If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
-		ParsajSveAutobusneDnevneLinije(j.GetString)
+'		ParsajSveAutobusneDnevneLinije(j.GetString)
 	Else
 		Log("Greška kod D/L: " & j.ErrorMessage)
 	End If
@@ -304,12 +306,15 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	For i = 0 To lL.Size - 1
 		Dim sB As Int = lB.Get(i)
 		Dim sN As String = lN.Get(i)
+		sN = sN.Trim
 		Dim sL As String = lL.Get(i)
+		sL = sL.Trim
 		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${sB} AND nazivLinije = '${sN}' AND link = '${sL}'"$)
 		If Cursor1.RowCount = 0 Then
-			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${lL}', 1, 1)"$)
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${sL}', 1, 1)"$)
 		End If
 	Next
+	Cursor1.Close
 	ProgressDialogHide
 
 '	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
