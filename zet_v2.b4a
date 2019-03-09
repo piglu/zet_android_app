@@ -110,8 +110,8 @@ Library8=sql
 Library9=firebasenotifications
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~'  android:theme="@android:style/Theme.Translucent.NoTitleBar"~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'AddApplicationText(~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.appid"~\n~'		android:value="{NmIhHAw4WYGyuy1bWQqK}" />~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.apptoken"~\n~'		android:value="{7pK0VxJoRvnMzjqJndq25w}" />~\n~')~\n~~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~''.NoActionBar">~\n~'CreateResource(values, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~'        <item name="colorPrimary">#0098FF</item>~\n~'        <item name="colorPrimaryDark">#007CF5</item>~\n~'        <item name="colorAccent">#AAAA00</item>~\n~'        <item name="windowNoTitle">false</item>~\n~'        <item name="windowActionBar">true</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'SetApplicationAttribute(android:theme, "@style/LightTheme")~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~'CreateResource(values, colors.xml,~\n~'<resources>~\n~'    <color name="actionbar">#ff039be5</color>~\n~'	<color name="statusbar">#ff006db3</color>~\n~'	<color name="textColorPrimary">#ffffffff</color>~\n~'	<color name="navigationBar">#ff006db3</color>~\n~'</resources>~\n~')~\n~'CreateResource(values-v20, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">~\n~'        <item name="colorPrimary">#418BEA</item>~\n~'        <item name="colorPrimaryDark">#2C7FE8</item>~\n~'        <item name="colorAccent">#5698EC</item>~\n~'        <item name="windowNoTitle">true</item>~\n~'        <item name="windowActionBar">false</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Material.Light">~\n~'		 <item name="android:colorPrimary">@color/actionbar</item>~\n~'		 <item name="android:colorPrimaryDark">@color/statusbar</item>~\n~'		 <item name="android:textColorPrimary">@color/textColorPrimary</item>~\n~'		 <item name="android:navigationBarColor">@color/navigationBar</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'CreateResource(values-v14, theme.xml,~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Holo.Light">~\n~'		<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>~\n~'    </style>~\n~'	<style name="CustomActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">~\n~'	    <item name="android:background">@color/actionbar</item>~\n~'	</style>~\n~'</resources>~\n~')
 Module1=Starter
-Module10=lok_123_karta2
-Module11=CustomListView
+Module10=CustomListView
+Module11=lok_123_karta2
 Module12=B4XComboBox
 Module2=gps_pozicija
 Module3=lokacije_123
@@ -235,7 +235,7 @@ Sub osvjezi_Click
 	j.Download(l) 'link
 	Wait For (j) JobDone(j As HttpJob)
 	If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
-'		ParsajSveAutobusneDnevneLinije(j.GetString)
+		ParsajSveAutobusneDnevneLinije(j.GetString)
 	Else
 		Log("Greška kod D/L: " & j.ErrorMessage)
 	End If
@@ -254,52 +254,85 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	' regex za linkove href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)"
 	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
 	stranica = stranica.Replace("&nbsp;", " ")
-	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
+	
+	Dim components() As String
+	components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
 	Dim lB As List
 	Dim lN As List
 	Dim lL As List
 	lB.Initialize
 	lN.Initialize
 	lL.Initialize
-	Do While matcher1.Find = True
+	For i = 1 To components.Length - 1
+'		Log(components(i))
+		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components(i))
+		Do While matcher1.Find = True
 '		Log(matcher1.Group(1))
-		lB.Add(matcher1.Group(1))
+			lB.Add(matcher1.Group(1))
 '		Log(matcher1.Group(2))
-		lN.Add(matcher1.Group(2))
-	Loop
+			lN.Add(matcher1.Group(2))
+		Loop
 
-	matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, stranica)
-	Do While matcher1.Find = True
+		matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, components(i))
+		Do While matcher1.Find = True
 '		Log(matcher1.Group(1))
-		lL.Add(matcher1.Group(1))
-	Loop
+			lL.Add(matcher1.Group(1))
+		Loop
+
+		If matcher1.Find = False Then
+			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components(i))
+			Do While matcher1.Find = True
+				lL.Add(matcher1.Group(1))
+			Loop
+		End If
+	Next
+	
+'	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
+'	Dim lB As List
+'	Dim lN As List
+'	Dim lL As List
+'	lB.Initialize
+'	lN.Initialize
+'	lL.Initialize
+'	Do While matcher1.Find = True
+''		Log(matcher1.Group(1))
+'		lB.Add(matcher1.Group(1))
+''		Log(matcher1.Group(2))
+'		lN.Add(matcher1.Group(2))
+'	Loop
+'
+'	matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, stranica)
+'	Do While matcher1.Find = True
+''		Log(matcher1.Group(1))
+'		lL.Add(matcher1.Group(1))
+'	Loop
 	ProgressDialogHide
-
-'	Dim b1, n1, ll1, f1, w1 As List
-'	b1.Initialize
-'	n1.Initialize
-'	ll1.Initialize
-'	f1.Initialize
-'	w1.Initialize
-'	Dim Cursor1 As Cursor
-'	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link, favorit, widget FROM linije WHERE favorit = 2 OR widget = 2"$)
-'	For i = 0 To Cursor1.RowCount - 1
-'		Cursor1.Position = i
-''		Log(Cursor1.GetInt("brojLinije"))
-'		b1.Add(Cursor1.GetInt("brojLinije"))
-''		Log(Cursor1.GetString("nazivLinije"))
-'		n1.Add(Cursor1.GetString("nazivLinije"))
-''		Log(Cursor1.GetString("link"))
-'		ll1.Add(Cursor1.GetString("link"))
-''		Log(Cursor1.GetInt("favorit"))
-'		f1.Add(Cursor1.GetInt("favorit"))
-''		Log(Cursor1.GetInt("widget"))
-'		w1.Add(Cursor1.GetInt("widget"))
-'	Next
-'	Cursor1.Close
-
-'	Starter.upit.ExecNonQuery("DROP TABLE IF EXISTS linije")
-'	Starter.upit.ExecNonQuery("CREATE TABLE IF NOT EXISTS linije (id INTEGER PRIMARY KEY AUTOINCREMENT, tip INTEGER, brojLinije INTEGER, nazivLinije TEXT, dnevna INTEGER, link TEXT, favorit INTEGER, widget INTEGER)")
+	
+''	Dim b1, n1, ll1, f1, w1 As List
+''	b1.Initialize
+''	n1.Initialize
+''	ll1.Initialize
+''	f1.Initialize
+''	w1.Initialize
+''	Dim Cursor1 As Cursor
+''	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link, favorit, widget FROM linije WHERE favorit = 2 OR widget = 2"$)
+''	For i = 0 To Cursor1.RowCount - 1
+''		Cursor1.Position = i
+'''		Log(Cursor1.GetInt("brojLinije"))
+''		b1.Add(Cursor1.GetInt("brojLinije"))
+'''		Log(Cursor1.GetString("nazivLinije"))
+''		n1.Add(Cursor1.GetString("nazivLinije"))
+'''		Log(Cursor1.GetString("link"))
+''		ll1.Add(Cursor1.GetString("link"))
+'''		Log(Cursor1.GetInt("favorit"))
+''		f1.Add(Cursor1.GetInt("favorit"))
+'''		Log(Cursor1.GetInt("widget"))
+''		w1.Add(Cursor1.GetInt("widget"))
+''	Next
+''	Cursor1.Close
+'
+''	Starter.upit.ExecNonQuery("DROP TABLE IF EXISTS linije")
+''	Starter.upit.ExecNonQuery("CREATE TABLE IF NOT EXISTS linije (id INTEGER PRIMARY KEY AUTOINCREMENT, tip INTEGER, brojLinije INTEGER, nazivLinije TEXT, dnevna INTEGER, link TEXT, favorit INTEGER, widget INTEGER)")
 
 	ProgressDialogShow2("Osvježavam podatke o linijama...", False)
 	Dim Cursor1 As Cursor
@@ -317,12 +350,12 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	Cursor1.Close
 	ProgressDialogHide
 
-'	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
-'	For i = 0 To b1.Size - 1
-'		Log($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
-'		Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
-'	Next
-'	ProgressDialogHide
+''	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
+''	For i = 0 To b1.Size - 1
+''		Log($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
+''		Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
+''	Next
+''	ProgressDialogHide
 End Sub
 
 Sub o_Click
