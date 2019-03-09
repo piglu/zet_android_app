@@ -1,0 +1,625 @@
+﻿Build1=Default,com.stanks.zet_v2,Full,Ads
+File1=arrow.png
+File10=db_obrisi.png
+File11=db_obrisi1.png
+File12=detalj.bal
+File13=detalj.png
+File14=fav_widget.bal
+File15=favorit_oduzmi.png
+File16=favorite_dodaj.png
+File17=favoriti.bal
+File18=gps.png
+File19=k.png
+File2=arrow_d.png
+File20=k_widget.bal
+File21=k1.png
+File22=karta.bal
+File23=karta.png
+File24=karta1.png
+File25=karta2.png
+File26=kasni.png
+File27=kontrola.png
+File28=linije.db
+File29=linije-orig.db
+File3=bus1.png
+File30=lociranje.png
+File31=logo.png
+File32=lok123_stavka.bal
+File33=lokacije123.bal
+File34=mejn2.bal
+File35=narancasta.png
+File36=o.png
+File37=postavke.png
+File38=postavke1.png
+File39=street_view2.png
+File4=clv_stavka.bal
+File40=tram1.png
+File41=widget_makni.png
+File42=widget_umetni.png
+File43=zastoj.png
+File44=zelena.png
+File5=clv_stavka_d.bal
+File6=clv_stavka_f.bal
+File7=clv_stavkad.bal
+File8=clv_trazi.bal
+File9=crvena.png
+FileGroup1=Default Group
+FileGroup10=Default Group
+FileGroup11=Default Group
+FileGroup12=Default Group
+FileGroup13=Default Group
+FileGroup14=Default Group
+FileGroup15=Default Group
+FileGroup16=Default Group
+FileGroup17=Default Group
+FileGroup18=Default Group
+FileGroup19=Default Group
+FileGroup2=Default Group
+FileGroup20=Default Group
+FileGroup21=Default Group
+FileGroup22=Default Group
+FileGroup23=Default Group
+FileGroup24=Default Group
+FileGroup25=Default Group
+FileGroup26=Default Group
+FileGroup27=Default Group
+FileGroup28=Default Group
+FileGroup29=Default Group
+FileGroup3=Default Group
+FileGroup30=Default Group
+FileGroup31=Default Group
+FileGroup32=Default Group
+FileGroup33=Default Group
+FileGroup34=Default Group
+FileGroup35=Default Group
+FileGroup36=Default Group
+FileGroup37=Default Group
+FileGroup38=Default Group
+FileGroup39=Default Group
+FileGroup4=Default Group
+FileGroup40=Default Group
+FileGroup41=Default Group
+FileGroup42=Default Group
+FileGroup43=Default Group
+FileGroup44=Default Group
+FileGroup5=Default Group
+FileGroup6=Default Group
+FileGroup7=Default Group
+FileGroup8=Default Group
+FileGroup9=Default Group
+Group=Default Group
+IconFile=
+Library1=core
+Library10=okhttp
+Library11=fusedlocationprovider
+Library12=gps
+Library13=xui
+Library14=googlemapsextras
+Library15=phone
+Library16=eslocation2
+Library17=reflection
+Library18=preferenceactivity
+Library19=clipboard
+Library2=stringutils
+Library3=okhttputils2
+Library4=runtimepermissions
+Library5=googlemaps
+Library6=json
+Library7=javaobject
+Library8=sql
+Library9=firebasenotifications
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~'  android:theme="@android:style/Theme.Translucent.NoTitleBar"~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'AddApplicationText(~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.appid"~\n~'		android:value="{NmIhHAw4WYGyuy1bWQqK}" />~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.apptoken"~\n~'		android:value="{7pK0VxJoRvnMzjqJndq25w}" />~\n~')~\n~~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~''.NoActionBar">~\n~'CreateResource(values, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~'        <item name="colorPrimary">#0098FF</item>~\n~'        <item name="colorPrimaryDark">#007CF5</item>~\n~'        <item name="colorAccent">#AAAA00</item>~\n~'        <item name="windowNoTitle">false</item>~\n~'        <item name="windowActionBar">true</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'SetApplicationAttribute(android:theme, "@style/LightTheme")~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~'CreateResource(values, colors.xml,~\n~'<resources>~\n~'    <color name="actionbar">#ff039be5</color>~\n~'	<color name="statusbar">#ff006db3</color>~\n~'	<color name="textColorPrimary">#ffffffff</color>~\n~'	<color name="navigationBar">#ff006db3</color>~\n~'</resources>~\n~')~\n~'CreateResource(values-v20, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">~\n~'        <item name="colorPrimary">#418BEA</item>~\n~'        <item name="colorPrimaryDark">#2C7FE8</item>~\n~'        <item name="colorAccent">#5698EC</item>~\n~'        <item name="windowNoTitle">true</item>~\n~'        <item name="windowActionBar">false</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Material.Light">~\n~'		 <item name="android:colorPrimary">@color/actionbar</item>~\n~'		 <item name="android:colorPrimaryDark">@color/statusbar</item>~\n~'		 <item name="android:textColorPrimary">@color/textColorPrimary</item>~\n~'		 <item name="android:navigationBarColor">@color/navigationBar</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'CreateResource(values-v14, theme.xml,~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Holo.Light">~\n~'		<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>~\n~'    </style>~\n~'	<style name="CustomActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">~\n~'	    <item name="android:background">@color/actionbar</item>~\n~'	</style>~\n~'</resources>~\n~')
+Module1=Starter
+Module10=lok_123_karta2
+Module11=CustomListView
+Module12=B4XComboBox
+Module2=gps_pozicija
+Module3=lokacije_123
+Module4=trazi
+Module5=FirebaseMessaging
+Module6=kw2
+Module7=fav
+Module8=detalj
+Module9=detalj_stanice
+NumberOfFiles=44
+NumberOfLibraries=19
+NumberOfModules=12
+Version=8.8
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: ZET
+	#VersionCode: 1
+	#VersionName: 0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+	#AdditionalJar: com.google.android.gms:play-services-location
+	#AdditionalJar: com.google.android.gms:play-services-maps
+'	#AdditionalRes: ..\res
+'	#AdditionalJar: com.android.support:support-v4
+'	#AdditionalJar: com.android.support:design - Needed for the MaterialDateTimePicker library
+'	#AdditionalRes: ..\resource
+'	#Extends: android.support.v7.app.AppCompatActivity
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+'	Public manager As AHPreferenceManager
+'	Dim screen As AHPreferenceScreen
+'	Dim Manager As PreferenceManager
+	Dim manager As PreferenceManager
+	Dim screen As PreferenceScreen
+	Private xui As XUI
+	Private awake As PhoneWakeState
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Private B4XComboBox1 As B4XComboBox
+	Private clvMejn As CustomListView
+	Private imgVozilo As ImageView
+	Private lblBrojLinije As B4XView
+	Private btnFavorit As Button
+	Private btnDetalj As Button
+	Private btnAddToWidget As Button
+	Private lblPolazisteOdrediste As B4XView
+	Private t1, d1 As Int
+	Private ukupnoZaWidget As Int = 0
+	Type VoziloData (id As Int, brl As String, i1 As Bitmap, i2 As Bitmap, nal As String, f As Int, t As Int, d As Int, wdg As Int, i3 As Bitmap)
+End Sub
+
+#Region aktivnost
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("mejn2")
+
+	If FirstTime Then
+		CreatePreferenceScreen
+		If manager.GetAll.Size = 0 Then SetDefaults
+	End If
+
+	Dim cs As CSBuilder
+	Dim l As List
+	l.Initialize
+	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
+	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
+	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
+	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
+	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll))
+	
+	B4XComboBox1.SetItems(l)
+
+	Activity.AddMenuItem3("Postavke", "postavke", LoadBitmap(File.DirAssets, "postavke1.png"), True)
+	Activity.AddMenuItem3("Kontrole/zastoji/kašnjenja", "kontrole", LoadBitmap(File.DirAssets, "k1.png"), True)
+	Activity.AddMenuItem("Pretraživanje", "trazi")
+	Activity.AddMenuItem("Osvježi sve linije", "osvjezi")
+	Activity.AddMenuItem("O...", "o")
+'	Activity.AddMenuItem("test karte", "test")
+'	Activity.AddMenuItem3("Pretraživanje", "trazi", LoadBitmap(File.DirAssets, "trazi.png"), True)
+'	Activity.AddMenuItem3("O...", "o", LoadBitmap(File.DirAssets, "o.png"), True)
+End Sub
+
+'Sub test_Click
+'	StartActivity(lok_123_karta2)
+'End Sub
+
+Sub kontrole_Click
+	StartActivity(lokacije_123)
+End Sub
+
+Sub postavke_Click
+'	StartActivity(postavke)
+	StartActivity(screen.CreateIntent)
+End Sub
+
+Sub trazi_Click
+	StartActivity(trazi)
+End Sub
+
+Sub osvjezi_Click
+	Dim l As String = "http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251"
+	' autobus dnevne linije -> http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251
+	'
+	ProgressDialogShow2("Preuzimam podatke o linijama...", False)
+
+	Dim j As HttpJob
+	j.Initialize("", Me) 'name is empty as it is no longer needed
+	j.Download(l) 'link
+	Wait For (j) JobDone(j As HttpJob)
+	If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
+		ParsajSveAutobusneDnevneLinije(j.GetString)
+	Else
+		Log("Greška kod D/L: " & j.ErrorMessage)
+	End If
+
+	j.Release
+End Sub
+
+Sub ParsajSveAutobusneDnevneLinije(stranica As String)
+	Dim matcher1 As Matcher
+
+	File.Copy(Starter.SourceFolder, "linije.db", Starter.SourceFolder, "linije.db.orig")
+
+	' regex za sve autobusne dnevne linije za PDF datoteku odnosno za okretišta (trenutno 29) <a data-fileid="\d+" href="(.*)">(.*)</a>\s+
+	'
+	' regex za linije sa brojem -> >(\d+)(.*)</a></li>
+	' regex za linkove href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)"
+	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
+	stranica = stranica.Replace("&nbsp;", " ")
+	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
+	Dim lB As List
+	Dim lN As List
+	Dim lL As List
+	lB.Initialize
+	lN.Initialize
+	lL.Initialize
+	Do While matcher1.Find = True
+'		Log(matcher1.Group(1))
+		lB.Add(matcher1.Group(1))
+'		Log(matcher1.Group(2))
+		lN.Add(matcher1.Group(2))
+	Loop
+
+	matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, stranica)
+	Do While matcher1.Find = True
+'		Log(matcher1.Group(1))
+		lL.Add(matcher1.Group(1))
+	Loop
+	ProgressDialogHide
+
+'	Dim b1, n1, ll1, f1, w1 As List
+'	b1.Initialize
+'	n1.Initialize
+'	ll1.Initialize
+'	f1.Initialize
+'	w1.Initialize
+'	Dim Cursor1 As Cursor
+'	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link, favorit, widget FROM linije WHERE favorit = 2 OR widget = 2"$)
+'	For i = 0 To Cursor1.RowCount - 1
+'		Cursor1.Position = i
+''		Log(Cursor1.GetInt("brojLinije"))
+'		b1.Add(Cursor1.GetInt("brojLinije"))
+''		Log(Cursor1.GetString("nazivLinije"))
+'		n1.Add(Cursor1.GetString("nazivLinije"))
+''		Log(Cursor1.GetString("link"))
+'		ll1.Add(Cursor1.GetString("link"))
+''		Log(Cursor1.GetInt("favorit"))
+'		f1.Add(Cursor1.GetInt("favorit"))
+''		Log(Cursor1.GetInt("widget"))
+'		w1.Add(Cursor1.GetInt("widget"))
+'	Next
+'	Cursor1.Close
+
+'	Starter.upit.ExecNonQuery("DROP TABLE IF EXISTS linije")
+'	Starter.upit.ExecNonQuery("CREATE TABLE IF NOT EXISTS linije (id INTEGER PRIMARY KEY AUTOINCREMENT, tip INTEGER, brojLinije INTEGER, nazivLinije TEXT, dnevna INTEGER, link TEXT, favorit INTEGER, widget INTEGER)")
+
+	ProgressDialogShow2("Osvježavam podatke o linijama...", False)
+	Dim Cursor1 As Cursor
+	For i = 0 To lL.Size - 1
+		Dim sB As Int = lB.Get(i)
+		Dim sN As String = lN.Get(i)
+		Dim sL As String = lL.Get(i)
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${sB} AND nazivLinije = '${sN}' AND link = '${sL}'"$)
+		If Cursor1.RowCount = 0 Then
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${lL}', 1, 1)"$)
+		End If
+	Next
+	ProgressDialogHide
+
+'	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
+'	For i = 0 To b1.Size - 1
+'		Log($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
+'		Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
+'	Next
+'	ProgressDialogHide
+End Sub
+
+Sub o_Click
+	MsgboxAsync("Vozni red ZET autobusnih i tramvajskih linija.", "ZET v1.0")
+End Sub
+
+Sub SetDefaults
+	'defaults are only set on the first run.
+	manager.SetBoolean("check1", True)
+	manager.SetBoolean("check2", False)
+	manager.SetBoolean("check3", False)
+	manager.SetBoolean("check4", False)
+	manager.SetString("edit1", "60")
+'	manager.SetString("list1", "Prikaži vrijeme za polazište/odredište")
+'	manager.SetString("edit1", 1000)
+'	manager.SetBoolean("check2", False)
+'	manager.SetString("edit1", "Hello!")
+'	manager.SetString("list1", "Black")
+End Sub
+
+Sub CreatePreferenceScreen
+	'create two categories
+	Dim cat1, cat2, cat3 As PreferenceCategory
+	
+	screen.Initialize("Postavke ekrana", "")
+	cat1.Initialize("Svi ekrani")
+	cat1.AddCheckBox("check1", "Bez čuvara ekrana", "Ekran uvijek upaljen", False)
+'	cat1.AddCheckBox("check2", "Checkbox2", "This is Checkbox2", False)
+'	cat1.AddEditText("edit1", "EditText1", "This is EditText1", "")
+	
+	cat2.Initialize("Prikaz lokacija na karti")
+	cat2.AddCheckBox("check2", "Lokacije kontrola", "Prikazuje zadnje lokacije kontrola na karti", False)
+	cat2.AddCheckBox("check3", "Lokacije zastoja", "Prikazuje zadnje lokacije zastoja na karti", False)
+	cat2.AddCheckBox("check4", "Lokacije kašnjenja", "Prikazuje zadnje lokacije kašnjenja na karti", False)
+'	cat2.AddCheckBox("check2", "Prikaži zadnje
+'	cat2.AddCheckBox("check2", "Pratiti unutar zadnje prijavljene lokacije", "Aplikacija prati događaje i šalje notifikacije unutar zadnje prijavljene lokacije", False)
+'	cat2.AddEditText("edit1", "Radijus kruga praćenja", "Radijus u metrima", 1000)
+'	cat2.AddList("list1", "List1", "This is List1", "", _
+	'        Array As String("Black", "Red", "Green", "Blue"))
+
+	cat3.Initialize("Postavke za widget")
+	cat3.AddEditText("edit1", "Vrijeme osvježavanja podataka (min)", "", "60")
+'	cat3.AddList("list1", "Prikaz vremena sa polazišta/odredišta/po stanicama", "", "Prikaži vrijeme za polazište/odredište", Array As String("Prikaži vrijeme za polazište/odredište", "Prikaži vrijeme za stanice"))
+
+	'add the categories to the main screen
+	screen.AddPreferenceCategory(cat1)
+	screen.AddPreferenceCategory(cat2)
+	screen.AddPreferenceCategory(cat3)
+End Sub
+
+Sub Activity_Resume
+	Dim ph As Phone
+
+	ph.SetScreenOrientation(1)
+
+	If manager.GetBoolean("check1") Then
+		awake.KeepAlive(True)
+	End If
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	awake.ReleaseKeepAlive
+	CallSubDelayed(Starter, "StopGPS")
+End Sub
+#End Region
+
+Sub B4XComboBox1_SelectedIndexChanged (Index As Int)
+	clvMejn.Clear
+
+	Select Index
+		Case 0	' autobusi dnevne linije
+			t1 = 1
+			d1 = 1
+			DodajStavke(1, 1)
+		Case 1	' autobusi noćne linije
+			t1 = 1
+			d1 = 2
+			DodajStavke(1, 2)
+		Case 2	' tramvaji dnevne linije
+			t1 = 2
+			d1 = 1
+			DodajStavke(2, 1)
+		Case 3	' tramvaji noćne linije
+			t1 = 2
+			d1 = 2
+			DodajStavke(2, 2)
+		Case 4	' favoriti
+			DodajStavke_F
+	End Select
+End Sub
+
+Sub DodajStavke(t As Int, d As Int)
+	If t = 1 Then	' bitmap autobus dnevne/noćne linije
+		Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
+	Else
+		Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
+	End If
+	Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+
+	Dim Cursor1 As Cursor
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		Dim tp As VoziloData
+		tp.Initialize
+		tp.id = Cursor1.GetInt("id")
+		Dim tt As Int = Cursor1.GetInt("dnevna")
+		If tt = 1 Then
+			tp.brl = Cursor1.GetInt("brojLinije")
+		Else
+			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+		End If
+		tp.i1 = img1
+		tp.i2 = img2
+		tp.wdg = Cursor1.GetInt("widget")
+		If tp.wdg = 1 Then
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+		Else
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+		End If
+		tp.i3 = img3
+		tp.nal = Cursor1.GetString("nazivLinije")
+		tp.f = Cursor1.GetInt("favorit")
+		tp.t = Cursor1.GetInt("tip")
+		tp.d = Cursor1.GetInt("dnevna")
+		Dim p As B4XView = xui.CreatePanel("")
+		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 88dip)'108dip)
+		clvMejn.Add(p, tp)
+	Next
+	Cursor1.Close
+End Sub
+
+Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clvMejn.Size - 1)
+		Dim p As B4XView = clvMejn.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clvMejn.GetValue(i)
+			p.LoadLayout("clv_stavka")
+			p.Color = Colors.White
+			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+End Sub
+
+'
+' favoriti
+'
+Sub DodajStavke_F
+	Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+	Dim Cursor1 As Cursor
+
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget FROM linije WHERE favorit = ${2} ORDER by brojLinije"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		Dim tt As Int = Cursor1.GetInt("dnevna")
+		If Cursor1.GetInt("tip") = 1 And Cursor1.GetInt("dnevna") = 1 Or Cursor1.GetInt("dnevna") = 2 Then
+			Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
+		Else
+			Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
+		End If
+		If Cursor1.GetInt("widget") = 1 Then
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+		Else
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+		End If
+		Starter.nocna = False
+		Dim tp As VoziloData
+		tp.Initialize
+		tp.id = Cursor1.GetInt("id")
+		If tt = 1 Then
+			tp.brl = Cursor1.GetInt("brojLinije")
+		Else
+			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+		End If
+		tp.i1 = img1
+		tp.i2 = img2
+		tp.i3 = img3
+		tp.nal = Cursor1.GetString("nazivLinije")
+		tp.f = Cursor1.GetInt("favorit")
+		tp.t = Cursor1.GetInt("tip")
+		tp.d = Cursor1.GetInt("dnevna")
+		tp.wdg = Cursor1.GetInt("widget")
+		Dim p As B4XView = xui.CreatePanel("")
+		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
+		clvMejn.Add(p, tp)
+	Next
+	Cursor1.Close
+End Sub
+
+#Region stavka_btn
+Sub btnDetalj_Click
+	Dim index As Int = clvMejn.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim lblN As B4XView = pnl.GetView(2)
+	Dim btn As Button = pnl.getview(3)
+	Dim lblB As B4XView = pnl.GetView(4)
+
+	Starter.nazivLinije = lblN.Text.Replace(" smjer ", " - ")'lblB.Text & " - " & lblN.Text
+	Starter.indeks = btn.Tag'index
+'	Starter.iz = 2
+	Starter.brojLinije = lblB.Text
+	Dim tp As VoziloData = clvMejn.GetValue(index)
+'	t1 = tp.t
+	d1 = tp.d
+	If d1 = 1 Then
+		Starter.nocna = False
+	Else
+		Starter.nocna = True
+	End If
+	StartActivity(detalj)
+End Sub
+
+Sub btnFavorit_Click
+	Dim index As Int = clvMejn.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim btn As Button = pnl.GetView(3)
+	Dim lblN As B4XView = pnl.GetView(2)
+	Dim nS As String = lblN.Text
+
+	Dim tp As VoziloData = clvMejn.GetValue(index)
+	t1 = tp.t
+	d1 = tp.d
+	nS = nS.Replace(" smjer ", " - ")
+	Dim Cursor1 As Cursor
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		Log(Cursor1.GetInt("brojLinije"))
+		Log(Cursor1.GetString("nazivLinije"))
+		Dim favorit As Int = Cursor1.GetInt("favorit")
+		If favorit = 1 Then	' nije favorit
+			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+			lblN.Color = Colors.Green
+			btn.SetBackgroundImage(bmpFavorit)
+			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 2 WHERE id = ${btn.Tag}"$)
+		Else
+			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+			lblN.Color = Colors.white
+			btn.SetBackgroundImage(bmpFavorit)
+			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 1 WHERE id = ${btn.Tag}"$)
+		End If
+	Next
+	Cursor1.Close
+End Sub
+
+Sub btnAddToWidget_Click
+	Dim index As Int = clvMejn.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim btn As Button = pnl.GetView(5)
+	
+	Dim tp As VoziloData = clvMejn.GetValue(index)
+	Dim t1, d1 As Int
+	t1 = tp.t
+	d1 = tp.d
+	Dim ww As Int = tp.wdg
+	Log(ww)
+	Dim Cursor1 As Cursor
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, widget, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+'		Dim w1 As Int = Cursor1.GetInt("widget")
+		If ww = 1 Then	' ako nije widget, onda ga postavi ako korisnik želi
+			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			btn.SetBackgroundImage(bmpWidget)
+			Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 2 WHERE id = ${btn.Tag}"$)
+			ukupnoZaWidget = ukupnoZaWidget + 1
+			If ukupnoZaWidget > 5 Then
+				Msgbox("Widget podržava samo 5 linija!", "Info")
+			End If
+		Else
+			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			btn.SetBackgroundImage(bmpWidget)
+			Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 1 WHERE id = ${btn.Tag}"$)
+			ukupnoZaWidget = ukupnoZaWidget - 1
+		End If
+	Next
+	Cursor1.Close
+End Sub
+#End Region

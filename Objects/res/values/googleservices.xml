@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://zet-v2.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">236710872058</string>
+  <string name="google_storage_bucket" translatable="false">zet-v2.appspot.com</string>
+  <string name="project_id" translatable="false">zet-v2</string>
+  <string name="google_app_id" translatable="false">1:236710872058:android:14f60a2b2491b395</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAC0JS6AX9sXcN_cEALLWjzA9VpqoHzuHU</string>
+  <string name="google_api_key" translatable="false">AIzaSyAC0JS6AX9sXcN_cEALLWjzA9VpqoHzuHU</string>
+  <string name="default_web_client_id" translatable="false">236710872058-01a6sk969022mskaj1sclmbg1pa8i41g.apps.googleusercontent.com</string>
+</resources>
