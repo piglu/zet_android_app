@@ -246,7 +246,7 @@ End Sub
 Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	Dim matcher1 As Matcher
 
-	File.Copy(Starter.SourceFolder, "linije.db", Starter.SourceFolder, "linije.db.orig")
+'	File.Copy(Starter.SourceFolder, "linije.db", Starter.SourceFolder, "linije.db.orig")
 
 	' regex za sve autobusne dnevne linije za PDF datoteku odnosno za okretišta (trenutno 29) <a data-fileid="\d+" href="(.*)">(.*)</a>\s+
 	'
@@ -257,36 +257,55 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	
 	Dim components() As String
 	components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
-	Dim lB As List
-	Dim lN As List
-	Dim lL As List
-	lB.Initialize
-	lN.Initialize
-	lL.Initialize
-	For i = 1 To components.Length - 1
-'		Log(components(i))
-		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components(i))
-		Do While matcher1.Find = True
-'		Log(matcher1.Group(1))
-			lB.Add(matcher1.Group(1))
-'		Log(matcher1.Group(2))
-			lN.Add(matcher1.Group(2))
-		Loop
-
-		matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, components(i))
-		Do While matcher1.Find = True
-'		Log(matcher1.Group(1))
-			lL.Add(matcher1.Group(1))
-		Loop
-
-		If matcher1.Find = False Then
-			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components(i))
-			Do While matcher1.Find = True
-				lL.Add(matcher1.Group(1))
-			Loop
-		End If
-	Next
+'	Dim lB As List
+'	Dim lN As List
+'	Dim lL As List
+'	lB.Initialize
+'	lN.Initialize
+'	lL.Initialize
+	Dim mB, mL As Map
+	mB.Initialize
+	mL.Initialize
+'	For i = 1 To components.Length - 1
+'		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components(i))
+'		Do While matcher1.Find = True
+'			mB.Put(matcher1.Group(1) & ";" & i, matcher1.Group(2))
+'		Loop
+'	Next
 	
+	For i = 1 To components.Length - 1
+		Dim s As String = components(i)
+		Dim components2() As String
+		components2 = Regex.Split("<ul>", s)
+		For j = 1 To components2.Length - 1
+			Log(components2(j))
+			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
+			Do While matcher1.Find = True
+				mB.Put(matcher1.Group(1) & ";" & j, matcher1.Group(2))
+			Loop
+			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, components2(j))
+			Do While matcher1.Find = True
+				mL.Put(matcher1.Group(1) & ";" & j, "")
+			Loop
+		Next
+	Next
+
+	For i = 1 To components.Length - 1
+		Dim s As String = components(i)
+		Dim components2() As String
+		components2 = Regex.Split("<ul>", s)
+		For j = 1 To components2.Length - 1
+			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components2(j))
+			Do While matcher1.Find = True
+				mL.Put(matcher1.Group(1) & ";" & j, "")
+			Loop
+		Next
+	Next
+
+	Log(mB.Size)
+	Log(mB)
+	Log(mL.Size)
+	Log(mL)
 '	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
 '	Dim lB As List
 '	Dim lN As List
@@ -335,19 +354,19 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 ''	Starter.upit.ExecNonQuery("CREATE TABLE IF NOT EXISTS linije (id INTEGER PRIMARY KEY AUTOINCREMENT, tip INTEGER, brojLinije INTEGER, nazivLinije TEXT, dnevna INTEGER, link TEXT, favorit INTEGER, widget INTEGER)")
 
 	ProgressDialogShow2("Osvježavam podatke o linijama...", False)
-	Dim Cursor1 As Cursor
-	For i = 0 To lL.Size - 1
-		Dim sB As Int = lB.Get(i)
-		Dim sN As String = lN.Get(i)
-		sN = sN.Trim
-		Dim sL As String = lL.Get(i)
-		sL = sL.Trim
-		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${sB} AND nazivLinije = '${sN}' AND link = '${sL}'"$)
-		If Cursor1.RowCount = 0 Then
-			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${sL}', 1, 1)"$)
-		End If
-	Next
-	Cursor1.Close
+'	Dim Cursor1 As Cursor
+'	For i = 0 To lL.Size - 1
+'		Dim sB As Int = lB.Get(i)
+'		Dim sN As String = lN.Get(i)
+'		sN = sN.Trim
+'		Dim sL As String = lL.Get(i)
+'		sL = sL.Trim
+'		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${sB} AND nazivLinije = '${sN}' AND link = '${sL}'"$)
+'		If Cursor1.RowCount = 0 Then
+'			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${sL}', 1, 1)"$)
+'		End If
+'	Next
+'	Cursor1.Close
 	ProgressDialogHide
 
 ''	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
