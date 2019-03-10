@@ -281,31 +281,84 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 			Log(components2(j))
 			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
 			Do While matcher1.Find = True
-				mB.Put(matcher1.Group(1) & ";" & j, matcher1.Group(2))
+				Dim s As String = matcher1.Group(2)
+				If s.Contains("SASI") Then
+					s = "ZAGREB (ZAPRUĐE) - SASI"
+				End If
+				s = s.Trim
+				mB.Put(matcher1.Group(1) & ";" & j, s)
 			Loop
-			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, components2(j))
+			matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
 			Do While matcher1.Find = True
-				mL.Put(matcher1.Group(1) & ";" & j, "")
+				Dim s As String = matcher1.Group(1)
+				If s.Contains("pdf") Or s.Contains("PDF") Then
+					'
+					'
+					'
+					' linija 607 -> sprema samo broj ne i ostatak stringa!!!!!
+					' provjeriti obavetno ASAP!!!!!
+					' ISPRAVLJENO! dodati u bazu...
+					'
+					'
+					If s.Contains("607") Then
+						Log(s)
+						s = "607"
+						s = s & ";" & j
+						mL.Put(s, matcher1.Group(1))
+					Else
+						s = s.SubString(s.LastIndexOf("/")+1)
+						s = s.SubString2(0, s.IndexOf("."))
+						s = s & ";" & j
+						mL.Put(s, matcher1.Group(1))
+						Log(mL.Get("607 sm - sopot - sm solo;1"))
+						Log(mL.Get("607 sm - sopot - sm solo;2"))
+					End If
+				Else
+					s = s.SubString(s.IndexOf("=")+1)
+					s = s & ";" & j
+					mL.Put(s, matcher1.Group(1))
+				End If
 			Loop
 		Next
 	Next
 
-	For i = 1 To components.Length - 1
-		Dim s As String = components(i)
-		Dim components2() As String
-		components2 = Regex.Split("<ul>", s)
-		For j = 1 To components2.Length - 1
-			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components2(j))
-			Do While matcher1.Find = True
-				mL.Put(matcher1.Group(1) & ";" & j, "")
-			Loop
-		Next
-	Next
-
+'	For i = 1 To components.Length - 1
+'		Dim s As String = components(i)
+'		Dim components2() As String
+'		components2 = Regex.Split("<ul>", s)
+'		For j = 1 To components2.Length - 1
+'			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components2(j))
+'			Do While matcher1.Find = True
+'				mL.Put(matcher1.Group(1) & ";" & j, "")
+'			Loop
+'		Next
+'	Next
+'
+'	For i = 0 To mB.Size - 1
+'		Dim br As String = mB.GetKeyAt(i)
+'		Dim ln As String = mL.GetKeyAt(i)
+'		If ln.Contains(br) Then
+'			Dim bb As String = br.SubString2(0, br.IndexOf(";"))
+'			Dim nn As String = mB.GetValueAt(i)
+'			Dim ll As String = mL.Get(bb)
+'			Log(bb)
+'			Log(nn)
+'			Log(ll)
+'		End If
+'	Next
 	Log(mB.Size)
 	Log(mB)
 	Log(mL.Size)
 	Log(mL)
+	For i = 0 To mB.Size - 1
+		Dim kljuc As String = mB.GetKeyAt(i)
+'		If kljuc.Contains("607") Then
+'			Log(mL.Get("607 sm - sopot - sm solo;1"))
+'			Log(mL.Get("607 sm - sopot - sm solo;2"))
+'		End If
+		Log(mB.Get(kljuc))
+		Log(mL.Get(kljuc))
+	Next
 '	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
 '	Dim lB As List
 '	Dim lN As List
