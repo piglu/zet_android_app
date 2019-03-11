@@ -320,56 +320,7 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	Next
 	If Cursor1.IsInitialized Then Cursor1.Close
 	ProgressDialogHide
-	
-''	Dim b1, n1, ll1, f1, w1 As List
-''	b1.Initialize
-''	n1.Initialize
-''	ll1.Initialize
-''	f1.Initialize
-''	w1.Initialize
-''	Dim Cursor1 As Cursor
-''	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link, favorit, widget FROM linije WHERE favorit = 2 OR widget = 2"$)
-''	For i = 0 To Cursor1.RowCount - 1
-''		Cursor1.Position = i
-'''		Log(Cursor1.GetInt("brojLinije"))
-''		b1.Add(Cursor1.GetInt("brojLinije"))
-'''		Log(Cursor1.GetString("nazivLinije"))
-''		n1.Add(Cursor1.GetString("nazivLinije"))
-'''		Log(Cursor1.GetString("link"))
-''		ll1.Add(Cursor1.GetString("link"))
-'''		Log(Cursor1.GetInt("favorit"))
-''		f1.Add(Cursor1.GetInt("favorit"))
-'''		Log(Cursor1.GetInt("widget"))
-''		w1.Add(Cursor1.GetInt("widget"))
-''	Next
-''	Cursor1.Close
-'
-''	Starter.upit.ExecNonQuery("DROP TABLE IF EXISTS linije")
-''	Starter.upit.ExecNonQuery("CREATE TABLE IF NOT EXISTS linije (id INTEGER PRIMARY KEY AUTOINCREMENT, tip INTEGER, brojLinije INTEGER, nazivLinije TEXT, dnevna INTEGER, link TEXT, favorit INTEGER, widget INTEGER)")
-
-	ProgressDialogShow2("Osvježavam podatke o linijama...", False)
-'	Dim Cursor1 As Cursor
-'	For i = 0 To lL.Size - 1
-'		Dim sB As Int = lB.Get(i)
-'		Dim sN As String = lN.Get(i)
-'		sN = sN.Trim
-'		Dim sL As String = lL.Get(i)
-'		sL = sL.Trim
-'		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${sB} AND nazivLinije = '${sN}' AND link = '${sL}'"$)
-'		If Cursor1.RowCount = 0 Then
-'			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${sB}, '${sN}', 1, '${sL}', 1, 1)"$)
-'		End If
-'	Next
-'	Cursor1.Close
-	ProgressDialogHide
-
-''	ProgressDialogShow2("Ubacujem podatke o favoritima...", False)
-''	For i = 0 To b1.Size - 1
-''		Log($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
-''		Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${f1.Get(i)} AND widget = ${w1.Get(i)} WHERE brojLinije = ${b1.Get(i)} AND nazivLinije = '${n1.Get(i)}' AND link = '${ll1.Get(i)}'"$)
-''	Next
-''	ProgressDialogHide
-End Sub
+	End Sub
 
 Sub o_Click
 	MsgboxAsync("Vozni red ZET autobusnih i tramvajskih linija.", "ZET v1.0")
@@ -661,8 +612,8 @@ Sub btnAddToWidget_Click
 			btn.SetBackgroundImage(bmpWidget)
 			Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 2 WHERE id = ${btn.Tag}"$)
 			ukupnoZaWidget = ukupnoZaWidget + 1
-			If ukupnoZaWidget > 5 Then
-				Msgbox("Widget podržava samo 5 linija!", "Info")
+			If ukupnoZaWidget > 6 Then
+				Msgbox("Widget podržava samo 6 linija!", "Info")
 			End If
 		Else
 			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)

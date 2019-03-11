@@ -13,7 +13,7 @@ Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
 	Dim rv As RemoteViews
-	Dim ajdi, ajdiLink, bl, nl As List
+	Dim ajdi, ajdiLink, ajdibl, ajdinl As List
 '	Dim okr1, okr2, lnk1, lnk2, polaziste1, polaziste2, odrediste1, odrediste2 As List
 	Dim lnk1, lnk2, okr1, okr2 As List
 	Dim rb As Int
@@ -21,14 +21,20 @@ Sub Process_Globals
 	Dim detaljiLinije As List
 	Dim cMapa As Map
 	Dim zMapa As Map
+	Dim okretiste1 As Boolean
+	Dim okretiste2 As Boolean
+	Dim okretiste3 As Boolean
+	Dim okretiste4 As Boolean
+	Dim okretiste5 As Boolean
+	Dim okretiste6 As Boolean
 End Sub
 
 Sub Service_Create
 	rv = ConfigureHomeWidget("fav_widget", "rv", 0, "", False)
 	ajdi.Initialize
 	ajdiLink.Initialize
-	bl.Initialize
-	nl.Initialize
+	ajdibl.Initialize
+	ajdinl.Initialize
 End Sub
 
 Sub Service_Start (StartingIntent As Intent)
@@ -44,6 +50,7 @@ End Sub
 
 Sub rv_RequestUpdate
 	DohvatiSveLinijeZaWidget
+'	rv.UpdateWidget
 End Sub
 
 Sub rv_Disabled
@@ -53,22 +60,32 @@ End Sub
 
 Sub DohvatiSveLinijeZaWidget
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 5"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-		Dim tt As Int = Cursor1.GetInt("dnevna")
-		ajdi.Add(Cursor1.GetInt("id"))
-		ajdiLink.Add(Cursor1.GetString("link"))
-		If tt = 1 Then
-			bl.Add(Cursor1.GetString("brojLinije"))
-		Else
-			bl.Add(Cursor1.GetString("brojLinije") & "N")
-		End If
-'		nl.Add(Cursor1.GetString("nazivLinije"))	' je li potrebno? možda ako korisnik pod postavkama odabere početno polazište i završno odredište?!
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
+	If Cursor1.RowCount > 0 Then
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Dim tt As Int = Cursor1.GetInt("dnevna")
+			ajdi.Add(Cursor1.GetInt("id"))
+			ajdiLink.Add(Cursor1.GetString("link"))
+			If tt = 1 Then
+				ajdibl.Add(Cursor1.GetString("brojLinije"))
+			Else
+				ajdibl.Add(Cursor1.GetString("brojLinije") & "N")
+			End If
+			ajdinl.Add(Cursor1.GetString("nazivLinije"))
+		Next
+		Cursor1.Close
+	Else
+		ToastMessageShow("Niste odabrili niti jednu liniju za widget unutar aplikacije!", False)
+	End If
+
+	For i = 0 To ajdi.Size - 1
+		Log(ajdi.Get(i))
+		Log(ajdibl.Get(i))
+		Log(ajdinl.Get(i))
+		Log(ajdiLink.get(i))
 	Next
-	Cursor1.Close
-'	Log(ajdi)
-'	Log(ajdiLink)
+
 	ProvjeraDatumaNaDatoteci
 End Sub
 
@@ -141,6 +158,78 @@ Sub iksiks
 '	End If
 End Sub
 
+Sub lblPolazisteOdrediste1_Click
+	If okretiste1 Then
+		okretiste1 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste1 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
+Sub lblPolazisteOdredist2_Click
+	If okretiste2 Then
+		okretiste2 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste2 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
+Sub lblPolazisteOdrediste3_Click
+	If okretiste3 Then
+		okretiste3 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste3 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
+Sub lblPolazisteOdrediste4_Click
+	If okretiste4 Then
+		okretiste4 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste4 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
+Sub lblPolazisteOdrediste5_Click
+	If okretiste5 Then
+		okretiste5 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste5 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
+Sub lblPolazisteOdrediste6_Click
+	If okretiste6 Then
+		okretiste6 = False
+'		IspuniTablicu
+'		iksiks
+	Else
+		okretiste6 = True
+'		IspuniTablicu
+'		iksiks
+	End If
+End Sub
+
 Sub DL_VozniRedDetalj2(lnk As String)
 	Dim j As HttpJob
 	j.Initialize("", Me) 'name is empty as it is no longer needed
@@ -203,13 +292,13 @@ Sub UbaciPodatkeWidget
 		rv.SetVisible("imgVozilo" & (i+1), True)
 		rv.SetVisible("lblBrojLinije" & (i+1), True)
 		rv.SetVisible("lblPolazisteOdrediste" & (i+1), True)
-		Dim br As Int = bl.Get(i)
+		Dim br As Int = ajdibl.Get(i)
 		If br < 100 Then	' slika tramvaja
 			rv.SetImage("imgVozilo" & (i+1), LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True))
 		Else	' inače autobusa
 			rv.SetImage("imgVozilo" & (i+1), LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True))
 		End If
-		rv.SetText("lblBrojLinije" & (i+1), bl.Get(i))
+		rv.SetText("lblBrojLinije" & (i+1), ajdibl.Get(i))
 '		Log(bl.Get(i))
 		rv.SetText("lblPolazisteOdrediste" & (i+1), zMapa.GetKeyAt(0) & CRLF & zMapa.GetValueAt(0))
 		Log(zMapa.GetKeyAt(0) & CRLF & zMapa.GetValueAt(0))

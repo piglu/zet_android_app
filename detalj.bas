@@ -148,6 +148,13 @@ Sub IspuniTablicu
 	satMin = satMin.SubString2(0, satMin.LastIndexOf(":"))
 	Dim idxLinijeB As Boolean = False
 
+	Dim ss As String = Starter.nazivLinije
+	Log("detalj -> IspuniTablicu -> starter.nazivLinije -> " & ss)
+	Dim ss1, ss2 As String
+	ss1 = ss.SubString2(0, ss.IndexOf(" -"))
+	ss2 = ss.SubString2(ss.IndexOf(" -") + 2, ss.Length)
+	Log(ss1)
+	Log(ss2)
 	If okretiste Then
 		For i = 0 To okr1.Size - 1
 '			lblLinija.Text = polaziste1.Get(0) & " - " & odrediste1.Get(0)
@@ -172,6 +179,15 @@ Sub IspuniTablicu
 		Next
 	End If
 
+	'
+	'
+	'
+	'
+	' dodati obrnuti naziv linije u naslov linije (lblLinija.Text) !!!!!!!
+	'
+	'
+	'
+	'
 	ProgressDialogHide
 
 	Sleep(100)
