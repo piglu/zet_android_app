@@ -257,28 +257,15 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	
 	Dim components() As String
 	components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
-'	Dim lB As List
-'	Dim lN As List
-'	Dim lL As List
-'	lB.Initialize
-'	lN.Initialize
-'	lL.Initialize
 	Dim mB, mL As Map
 	mB.Initialize
 	mL.Initialize
-'	For i = 1 To components.Length - 1
-'		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components(i))
-'		Do While matcher1.Find = True
-'			mB.Put(matcher1.Group(1) & ";" & i, matcher1.Group(2))
-'		Loop
-'	Next
-	
 	For i = 1 To components.Length - 1
 		Dim s As String = components(i)
 		Dim components2() As String
 		components2 = Regex.Split("<ul>", s)
 		For j = 1 To components2.Length - 1
-			Log(components2(j))
+'			Log(components2(j))
 			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
 			Do While matcher1.Find = True
 				Dim s As String = matcher1.Group(2)
@@ -292,26 +279,20 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 			Do While matcher1.Find = True
 				Dim s As String = matcher1.Group(1)
 				If s.Contains("pdf") Or s.Contains("PDF") Then
-					'
-					'
-					'
-					' linija 607 -> sprema samo broj ne i ostatak stringa!!!!!
-					' provjeriti obavetno ASAP!!!!!
-					' ISPRAVLJENO! dodati u bazu...
-					'
-					'
 					If s.Contains("607") Then
-						Log(s)
+'						Log(s)
 						s = "607"
 						s = s & ";" & j
+						s = s.Trim
 						mL.Put(s, matcher1.Group(1))
 					Else
 						s = s.SubString(s.LastIndexOf("/")+1)
 						s = s.SubString2(0, s.IndexOf("."))
 						s = s & ";" & j
+						s = s.Trim
 						mL.Put(s, matcher1.Group(1))
-						Log(mL.Get("607 sm - sopot - sm solo;1"))
-						Log(mL.Get("607 sm - sopot - sm solo;2"))
+'						Log(mL.Get("607 sm - sopot - sm solo;1"))
+'						Log(mL.Get("607 sm - sopot - sm solo;2"))
 					End If
 				Else
 					s = s.SubString(s.IndexOf("=")+1)
@@ -322,62 +303,22 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 		Next
 	Next
 
-'	For i = 1 To components.Length - 1
-'		Dim s As String = components(i)
-'		Dim components2() As String
-'		components2 = Regex.Split("<ul>", s)
-'		For j = 1 To components2.Length - 1
-'			matcher1 = Regex.Matcher($"href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)"$, components2(j))
-'			Do While matcher1.Find = True
-'				mL.Put(matcher1.Group(1) & ";" & j, "")
-'			Loop
-'		Next
-'	Next
-'
-'	For i = 0 To mB.Size - 1
-'		Dim br As String = mB.GetKeyAt(i)
-'		Dim ln As String = mL.GetKeyAt(i)
-'		If ln.Contains(br) Then
-'			Dim bb As String = br.SubString2(0, br.IndexOf(";"))
-'			Dim nn As String = mB.GetValueAt(i)
-'			Dim ll As String = mL.Get(bb)
-'			Log(bb)
-'			Log(nn)
-'			Log(ll)
-'		End If
-'	Next
-	Log(mB.Size)
-	Log(mB)
-	Log(mL.Size)
-	Log(mL)
+'	Log(mB.Size)
+'	Log(mB)
+'	Log(mL.Size)
+'	Log(mL)
+	Dim Cursor1 As Cursor
 	For i = 0 To mB.Size - 1
 		Dim kljuc As String = mB.GetKeyAt(i)
-'		If kljuc.Contains("607") Then
-'			Log(mL.Get("607 sm - sopot - sm solo;1"))
-'			Log(mL.Get("607 sm - sopot - sm solo;2"))
-'		End If
-		Log(mB.Get(kljuc))
-		Log(mL.Get(kljuc))
+		Dim brL As Int = kljuc.SubString2(0, kljuc.IndexOf(";"))
+		Dim naL As String = mB.Get(kljuc)
+		Dim lnk As String = mL.Get(kljuc)
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
+		If Cursor1.RowCount = 0 Then
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
+		End If
 	Next
-'	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
-'	Dim lB As List
-'	Dim lN As List
-'	Dim lL As List
-'	lB.Initialize
-'	lN.Initialize
-'	lL.Initialize
-'	Do While matcher1.Find = True
-''		Log(matcher1.Group(1))
-'		lB.Add(matcher1.Group(1))
-''		Log(matcher1.Group(2))
-'		lN.Add(matcher1.Group(2))
-'	Loop
-'
-'	matcher1 = Regex.Matcher($"href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)""$, stranica)
-'	Do While matcher1.Find = True
-''		Log(matcher1.Group(1))
-'		lL.Add(matcher1.Group(1))
-'	Loop
+	If Cursor1.IsInitialized Then Cursor1.Close
 	ProgressDialogHide
 	
 ''	Dim b1, n1, ll1, f1, w1 As List

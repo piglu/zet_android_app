@@ -133,6 +133,7 @@ Sub Service_Create
 '	File.Copy(SourceFolder, "linije.db.orig", SourceFolder, "linije.db")
 	If File.Exists(SourceFolder, "linije.db") = False Then
 		File.Copy(File.DirAssets, "linije.db", SourceFolder, "linije.db")
+		File.Copy(File.DirAssets, "linije.db", SourceFolder, "linije.db.orig")
 	End If
 	upit.Initialize(SourceFolder, "linije.db", True)
 	'

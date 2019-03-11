@@ -1,0 +1,9 @@
+#Git will ignore the following files/folders:
+bin/
+gen/
+src/
+AutoBackups/
+Objects/AndroidManifest.xml
+*.apk
+*.dex
+*b4a.meta
