@@ -255,7 +255,7 @@ Sub ProvjeraDatumaNaDatoteci
 			Log("današnji datum datoteke!")
 			UcitajListe
 			Dim brL As Int = Starter.brojLinije
-			If brL < 99 Then	' tramvaj
+			If brL < 100 Then	' tramvaj
 				imgLinija.Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
 			Else	' bus
 				imgLinija.Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
@@ -343,7 +343,7 @@ Sub PripremiDL
 		intent1.SetType("application/pdf")
 		Dim pdfAppsList As List
 		pdfAppsList = QueryIntent(intent1)
-		If pdfAppsList.size>0 Then
+		If pdfAppsList.size > 0 Then
 			' pdf viewer(s) exists
 			StartActivity(intent1)
 		Else
