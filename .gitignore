@@ -2,8 +2,8 @@
 bin/
 gen/
 src/
-AutoBackups/
 Objects/AndroidManifest.xml
+AutoBackups/
 *.apk
 *.dex
 *b4a.meta
