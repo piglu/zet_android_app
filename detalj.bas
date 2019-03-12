@@ -166,6 +166,7 @@ Sub IspuniTablicu
 			End If
 			clvD.Add(CreateItem(okr1.Get(i), polaziste1.Get(i), odrediste1.Get(i), clvD.AsView.Width, 62dip), "")
 		Next
+		lblLinija.Text = ss1 & " - " & ss2
 	Else
 		For i = 0 To okr2.Size - 1
 '			lblLinija.Text = polaziste2.Get(0) & " - " & odrediste2.Get(0)
@@ -177,17 +178,9 @@ Sub IspuniTablicu
 			End If
 			clvD.Add(CreateItem(okr2.Get(i), polaziste2.Get(i), odrediste2.Get(i), clvD.AsView.Width, 62dip), "")
 		Next
+		lblLinija.Text = ss2 & " - " & ss1
 	End If
 
-	'
-	'
-	'
-	'
-	' dodati obrnuti naziv linije u naslov linije (lblLinija.Text) !!!!!!!
-	'
-	'
-	'
-	'
 	ProgressDialogHide
 
 	Sleep(100)
@@ -211,13 +204,6 @@ Sub CreateItem(okret As String, polaz As String, odred As String, Width As Int, 
 
 	Return p
 End Sub
-
-'Sub AnimatedArrow(index As Int, From As Int, ToDegree As Int)
-'	Panel1 = clvD.GetPanel(index).GetView(0) 'Panel1 is the first item
-'	Dim iv As B4XView = Panel1.GetView(1) 'ImageView1 is the second item
-'	iv.SetRotationAnimated(0, From)
-'	iv.SetRotationAnimated(clvD.AnimationDuration, ToDegree)
-'End Sub
 
 Sub clvD_ItemClick (Index As Int, Value As Object)
 	If Starter.brojLinije > 99 Then

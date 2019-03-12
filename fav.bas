@@ -144,6 +144,19 @@ Sub iksiks
 	Log(lnk1.Get(pos))
 	DL_VozniRedDetalj2(lnk1.Get(pos))
 
+	'
+	'
+	'
+	' spremiti za svaki vozni red sa polazišta/odredišta  u određđeno vrijeme, podatke po stanicama u mapu
+	' primjer:
+	' 13:20:24 je key, a value je stanica1
+	' 13:24:45 je key, a value je stanica2
+	' ...
+	' ...
+	'
+	'
+	'
+
 '	Else
 '		For i = 0 To okr2.Size - 1
 '			lblLinija.Text = polaziste2.Get(0) & " - " & odrediste2.Get(0)

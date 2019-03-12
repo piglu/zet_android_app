@@ -136,6 +136,8 @@ Sub Service_Create
 		File.Copy(File.DirAssets, "linije.db", SourceFolder, "linije.db.orig")
 	End If
 	upit.Initialize(SourceFolder, "linije.db", True)
+'	upit.ExecNonQuery($"DELETE FROM linije WHERE tip = 1 AND dnevna = 1"$)
+
 	'
 	' tablica lokacija kontrolora, zastoja i kašnjenja
 	'
