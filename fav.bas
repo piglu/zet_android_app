@@ -414,6 +414,31 @@ Sub QueryIntent(Intent1 As Intent) As List
 	Return listRes
 End Sub
 
+'Sub DL_VozniRedTekuciDatum(links As List, datum As String)
+'	Log("DL_VozniRedTekuciDatum")
+'
+'	For Each link As String In links
+'		Dim j As HttpJob
+'		j.Initialize("", Me) 'name is empty as it is no longer needed
+'		DateTime.DateFormat = "dd.MM.yyyy"
+'		Dim dat As Long
+'		dat = DateTime.DateParse(datum)
+'		DateTime.DateFormat = "yyyyMMdd"
+'		Dim s As String = link & "&datum=" & DateTime.Date(dat)
+'		j.Download(s) 'link
+'		Wait For (j) JobDone(j As HttpJob)
+'		If j.Success And j.getstring.Contains("<table class='table raspored table-striped'>") Then
+'			ParsajVozniRed(j.GetString)
+'		Else
+'			DateTime.DateFormat = "dd.MM.yyyy"
+'			ToastMessageShow("Nema voznog reda za " & DateTime.Date(DateTime.Now) & " linije broj " & Starter.brojLinije, False)
+'	'		Msgbox("Nema voznog reda za " & DateTime.Date(DateTime.Now) & " linije broj " & Starter.brojLinije, "Informacija")
+'		End If
+'	Next
+'
+'	j.Release
+'End Sub
+
 Sub DL_VozniRedTekuciDatum(lnk As String, datum As String)
 	Log("DL_VozniRedTekuciDatum")
 '	ProgressDialogShow2("Preuzimam podatke...", False)
