@@ -30,9 +30,9 @@ Sub Process_Globals
 End Sub
 
 Sub Service_Create
-	#if release
+'	#if release
 	rv = ConfigureHomeWidget("fav_widget", "rv", 0, "", False)
-	#end if
+'	#end if
 	ajdi.Initialize
 	ajdiLink.Initialize
 	ajdibl.Initialize
@@ -61,6 +61,7 @@ Sub rv_Disabled
 End Sub
 
 Sub DohvatiSveLinijeZaWidget
+	Log("DohvatiSveLinijeZaWidget iz rv_RequestUpdate")
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
 	If Cursor1.RowCount > 0 Then
@@ -92,6 +93,7 @@ Sub DohvatiSveLinijeZaWidget
 End Sub
 
 Sub ProvjeraDatumaNaDatoteci
+	Log("ProvjeraDatumaNaDatoteci iz DohvatiSveLinijeZaWidget")
 	For i = 0 To ajdi.Size - 1
 		If File.Exists(Starter.SourceFolder, ajdi.Get(i) & "lnk1") Then
 			rb = ajdi.Get(i)
@@ -129,22 +131,20 @@ End Sub
 Sub iksiks
 	Dim satMin As String = DateTime.Time(DateTime.Now)
 	satMin = satMin.SubString2(0, satMin.LastIndexOf(":"))
-'	Dim idxLinijeB As Boolean = False
+	Dim idxLinijeB As Boolean = False
 
-'	If okretiste Then
+	If okretiste1 Then
 		For i = 0 To okr1.Size - 1
 '			lblLinija.Text = polaziste1.Get(0) & " - " & odrediste1.Get(0)
 			Dim ss As String = okr1.Get(i)
 			ss = ss.SubString2(0, ss.LastIndexOf(":"))
 			If ss.CompareTo(satMin) > 0 Then
 				pos = i	' pozicija za link za detalj linije (uspredba sa trenutnim vremenom)
-				Exit
-'				idxLinijeB = True
+'				Exit
+				idxLinijeB = True
 			End If
 '			clvD.Add(CreateItem(okr1.Get(i), polaziste1.Get(i), odrediste1.Get(i), clvD.AsView.Width, 62dip), "")
 		Next
-'	Log(lnk1.Get(pos))
-'	DL_VozniRedDetalj2(lnk1.Get(pos))
 
 	'
 	'
@@ -159,18 +159,24 @@ Sub iksiks
 	'
 	'
 
-'	Else
-'		For i = 0 To okr2.Size - 1
+	Else
+		For i = 0 To okr2.Size - 1
 '			lblLinija.Text = polaziste2.Get(0) & " - " & odrediste2.Get(0)
-'			Dim ss As String = okr2.Get(i)
-'			ss = ss.SubString2(0, ss.LastIndexOf(":"))
-'			If ss.CompareTo(satMin) > 0 And idxLinijeB = False Then	' nemamo još indeks koji treba označiti
-'				pos = i
-'				idxLinijeB = True
-'			End If
+			Dim ss As String = okr2.Get(i)
+			ss = ss.SubString2(0, ss.LastIndexOf(":"))
+			If ss.CompareTo(satMin) > 0 And idxLinijeB = False Then	' nemamo još indeks koji treba označiti
+				pos = i
+				idxLinijeB = True
+			End If
 '			clvD.Add(CreateItem(okr2.Get(i), polaziste2.Get(i), odrediste2.Get(i), clvD.AsView.Width, 62dip), "")
-'		Next
-'	End If
+		Next
+	End If
+
+	'
+	' download vozno reda po vremenu i stanici
+	'
+	Log(lnk1.Get(pos))
+	DL_VozniRedDetalj2(lnk1.Get(pos))
 End Sub
 
 Sub lblPolazisteOdrediste1_Click
@@ -246,6 +252,7 @@ Sub lblPolazisteOdrediste6_Click
 End Sub
 
 Sub DL_VozniRedDetalj2(lnk As String)
+	Log("DL_VozniRedDetalj2 poziv iz iksiks")
 	Dim j As HttpJob
 	j.Initialize("", Me) 'name is empty as it is no longer needed
 	j.Download(lnk)
@@ -258,6 +265,7 @@ Sub DL_VozniRedDetalj2(lnk As String)
 End Sub
 
 Sub ParsajDetaljeLinije2(strim As String)
+	Log("ParsajDetaljeLinije2 iz DL_VozniRedDetalj2")
 	Dim matcher1 As Matcher
 
 	Dim satMin As String = DateTime.Time(DateTime.Now)
@@ -303,6 +311,7 @@ Sub ParsajDetaljeLinije2(strim As String)
 End Sub
 
 Sub UbaciPodatkeWidget
+	Log("UbaciPodatkeWidget iz ParsajDetaljeLinije2")
 	For i = 0 To ajdi.Size - 1
 		rv.SetVisible("imgVozilo" & (i+1), True)
 		rv.SetVisible("lblBrojLinije" & (i+1), True)
@@ -322,20 +331,8 @@ Sub UbaciPodatkeWidget
 	rv.UpdateWidget
 End Sub
 
-Sub UcitajListe
-	lnk1 = File.ReadList(Starter.SourceFolder, rb & "lnk1")
-'	Log(lnk1)
-	lnk2 = File.ReadList(Starter.SourceFolder, rb & "lnk2")
-'	Log(lnk2)
-	okr1 = File.ReadList(Starter.SourceFolder, rb & "okr1")
-	okr2 = File.ReadList(Starter.SourceFolder, rb & "okr2")
-	polaziste1 = File.ReadList(Starter.SourceFolder, rb & "p1")
-	polaziste2 = File.ReadList(Starter.SourceFolder, rb & "p2")
-	odrediste1 = File.ReadList(Starter.SourceFolder, rb & "o1")
-	odrediste2 = File.ReadList(Starter.SourceFolder, rb & "o2")
-End Sub
-
 Sub PripremiDL
+	Log("PripremiDL iz ProvjeraDatumaNaDatoteci")
 	Dim Cursor1 As Cursor
 
 	DateTime.DateFormat = "dd.MM.yyyy"
@@ -368,7 +365,15 @@ Sub PripremiDL
 	Next
 	Cursor1.Close
 
+	'
+	'
+	'
 	' ako link sadrži pdf datoteku onda prikazujemo PDF korisniku
+	'
+	' gdje prikazati pdf? u transparentnoj (prozirnoj) aktivnosti?
+	'
+	'
+	'
 	If link.Contains("pdf") Then
 		' prikazi pdf
 		Dim ss As String = link
@@ -410,7 +415,8 @@ Sub QueryIntent(Intent1 As Intent) As List
 End Sub
 
 Sub DL_VozniRedTekuciDatum(lnk As String, datum As String)
-	ProgressDialogShow2("Preuzimam podatke...", False)
+	Log("DL_VozniRedTekuciDatum")
+'	ProgressDialogShow2("Preuzimam podatke...", False)
 
 	Dim j As HttpJob
 	j.Initialize("", Me) 'name is empty as it is no longer needed
@@ -462,18 +468,32 @@ Sub ParsajVozniRed(strim As String)
 
 	UsnimiListe
 
+	iksiks
 '	IspuniTablicu
 End Sub
 
 Sub UsnimiListe
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "lnk1", lnk1)
+	File.WriteList(Starter.SourceFolder, rb & "lnk1", lnk1)
 '	Log(lnk1)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "lnk2", lnk2)
+	File.WriteList(Starter.SourceFolder, rb & "lnk2", lnk2)
 '	Log(lnk2)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "okr1", okr1)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "okr2", okr2)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "p1", polaziste1)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "p2", polaziste2)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "o1", odrediste1)
-	File.WriteList(Starter.SourceFolder, Starter.indeks & "o2", odrediste2)
+	File.WriteList(Starter.SourceFolder, rb & "okr1", okr1)
+	File.WriteList(Starter.SourceFolder, rb & "okr2", okr2)
+	File.WriteList(Starter.SourceFolder, rb & "p1", polaziste1)
+	File.WriteList(Starter.SourceFolder, rb & "p2", polaziste2)
+	File.WriteList(Starter.SourceFolder, rb & "o1", odrediste1)
+	File.WriteList(Starter.SourceFolder, rb & "o2", odrediste2)
+End Sub
+
+Sub UcitajListe
+	lnk1 = File.ReadList(Starter.SourceFolder, rb & "lnk1")
+'	Log(lnk1)
+	lnk2 = File.ReadList(Starter.SourceFolder, rb & "lnk2")
+'	Log(lnk2)
+	okr1 = File.ReadList(Starter.SourceFolder, rb & "okr1")
+	okr2 = File.ReadList(Starter.SourceFolder, rb & "okr2")
+	polaziste1 = File.ReadList(Starter.SourceFolder, rb & "p1")
+	polaziste2 = File.ReadList(Starter.SourceFolder, rb & "p2")
+	odrediste1 = File.ReadList(Starter.SourceFolder, rb & "o1")
+	odrediste2 = File.ReadList(Starter.SourceFolder, rb & "o2")
 End Sub

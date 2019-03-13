@@ -24,9 +24,9 @@ Sub Process_Globals
 End Sub
 
 Sub Service_Create
-	#if release
+'	#if release
 	rv = ConfigureHomeWidget("k_widget", "rv", 0, "", False)
-	#end if
+'	#end if
 	lm.Initialize("Location")
 	gps1.Initialize("gps1")
 End Sub

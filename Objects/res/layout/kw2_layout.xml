@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+  <AbsoluteLayout android:id="@+id/kw2_panel1" android:layout_width="216dp" android:layout_height="72dp" android:layout_x="0dp" android:layout_y="0dp" android:visibility="visible" android:background="@drawable/kw2_panel1_background">
+    <TextView android:id="@+id/kw2_label1" android:layout_width="216dp" android:layout_height="28dp" android:layout_x="0dp" android:layout_y="43dp" android:visibility="visible" android:text="Nema podataka!" android:gravity="center_vertical|center_horizontal" android:textColor="#FF0000FF" android:textSize="10dp" android:textStyle="bold" android:typeface="normal" />
+    <ImageView android:src="@drawable/kontrola" android:scaleType="fitXY" android:id="@+id/kw2_img1" android:layout_width="40dp" android:layout_height="40dp" android:layout_x="2dp" android:layout_y="2dp" android:visibility="visible" />
+    <ImageView android:src="@drawable/zastoj" android:scaleType="fitXY" android:id="@+id/kw2_img2" android:layout_width="40dp" android:layout_height="40dp" android:layout_x="59dp" android:layout_y="2dp" android:visibility="visible" />
+    <ImageView android:src="@drawable/kasni" android:scaleType="fitXY" android:id="@+id/kw2_img3" android:layout_width="40dp" android:layout_height="40dp" android:layout_x="117dp" android:layout_y="2dp" android:visibility="visible" />
+    <ImageView android:src="@drawable/karta" android:scaleType="fitXY" android:id="@+id/kw2_img4" android:layout_width="40dp" android:layout_height="40dp" android:layout_x="174dp" android:layout_y="2dp" android:visibility="visible" />
+  </AbsoluteLayout>
+</AbsoluteLayout>
