@@ -157,7 +157,6 @@ Sub IspuniTablicu
 	Log(ss2)
 	If okretiste Then
 		For i = 0 To okr1.Size - 1
-'			lblLinija.Text = polaziste1.Get(0) & " - " & odrediste1.Get(0)
 			Dim ss As String = okr1.Get(i)
 			ss = ss.SubString2(0, ss.LastIndexOf(":"))
 			If ss.CompareTo(satMin) > 0 And idxLinijeB = False Then	' nemamo još indeks koji treba označiti
@@ -169,7 +168,6 @@ Sub IspuniTablicu
 		lblLinija.Text = ss1 & " - " & ss2
 	Else
 		For i = 0 To okr2.Size - 1
-'			lblLinija.Text = polaziste2.Get(0) & " - " & odrediste2.Get(0)
 			Dim ss As String = okr2.Get(i)
 			ss = ss.SubString2(0, ss.LastIndexOf(":"))
 			If ss.CompareTo(satMin) > 0 And idxLinijeB = False Then	' nemamo još indeks koji treba označiti

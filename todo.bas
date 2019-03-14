@@ -33,3 +33,6 @@ End Sub
 '		j.Release
 '	Next
 'End Sub
+' u widget dodati 2 gumba čiji tekst je "1" i "2"
+' 1 je vozni red za polazište -> odredište
+' 2 je vozni red za odredište -> polazište

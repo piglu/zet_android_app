@@ -33,11 +33,12 @@ File37=postavke.png
 File38=postavke1.png
 File39=street_view2.png
 File4=clv_stavka.bal
-File40=tram1.png
-File41=widget_makni.png
-File42=widget_umetni.png
-File43=zastoj.png
-File44=zelena.png
+File40=test.bal
+File41=tram1.png
+File42=widget_makni.png
+File43=widget_umetni.png
+File44=zastoj.png
+File45=zelena.png
 File5=clv_stavka_d.bal
 File6=clv_stavka_f.bal
 File7=clv_stavkad.bal
@@ -82,6 +83,7 @@ FileGroup41=Default Group
 FileGroup42=Default Group
 FileGroup43=Default Group
 FileGroup44=Default Group
+FileGroup45=Default Group
 FileGroup5=Default Group
 FileGroup6=Default Group
 FileGroup7=Default Group
@@ -114,6 +116,7 @@ Module10=todo
 Module11=CustomListView
 Module12=lok_123_karta2
 Module13=B4XComboBox
+Module14=test
 Module2=gps_pozicija
 Module3=lokacije_123
 Module4=trazi
@@ -122,9 +125,9 @@ Module6=kw2
 Module7=fav
 Module8=detalj
 Module9=detalj_stanice
-NumberOfFiles=44
+NumberOfFiles=45
 NumberOfLibraries=19
-NumberOfModules=13
+NumberOfModules=14
 Version=8.8
 @EndOfDesignText@
 #Region  Project Attributes 
@@ -201,6 +204,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.AddMenuItem("Pretraživanje", "trazi")
 	Activity.AddMenuItem("Osvježi sve linije", "osvjezi")
 	Activity.AddMenuItem("O...", "o")
+	Activity.AddMenuItem("testiranje za widget", "test")
 '	Activity.AddMenuItem("test karte", "test")
 '	Activity.AddMenuItem3("Pretraživanje", "trazi", LoadBitmap(File.DirAssets, "trazi.png"), True)
 '	Activity.AddMenuItem3("O...", "o", LoadBitmap(File.DirAssets, "o.png"), True)
@@ -209,6 +213,10 @@ End Sub
 'Sub test_Click
 '	StartActivity(lok_123_karta2)
 'End Sub
+
+Sub test_CLick
+	StartActivity(test)
+End Sub
 
 Sub kontrole_Click
 	StartActivity(lokacije_123)
