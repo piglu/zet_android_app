@@ -16,12 +16,12 @@ Sub Process_Globals
 	Dim ajdi, ajdiLink, ajdibl, ajdinl As List
 '	Dim okr1, okr2, lnk1, lnk2, polaziste1, polaziste2, odrediste1, odrediste2 As List
 	Dim lnk1, lnk2, okr1, okr2, polaziste1, polaziste2, odrediste1, odrediste2 As List
-	Dim rb As Int
-	Dim pos As Int
-	Dim detaljiLinije As List
-	Dim cMapa As Map
-	Dim zMapa As Map
-	Dim okretiste As Boolean
+'	Dim rb As Int
+'	Dim pos As Int
+'	Dim detaljiLinije As List
+'	Dim cMapa As Map
+'	Dim zMapa As Map
+'	Dim okretiste As Boolean
 '	Dim okretiste2 As Boolean
 '	Dim okretiste3 As Boolean
 '	Dim okretiste4 As Boolean

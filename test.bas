@@ -22,7 +22,7 @@ Sub Globals
 '	Dim okr1, okr2, lnk1, lnk2, polaziste1, polaziste2, odrediste1, odrediste2 As List
 	Dim lnk1, lnk2, okr1, okr2, polaziste1, polaziste2, odrediste1, odrediste2 As List
 	Dim linkovi As List
-	Dim rb As Int
+'	Dim rb As Int
 	Dim pos As Int
 	Dim detaljiLinije As List
 	Dim cMapa As Map
@@ -57,6 +57,9 @@ Sub Globals
 	Private Button4 As Button
 	Private Button5 As Button
 	Private Button6 As Button
+	Private ima As Boolean = False
+	Private linkoviZaDnevni As List
+	Type podZaDnevniDL (id As Int, nal As String, lnkLinije As String)
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -68,6 +71,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	ajdinl.Initialize
 
 	linkovi.Initialize
+	linkoviZaDnevni.Initialize
 
 	DohvatiSveLinijeZaWidget
 End Sub
@@ -90,28 +94,31 @@ Sub DohvatiSveLinijeZaWidget
 			ajdinl.Add(Cursor1.GetString("nazivLinije"))
 		Next
 		Cursor1.Close
+
+		Dim j As Int = 0
+		For Each link As String In ajdiLink
+			ProvjeraDatumaNaDatoteci(ajdi.Get(j), link, ajdinl.Get(j))
+			j = j + 1
+		Next
+		If ima Then
+			DL_VozniRedDetalj2(linkovi)
+		Else
+'			For i = 0 To linkoviZaDnevni.Size - 1
+'				Dim pzzd2 As podZaDnevniDL = linkoviZaDnevni.Get(i)
+'				Log(pzzd2.id)
+'				Log(pzzd2.nal)
+'				Log(pzzd2.lnkLinije)
+''				Log(pzzd2.da)
+'				DL_VozniRedTekuciDatum(pzzd2.id, pzzd2.lnkLinije, DateTime.Date(DateTime.Now), pzzd2.nal)
+'			Next
+''			DL_VozniRedDetalj2(linkovi)
+		End If
 	Else
 		ToastMessageShow("Niste odabrili niti jednu liniju za widget unutar aplikacije!", False)
 	End If
-
-'	For i = 0 To ajdi.Size - 1
-'		Log(ajdi.Get(i))
-	Dim j As Int = 0
-	For Each link As String In ajdiLink
-		ProvjeraDatumaNaDatoteci(ajdi.Get(j), link, ajdinl.Get(j))
-		j = j + 1
-	Next
-	DL_VozniRedDetalj2(linkovi)
-
-'		Sleep(5000)
-'		Log(ajdibl.Get(i))
-'		Log(ajdinl.Get(i))
-'		Log(ajdiLink.Get(i))
-'	Next
 End Sub
 
 Sub ProvjeraDatumaNaDatoteci(id As Int, link As String, nl As String)
-'Sub ProvjeraDatumaNaDatoteci(link As String)
 '	File.Delete(Starter.SourceFolder, id & "lnk1")
 	If File.Exists(Starter.SourceFolder, id & "lnk1") Then
 		DateTime.DateFormat = "dd"'.MM.yyyy"
@@ -124,22 +131,37 @@ Sub ProvjeraDatumaNaDatoteci(id As Int, link As String, nl As String)
 			Log("današnji datum datoteke, učitaj listu")
 			UcitajListe(id)
 			DohvatiIndeksZaDL(nl)
+			ima = True
 '			UbaciPodatkeWidget
 		Else
-			' ako je datoteka sa podacima o današnjem voznom redu od jučer (ili od prije u prošlosti), preuzmi novu sa neta
-			Log("datoteka je starija, preuzmi nove podatke sa neta")
-			DateTime.DateFormat = "dd.MM.yyyy"
-			DL_VozniRedTekuciDatum(id, link, DateTime.Date(DateTime.Now))
-			DohvatiIndeksZaDL(nl)
-'			UbaciPodatkeWidget
+'			' ako je datoteka sa podacima o današnjem voznom redu od jučer (ili od prije u prošlosti), preuzmi novu sa neta
+'			Log("datoteka je starija, preuzmi nove podatke sa neta")
+'			DateTime.DateFormat = "dd.MM.yyyy"
+			ima = False
+'			Dim pzdd As podZaDnevniDL
+'			pzdd.Initialize
+'			pzdd.id = id
+'			pzdd.lnkLinije = link
+'			pzdd.nal = nl
+''			pzdd.da = DateTime.Date(DateTime.Now)
+'			linkoviZaDnevni.Add(pzdd)
+''			DL_VozniRedTekuciDatum(id, link, DateTime.Date(DateTime.Now), nl)
+''			UbaciPodatkeWidget
 		End If
 	Else
-		' ako ne postoji datoteka sa podacima o današnjem voznom redu, preuzmi ju sa neta
-		Log("ne postoji datoteka sa podacima o današnjem voznom redu, preuzmi nove podatke sa neta")
-		DateTime.DateFormat = "dd.MM.yyyy"
-		DL_VozniRedTekuciDatum(id, link, DateTime.Date(DateTime.Now))
-		DohvatiIndeksZaDL(nl)
-'		UbaciPodatkeWidget
+'		' ako ne postoji datoteka sa podacima o današnjem voznom redu, preuzmi ju sa neta
+'		Log("ne postoji datoteka sa podacima o današnjem voznom redu, preuzmi nove podatke sa neta")
+'		DateTime.DateFormat = "dd.MM.yyyy"
+		ima = False
+'		Dim pzdd As podZaDnevniDL
+'		pzdd.Initialize
+'		pzdd.id = id
+'		pzdd.lnkLinije = link
+'		pzdd.nal = nl
+''		pzdd.da = DateTime.Date(DateTime.Now)
+'		linkoviZaDnevni.Add(pzdd)
+''		DL_VozniRedTekuciDatum(id, link, DateTime.Date(DateTime.Now), nl)
+''		UbaciPodatkeWidget
 	End If
 End Sub
 
@@ -147,15 +169,8 @@ Sub DohvatiIndeksZaDL(nl As String)
 	Dim satMin As String = DateTime.Time(DateTime.Now)
 	satMin = satMin.SubString2(0, satMin.LastIndexOf(":"))
 	Dim idxLinijeB As Boolean = False
-'	Dim lnkTemp As String
 
 	Dim ss As String = nl'Starter.nazivLinije
-'	Log("test -> DohvatiIndeksZaDL -> starter.nazivLinije -> " & ss)
-'	Dim ss1, ss2 As String
-'	ss1 = ss.SubString2(0, ss.IndexOf(" -"))
-'	ss2 = ss.SubString2(ss.IndexOf(" -") + 2, ss.Length)
-'	Log(ss1)
-'	Log(ss2)
 	If okretiste1 Then
 		For i = 0 To okr1.Size - 1
 			Dim ss As String = okr1.Get(i)
@@ -164,13 +179,8 @@ Sub DohvatiIndeksZaDL(nl As String)
 				pos = i
 				idxLinijeB = True
 			End If
-'			clvD.Add(CreateItem(okr1.Get(i), polaziste1.Get(i), odrediste1.Get(i), clvD.AsView.Width, 62dip), "")
 		Next
-'		lblLinija.Text = ss1 & " - " & ss2
-'		Log(pos)
-'		Log(lnk1.Get(pos))
 		linkovi.Add(lnk1.Get(pos))
-'		lnkTemp = lnk1.Get(pos)
 	Else
 		For i = 0 To okr2.Size - 1
 			Dim ss As String = okr2.Get(i)
@@ -179,15 +189,9 @@ Sub DohvatiIndeksZaDL(nl As String)
 				pos = i
 				idxLinijeB = True
 			End If
-'			clvD.Add(CreateItem(okr2.Get(i), polaziste2.Get(i), odrediste2.Get(i), clvD.AsView.Width, 62dip), "")
 		Next
-'		lblLinija.Text = ss2 & " - " & ss1
-'		Log(pos)
-'		Log(lnk2.Get(pos))
 		linkovi.Add(lnk2.Get(pos))
-'		lnkTemp = lnk2.Get(pos)
 	End If
-	Log(linkovi)
 End Sub
 
 Sub DL_VozniRedDetalj2(lnks As List)'(lnk As String)
@@ -198,21 +202,9 @@ Sub DL_VozniRedDetalj2(lnks As List)'(lnk As String)
 		Wait For (j) JobDone(j As HttpJob)
 		If j.Success Then
 			ParsajDetaljeLinije2(j.GetString)
-'			Log("Current link: " & link)
-'			Log(j.GetString)
 		End If
 		j.Release
 	Next
-'	Dim j As HttpJob
-'	j.Initialize("", Me) 'name is empty as it is no longer needed
-'	j.Download(lnk)
-'	Wait For (j) JobDone(j As HttpJob)
-'	If j.Success Then
-''		Log(j.GetString)
-'		ParsajDetaljeLinije2(j.GetString)
-'	End If
-'	j.Release
-''	PrikaziDetaljeLinijeZaSat
 End Sub
 
 Sub ParsajDetaljeLinije2(strim As String)
@@ -230,7 +222,6 @@ Sub ParsajDetaljeLinije2(strim As String)
 		detaljiLinije.Add(matcher1.Group(1))
 	Loop
 
-'	Log(detaljiLinije)
 	For i = 0 To detaljiLinije.Size - 1
 		Dim s1 As String = detaljiLinije.Get(i)
 		Dim s3 As String = s1
@@ -261,26 +252,19 @@ End Sub
 
 Sub UcitajListe(id As Int)
 	lnk1 = File.ReadList(Starter.SourceFolder, id & "lnk1")
-'	Log(lnk1)
 	lnk2 = File.ReadList(Starter.SourceFolder, id & "lnk2")
-'	Log(lnk2)
 	okr1 = File.ReadList(Starter.SourceFolder, id & "okr1")
-'	Log(okr1)
 	okr2 = File.ReadList(Starter.SourceFolder, id & "okr2")
-'	Log(okr2)
 	polaziste1 = File.ReadList(Starter.SourceFolder, id & "p1")
 	polaziste2 = File.ReadList(Starter.SourceFolder, id & "p2")
 	odrediste1 = File.ReadList(Starter.SourceFolder, id & "o1")
 	odrediste2 = File.ReadList(Starter.SourceFolder, id & "o2")
 End Sub
 
-Sub DL_VozniRedTekuciDatum(id As Int, lnk As String, datum As String)
-'	ProgressDialogShow2("Preuzimam podatke...", False)
-
+Sub DL_VozniRedTekuciDatum(id As Int, lnk As String, datum As String, nl As String)
 	Log(datum)
 	Dim j As HttpJob
 	j.Initialize("", Me) 'name is empty as it is no longer needed
-'	DateTime.DateFormat = DateTime.DeviceDefaultDateFormat' "dd.MM.yyyy"
 	Dim dat As Long
 	dat = DateTime.DateParse(datum)
 	DateTime.DateFormat = "yyyyMMdd"
@@ -288,7 +272,7 @@ Sub DL_VozniRedTekuciDatum(id As Int, lnk As String, datum As String)
 	j.Download(s) 'link
 	Wait For (j) JobDone(j As HttpJob)
 	If j.Success And j.getstring.Contains("<table class='table raspored table-striped'>") Then
-		ParsajVozniRed(id, j.GetString)
+		ParsajVozniRed(id, j.GetString, nl)
 	Else
 		DateTime.DateFormat = "dd.MM.yyyy"
 		ToastMessageShow("Nema voznog reda za " & DateTime.Date(DateTime.Now) & " linije broj " & Starter.brojLinije, False)
@@ -297,11 +281,11 @@ Sub DL_VozniRedTekuciDatum(id As Int, lnk As String, datum As String)
 	j.Release
 End Sub
 
-Sub ParsajVozniRed(id As Int, strim As String)
+Sub ParsajVozniRed(id As Int, strim As String, nl As String)
 	Dim matcher1 As Matcher
 
 	lnk1.Initialize
-	lnk1.Initialize
+	lnk2.Initialize
 	okr1.Initialize
 	okr2.Initialize
 	polaziste1.Initialize
@@ -326,6 +310,8 @@ Sub ParsajVozniRed(id As Int, strim As String)
 	Loop
 
 	UsnimiListe(id)
+
+	DohvatiIndeksZaDL(nl)
 
 '	UbaciPodatkeWidget
 End Sub
@@ -371,5 +357,7 @@ Sub Button2_Click
 End Sub
 
 Sub Button1_Click
-	
+	Dim b As Button
+	b = Sender
+	Log(b.Tag)
 End Sub
