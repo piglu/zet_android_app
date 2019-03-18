@@ -21,6 +21,7 @@ Sub Process_Globals
 End Sub
 
 Sub Service_Create
+	Log("fav servis -> Service_Create")
 	#if release
 	rv = ConfigureHomeWidget("fav_widget", "rv", 0, "", False)
 	#end if
@@ -31,17 +32,19 @@ Sub Service_Create
 	DohvatiSveLinijeZaWidget
 End Sub
 
-Sub Service_Start (StartingIntent As Intent)
+Sub Service_Start(StartingIntent As Intent)
+	Log("fav servis -> Service_Start")
 	rv.HandleWidgetEvents(StartingIntent)
 	Sleep(0)
 	Service.StopAutomaticForeground
 End Sub
 
 Sub Service_Destroy
-
+	Log("fav servis -> Service_Destroy")
 End Sub
 
 Sub rv_RequestUpdate
+	Log("fav servis -> rv_RequestUpdate")
 	rv.UpdateWidget
 End Sub
 
@@ -50,6 +53,7 @@ End Sub
 ' linija za prikaz u widgetu može biti najviše 6
 '
 Sub DohvatiSveLinijeZaWidget
+	Log("fav servis -> DohvatiSveLinijeZaWidget")
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
 	If Cursor1.RowCount > 0 Then
@@ -70,7 +74,6 @@ Sub DohvatiSveLinijeZaWidget
 	Else
 		ToastMessageShow("Niste odabrili niti jednu liniju za widget unutar aplikacije!", False)
 	End If
-	Log("DohvatiSveLinijeZaWidget: " & ajdi.Size)
 End Sub
 
 '
@@ -79,13 +82,15 @@ End Sub
 ' ako nisu DL novih od tekućeg datuma
 '
 Sub Provjera_Lista_I_Datuma_Na_Dat
+	Log("fav servis -> Provjera_Lista_I_Datuma_Na_Dat")
 	For i = 0 To ajdi.Size - 1
 		If File.Exists(Starter.SourceFolder, ajdi.Get(i) & "lnk1") = False Then
-			DL_Polaziste_Odrediste_Tekuci_Datum2(ajdiLink.Get(i), ajdi.Get(i), ajdinl.Get(i), ajdibl.Get(i), i)
+			Wait For (DL_Polaziste_Odrediste_Tekuci_Datum2(ajdiLink.Get(i), ajdi.Get(i), ajdinl.Get(i), ajdibl.Get(i), i)) Complete (Success As Boolean)
+			If Success Then
+				Log("prvi DL OK!")
+			End If
 		Else
 			DateTime.DateFormat = "dd"
-			Log(DateTime.Date(File.LastModified(Starter.SourceFolder, ajdi.Get(i) & "lnk1")))
-			Log(DateTime.Date(DateTime.Now))
 			Dim danNaDatoteciKaoBroj As Int = DateTime.Date(File.LastModified(Starter.SourceFolder, ajdi.Get(i) & "lnk1"))
 			Dim danasnjiDanKaoBroj As Int = DateTime.Date(DateTime.Now)
 			Dim razlika As Int = danasnjiDanKaoBroj - danNaDatoteciKaoBroj
@@ -94,7 +99,7 @@ Sub Provjera_Lista_I_Datuma_Na_Dat
 				UcitajListe(ajdi.Get(i))
 				Dohvati_Indeks_Za_DL_Postojece_Liste(ajdi.Get(i), ajdinl.Get(i), i)
 			Else
-				DL_Polaziste_Odrediste_Tekuci_Datum2(ajdiLink.Get(i), ajdi.Get(i), ajdinl.Get(i), ajdibl.Get(i), i)
+				Wait For (DL_Polaziste_Odrediste_Tekuci_Datum2(ajdiLink.Get(i), ajdi.Get(i), ajdinl.Get(i), ajdibl.Get(i), i)) Complete (Success As Boolean)				
 			End If
 		End If
 	Next
@@ -103,7 +108,8 @@ End Sub
 '
 ' DL tekućih podataka za polazište/odredište
 '
-Sub DL_Polaziste_Odrediste_Tekuci_Datum2(link As String, id As Int, nl As String, bl As String, idx As Int)
+Sub DL_Polaziste_Odrediste_Tekuci_Datum2(link As String, id As Int, nl As String, bl As String, idx As Int) As ResumableSub
+	Log("fav servis -> DL_Polaziste_Odrediste_Tekuci_Datum2")
 	Dim j As HttpJob
 	j.Initialize("", Me)
 	Dim dat As Long
@@ -120,12 +126,15 @@ Sub DL_Polaziste_Odrediste_Tekuci_Datum2(link As String, id As Int, nl As String
 		ToastMessageShow("Nema voznog reda za " & DateTime.Date(DateTime.Now) & " linije broj " & bl, False)
 	End If
 	j.Release
+
+	Return j.Success
 End Sub
 
 '
 ' parsanje datoteke za polazište/odredište za tekući datum
 '
 Sub Parsaj_Polaziste_Odrediste_Tekuci_Datum(stranica As String, ide As Int, nl As String, idx As Int)
+	Log("fav servis -> Parsaj_Polaziste_Odrediste_Tekuci_Datum")
 	Dim matcher1 As Matcher
 
 	lnk1.Initialize
@@ -180,6 +189,7 @@ End Sub
 ' prvo najbliže vrijeme do tekućeg vremena
 '
 Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
+	Log("fav servis -> Dohvati_Indeks_Za_DL_Postojece_Liste")
 	'
 	' dohvat indeksa za prikaz detaljnijeg voznog reda
 	'
@@ -204,6 +214,7 @@ End Sub
 ' DL detalja voznog reda (za indeks gore)
 '
 Sub DL_VozniRedDetalj2(link As String, ide As Int, idx As Int)
+	Log("fav servis -> DL_VozniRedDetalj2")
 	Dim j As HttpJob
 	j.Initialize("", Me)
 	j.Download(link)
@@ -218,6 +229,7 @@ End Sub
 ' parsanje detalja voznog reda
 '
 Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
+	Log("fav servis -> ParsajDetaljeLinije2")
 	Dim matcher1 As Matcher
 
 	cMapa.Initialize
@@ -257,6 +269,9 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 	Log(zMapa.GetKeyAt(0))
 '	Log(cMapa)
 	Dim bl As String = ajdibl.Get(ajdi.IndexOf(ide))
+	Log("imgVozilo" & idx)
+	Log("lblBrojLinije" & idx)
+	Log("lblPolazisteOdrediste" & idx)
 	If bl < 100 Then ' tramvaji
 		rv.SetImage("imgVozilo" & idx, LoadBitmap(File.DirAssets, "tram1.png"))
 		rv.SetText("lblBrojLinije" & idx, zMapa.GetKeyAt(0))
@@ -273,6 +288,7 @@ End Sub
 ' usnimavanje liste za tekući dan, da se ista ne mora svaki puta preuzimati sa neta
 '
 Sub UsnimiListe(id As Int)
+	Log("fav servis -> UsnimiListe")
 	File.WriteList(Starter.SourceFolder, id & "lnk1", lnk1)
 	File.WriteList(Starter.SourceFolder, id & "lnk2", lnk2)
 	File.WriteList(Starter.SourceFolder, id & "okr1", okr1)
@@ -287,6 +303,7 @@ End Sub
 ' učitavanje tekuće liste
 '
 Sub UcitajListe(id As Int)
+	Log("fav servis -> UcitajListe")
 	lnk1 = File.ReadList(Starter.SourceFolder, id & "lnk1")
 	lnk2 = File.ReadList(Starter.SourceFolder, id & "lnk2")
 	okr1 = File.ReadList(Starter.SourceFolder, id & "okr1")
@@ -298,6 +315,7 @@ Sub UcitajListe(id As Int)
 End Sub
 
 Sub rv_Disabled
+	Log("fav servis -> rv_Disabled")
 	CancelScheduledService("")
 	StopService("")
 End Sub
