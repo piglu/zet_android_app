@@ -42,9 +42,13 @@ Sub Service_Destroy
 End Sub
 
 Sub rv_RequestUpdate
-	DohvatiSveLinijeZaWidget
+	rv.UpdateWidget
 End Sub
 
+'
+' dohvaćanje svih linija koje je korisnik dodao za widget
+' linija za prikaz u widgetu može biti najviše 6
+'
 Sub DohvatiSveLinijeZaWidget
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
@@ -96,6 +100,9 @@ Sub Provjera_Lista_I_Datuma_Na_Dat
 	Next
 End Sub
 
+'
+' DL tekućih podataka za polazište/odredište
+'
 Sub DL_Polaziste_Odrediste_Tekuci_Datum2(link As String, id As Int, nl As String, bl As String, idx As Int)
 	Dim j As HttpJob
 	j.Initialize("", Me)
@@ -115,6 +122,9 @@ Sub DL_Polaziste_Odrediste_Tekuci_Datum2(link As String, id As Int, nl As String
 	j.Release
 End Sub
 
+'
+' parsanje datoteke za polazište/odredište za tekući datum
+'
 Sub Parsaj_Polaziste_Odrediste_Tekuci_Datum(stranica As String, ide As Int, nl As String, idx As Int)
 	Dim matcher1 As Matcher
 
@@ -165,6 +175,10 @@ Sub Parsaj_Polaziste_Odrediste_Tekuci_Datum(stranica As String, ide As Int, nl A
 	DL_VozniRedDetalj2(lnk1.Get(pos), ide, idx)
 End Sub
 
+'
+' dohvaćanje indeksa za vrijeme (od kojeg vremena ćemo prikazati podatke unutar widgeta)
+' prvo najbliže vrijeme do tekućeg vremena
+'
 Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
 	'
 	' dohvat indeksa za prikaz detaljnijeg voznog reda
@@ -186,6 +200,9 @@ Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
 	DL_VozniRedDetalj2(lnk1.Get(pos), ide, idx)
 End Sub
 
+'
+' DL detalja voznog reda (za indeks gore)
+'
 Sub DL_VozniRedDetalj2(link As String, ide As Int, idx As Int)
 	Dim j As HttpJob
 	j.Initialize("", Me)
@@ -197,6 +214,9 @@ Sub DL_VozniRedDetalj2(link As String, ide As Int, idx As Int)
 	j.Release
 End Sub
 
+'
+' parsanje detalja voznog reda
+'
 Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 	Dim matcher1 As Matcher
 
@@ -250,6 +270,8 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 	rv.UpdateWidget
 End Sub
 
+' usnimavanje liste za tekući dan, da se ista ne mora svaki puta preuzimati sa neta
+'
 Sub UsnimiListe(id As Int)
 	File.WriteList(Starter.SourceFolder, id & "lnk1", lnk1)
 	File.WriteList(Starter.SourceFolder, id & "lnk2", lnk2)
@@ -261,6 +283,9 @@ Sub UsnimiListe(id As Int)
 	File.WriteList(Starter.SourceFolder, id & "o2", odrediste2)
 End Sub
 
+'
+' učitavanje tekuće liste
+'
 Sub UcitajListe(id As Int)
 	lnk1 = File.ReadList(Starter.SourceFolder, id & "lnk1")
 	lnk2 = File.ReadList(Starter.SourceFolder, id & "lnk2")
