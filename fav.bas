@@ -28,6 +28,7 @@ Sub Service_Create
 	ajdiLink.Initialize
 	ajdibl.Initialize
 	ajdinl.Initialize
+	DohvatiSveLinijeZaWidget
 End Sub
 
 Sub Service_Start (StartingIntent As Intent)
@@ -45,7 +46,6 @@ Sub rv_RequestUpdate
 End Sub
 
 Sub DohvatiSveLinijeZaWidget
-	Log("DohvatiSveLinijeZaWidget iz test2 aktivnosti")
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
 	If Cursor1.RowCount > 0 Then
@@ -66,6 +66,7 @@ Sub DohvatiSveLinijeZaWidget
 	Else
 		ToastMessageShow("Niste odabrili niti jednu liniju za widget unutar aplikacije!", False)
 	End If
+	Log("DohvatiSveLinijeZaWidget: " & ajdi.Size)
 End Sub
 
 '
