@@ -135,6 +135,20 @@ Sub ParsajDetaljeLinije2(strim As String)
 		End If
 	Next
 
+	Dim tv As String = DateTime.Time(DateTime.Now)
+	Log(tv)
+	For i = 0 To zMapa.Size - 1
+		Dim ki As String = zMapa.GetKeyAt(i)
+		If ki.CompareTo(tv) < 0 Then	' trenutno vrijeme je veće
+			Log("trenutno vrijeme je veće")
+			Log(zMapa.GetKeyAt(i))
+			Log(zMapa.GetValueAt(i))
+		Else
+			Log("trenutno vrijeme je manje")
+			Log(zMapa.GetKeyAt(i))
+			Log(zMapa.GetValueAt(i))
+		End If
+	Next
 '	Log("detaljiLinije: " & detaljiLinije)
 End Sub
 

@@ -18,7 +18,7 @@ Sub Process_Globals
 	Dim cMapa As Map
 	Dim zMapa As Map
 	Dim detaljiLinije As List
-	Dim pos As Int
+'	Dim pos As Int
 End Sub
 
 Sub Service_Create
@@ -40,7 +40,7 @@ Sub Service_Start(StartingIntent As Intent)
 	' We have to be sure that we do not start the service
 	' again if all widgets are removed from homescreen
 	If StartingIntent.Action <> "android.appwidget.action.APPWIDGET_DISABLED" Then
-		Dim minuteUPreferences as int = Main.manager.GetString("edit1")
+		Dim minuteUPreferences As Int = Main.manager.GetString("edit1")
 		Dim slijedecePokretanje As Long = DateTime.Now + (minuteUPreferences * 60) * 1000
 		StartServiceAt("", slijedecePokretanje, False)
 	End If
@@ -58,7 +58,7 @@ End Sub
 
 #Region Novi_Kod
 Sub DohvatiSveLinijeZaWidget
-	pos = 0
+'	pos = 0
 	Log("test2 -> DohvatiSveLinijeZaWidget")
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
@@ -192,7 +192,7 @@ Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
 	satMin = satMin.SubString2(0, satMin.LastIndexOf(":"))
 	Dim idxLinijeB As Boolean = False
 	Dim ss As String = nl
-'	Dim pos As Int
+	Dim pos As Int
 	For i = 0 To okr1.Size - 1
 		Dim ss As String = okr1.Get(i)
 		ss = ss.SubString2(0, ss.LastIndexOf(":"))
@@ -223,6 +223,7 @@ End Sub
 Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 	Log("test2 -> ParsajDetaljeLinije2")
 	Dim matcher1 As Matcher
+'	Dim pos As Int
 
 	cMapa.Initialize
 	zMapa.Initialize
@@ -235,7 +236,7 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 		detaljiLinije.Add(matcher1.Group(1))
 	Loop
 
-	Log("detaljiLinije: " & detaljiLinije)
+'	Log("detaljiLinije: " & detaljiLinije)
 	For i = 0 To detaljiLinije.Size - 1
 		Dim s1 As String = detaljiLinije.Get(i)
 		Dim s3 As String = s1
@@ -257,10 +258,29 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 '	Log(ajdibl.Get(ajdi.IndexOf(ide)))
 '	Log(ajdinl.Get(ajdi.IndexOf(ide)))
 '	Log(ajdiLink.Get(ajdi.IndexOf(ide)))
+	Dim tv As String = DateTime.Time(DateTime.Now)
+	Log("trenutno vrijeme: " & tv)
+	For i = 0 To zMapa.Size - 1
+		Dim ki As String = zMapa.GetKeyAt(i)
+		Log("prvo vrijeme u zMapa: " & ki)
+		If ki.CompareTo(tv) < 0 Then	' trenutno vrijeme je veće
+			Log("trenutno vrijeme je veće")
+			Log(zMapa.GetKeyAt(i))
+			Log(zMapa.GetValueAt(i))
+		Else
+			Log("trenutno vrijeme je manje")
+			Log(zMapa.GetKeyAt(i))
+			Log(zMapa.GetValueAt(i))
+		End If
+	Next
+	Log(detaljiLinije.Size)
+'	Log(pos)
 	Log(zMapa)
+'	Log(cMapa)
 	Log(zMapa.GetKeyAt(0))
 	Log(zMapa.GetKeyAt(1))
-	Log(zMapa.GetValueAt(pos))
+'	Log(detaljiLinije.Get(pos))
+'	Log(zMapa.GetValueAt(pos))
 	'
 	'
 	' sa donje dvije LOG linije app se ruši
