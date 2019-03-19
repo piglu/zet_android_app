@@ -267,10 +267,12 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 			Log("trenutno vrijeme je veće")
 			Log(zMapa.GetKeyAt(i))
 			Log(zMapa.GetValueAt(i))
+			Exit
 		Else
 			Log("trenutno vrijeme je manje")
 			Log(zMapa.GetKeyAt(i))
 			Log(zMapa.GetValueAt(i))
+			Exit
 		End If
 	Next
 	Log(detaljiLinije.Size)
