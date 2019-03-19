@@ -28,16 +28,20 @@ Sub Globals
 	Private btnDetalj As Button
 '	Private t1 As Int
 	Private d1 As Int
-	Private edtTrazi As EditText
+'	Private edtTrazi As EditText
 '	Private btnIzbrisi As Button
 	Private pojamTrazi As String
 	Private btnAddToWidget As Button
 	Private ukupnoZaWidget As Int = 0
+	Private edtMSV As MiniSearchView
+	Private btnTrazi As Button
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
 	Activity.LoadLayout("clv_trazi")
+
+	UbaciSveBrojeveILinijeUMSV
 End Sub
 
 Sub Activity_Resume
@@ -54,10 +58,25 @@ Sub Activity_Pause (UserClosed As Boolean)
 	awake.ReleaseKeepAlive
 End Sub
 
+Sub UbaciSveBrojeveILinijeUMSV
+	Dim linijeZaTraziti As List
+	Dim Cursor1 As Cursor
+
+	linijeZaTraziti.Initialize
+	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije FROM linije"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		linijeZaTraziti.Add(Cursor1.GetInt("brojLinije"))
+		linijeZaTraziti.Add(Cursor1.GetString("nazivLinije"))
+	Next
+	Log(linijeZaTraziti)
+	edtMSV.SetItems(linijeZaTraziti)
+End Sub
+
 #Region trazi
-Sub edtTrazi_EnterPressed
+Sub btnTrazi_Click
 	pojamTrazi = ""
-	pojamTrazi = edtTrazi.Text
+	pojamTrazi = edtMSV.TextField.Text
 
 	If pojamTrazi.Length > 0 Then
 		clvMejn.Clear
@@ -65,8 +84,21 @@ Sub edtTrazi_EnterPressed
 	Else
 		Msgbox("Niste unijeli traženi pojam!", "Info")
 	End If
-	edtTrazi.Text = ""
+	edtMSV.TextField.Text = ""
 End Sub
+
+'Sub edtTrazi_EnterPressed
+'	pojamTrazi = ""
+'	pojamTrazi = edtTrazi.Text
+'
+'	If pojamTrazi.Length > 0 Then
+'		clvMejn.Clear
+'		TraziPojam
+'	Else
+'		Msgbox("Niste unijeli traženi pojam!", "Info")
+'	End If
+'	edtTrazi.Text = ""
+'End Sub
 #End Region
 
 Sub TraziPojam
@@ -114,10 +146,21 @@ Sub TraziPojam
 		Next
 	Else
 		Dim Cursor1 As Cursor
-		Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit FROM linije WHERE nazivLinije LIKE '%${pojamTrazi}%'"$)
+		Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget FROM linije WHERE nazivLinije LIKE '%${pojamTrazi}%'"$)
 		For i = 0 To Cursor1.RowCount - 1
 			imaTrazenogPojma = True
 			Cursor1.Position = i
+			Dim tt As Int = Cursor1.GetInt("dnevna")
+			If Cursor1.GetInt("tip") = 1 And Cursor1.GetInt("dnevna") = 1 Or Cursor1.GetInt("dnevna") = 2 Then
+				Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
+			Else
+				Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
+			End If
+			If Cursor1.GetInt("widget") = 1 Then
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
 			Dim tp As VoziloData
 			tp.Initialize
 			tp.id = Cursor1.GetInt("id")
@@ -138,13 +181,6 @@ Sub TraziPojam
 			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
 			p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
 			clvMejn.Add(p, tp)
-'			t1 = Cursor1.GetInt("tip")
-'			d1 = Cursor1.GetInt("dnevna")
-'			If d1 = 1 Then
-'				clvT.Add(CreateListItem(Cursor1.GetInt("id"), Cursor1.GetInt("brojLinije"), img1, img2, img3, Cursor1.GetString("nazivLinije"), Cursor1.GetInt("favorit"), clvT.AsView.Width, 88dip), "")
-'			Else
-'				clvT.Add(CreateListItem(Cursor1.GetInt("id"), Cursor1.GetInt("brojLinije") & "N", img1, img2, img3, Cursor1.GetString("nazivLinije"), Cursor1.GetInt("favorit"), clvT.AsView.Width, 88dip), "")
-'			End If
 		Next
 	End If
 

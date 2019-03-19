@@ -37,6 +37,13 @@ Sub Service_Start(StartingIntent As Intent)
 	rv.HandleWidgetEvents(StartingIntent)
 	Sleep(0)
 	Service.StopAutomaticForeground
+	' We have to be sure that we do not start the service
+	' again if all widgets are removed from homescreen
+	If StartingIntent.Action <> "android.appwidget.action.APPWIDGET_DISABLED" Then
+		Dim minuteUPreferences as int = Main.manager.GetString("edit1")
+		Dim slijedecePokretanje As Long = DateTime.Now + (minuteUPreferences * 60) * 1000
+		StartServiceAt("", slijedecePokretanje, False)
+	End If
 End Sub
 
 Sub Service_Destroy
@@ -223,12 +230,12 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 
 	Dim satMin As String = DateTime.Time(DateTime.Now)
 	satMin = satMin.SubString2(0, satMin.LastIndexOf(":"))
-
 	matcher1 = Regex.Matcher($"<li>(\d+:\d+:\d+\s+-\s+.*)</li>"$, stranica)
 	Do While matcher1.Find = True
 		detaljiLinije.Add(matcher1.Group(1))
 	Loop
 
+	Log("detaljiLinije: " & detaljiLinije)
 	For i = 0 To detaljiLinije.Size - 1
 		Dim s1 As String = detaljiLinije.Get(i)
 		Dim s3 As String = s1
@@ -253,6 +260,7 @@ Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
 	Log(zMapa)
 	Log(zMapa.GetKeyAt(0))
 	Log(zMapa.GetKeyAt(1))
+	Log(zMapa.GetValueAt(pos))
 	'
 	'
 	' sa donje dvije LOG linije app se ruši
