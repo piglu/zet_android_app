@@ -1,50 +1,66 @@
 ﻿Build1=Default,com.stanks.zet_v2,Full,Ads
 File1=arrow.png
-File10=db_obrisi1.png
-File11=detalj.bal
-File12=detalj.png
-File13=fav_widget.bal
-File14=favorit_oduzmi.png
-File15=favorite_dodaj.png
-File16=gps.png
-File17=k.png
-File18=k_widget.bal
-File19=k1.png
+File10=clv_tab_strip2.bal
+File11=clv_tab_strip3.bal
+File12=clv_tab_strip4.bal
+File13=clv_tab_strip5.bal
+File14=clv_trazi.bal
+File15=crvena.png
+File16=dan.png
+File17=db_obrisi.png
+File18=db_obrisi1.png
+File19=detalj.bal
 File2=arrow_d.png
-File20=karta.bal
-File21=karta.png
-File22=karta1.png
-File23=karta2.png
-File24=kasni.png
-File25=kontrola.png
-File26=linije.db
-File27=linije-orig.db
-File28=lociranje.png
-File29=logo.png
-File3=bus1.png
-File30=lok123_stavka.bal
-File31=lokacije123.bal
-File32=mejn2.bal
-File33=minisearchview.bal
-File34=narancasta.png
-File35=o.png
-File36=pdf.png
-File37=postavke.png
-File38=postavke1.png
-File39=street_view2.png
-File4=clv_stavka.bal
-File40=test.bal
-File41=tram1.png
-File42=trazi.png
-File43=widget_makni.png
-File44=widget_umetni.png
-File45=zastoj.png
-File46=zelena.png
-File5=clv_stavka_d.bal
-File6=clv_stavkad.bal
-File7=clv_trazi.bal
-File8=crvena.png
-File9=db_obrisi.png
+File20=detalj.png
+File21=fav.png
+File22=fav_widget.bal
+File23=favorit_oduzmi.png
+File24=favorite_dodaj.png
+File25=gps.png
+File26=k.png
+File27=k_widget.bal
+File28=k1.png
+File29=k2.png
+File3=bus.png
+File30=karta.bal
+File31=karta.png
+File32=karta1.png
+File33=karta2.png
+File34=kasni.png
+File35=kontrola.png
+File36=linije.db
+File37=linije-orig.db
+File38=lociranje.png
+File39=logo.png
+File4=bus1.png
+File40=lok123_stavka.bal
+File41=lokacije123.bal
+File42=mejn1.bal
+File43=mejn2.bal
+File44=meni.png
+File45=minisearchview.bal
+File46=narancasta.png
+File47=noc.png
+File48=o.png
+File49=osvjezi.png
+File5=clv_stavka.bal
+File50=pdf.png
+File51=postavke.png
+File52=postavke1.png
+File53=postavke2.png
+File54=street_view2.png
+File55=test.bal
+File56=tram.png
+File57=tram1.png
+File58=trazi.png
+File59=widget_makni.png
+File6=clv_stavka_d.bal
+File60=widget_umetni.png
+File61=zastoj.png
+File62=zelena.png
+File7=clv_stavka2.bal
+File8=clv_stavkad.bal
+File9=clv_tab_strip1.bal
 FileGroup1=Default Group
 FileGroup10=Default Group
 FileGroup11=Default Group
@@ -86,8 +102,24 @@ FileGroup43=Default Group
 FileGroup44=Default Group
 FileGroup45=Default Group
 FileGroup46=Default Group
+FileGroup47=Default Group
+FileGroup48=Default Group
+FileGroup49=Default Group
 FileGroup5=Default Group
+FileGroup50=Default Group
+FileGroup51=Default Group
+FileGroup52=Default Group
+FileGroup53=Default Group
+FileGroup54=Default Group
+FileGroup55=Default Group
+FileGroup56=Default Group
+FileGroup57=Default Group
+FileGroup58=Default Group
+FileGroup59=Default Group
 FileGroup6=Default Group
+FileGroup60=Default Group
+FileGroup61=Default Group
+FileGroup62=Default Group
 FileGroup7=Default Group
 FileGroup8=Default Group
 FileGroup9=Default Group
@@ -106,6 +138,11 @@ Library18=preferenceactivity
 Library19=clipboard
 Library2=stringutils
 Library20=xcustomlistview
+Library21=tabstripviewpager
+Library22=abextdrawing
+Library23=appcompat
+Library24=sd_bottomenu
+Library25=bitmapcreator
 Library3=okhttputils2
 Library4=runtimepermissions
 Library5=googlemaps
@@ -113,10 +150,10 @@ Library6=json
 Library7=javaobject
 Library8=sql
 Library9=firebasenotifications
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~'  android:theme="@android:style/Theme.Translucent.NoTitleBar"~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'AddApplicationText(~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.appid"~\n~'		android:value="{NmIhHAw4WYGyuy1bWQqK}" />~\n~'	<meta-data~\n~'		android:name="com.here.android.maps.apptoken"~\n~'		android:value="{7pK0VxJoRvnMzjqJndq25w}" />~\n~')~\n~~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~''.NoActionBar">~\n~'CreateResource(values, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~'        <item name="colorPrimary">#0098FF</item>~\n~'        <item name="colorPrimaryDark">#007CF5</item>~\n~'        <item name="colorAccent">#AAAA00</item>~\n~'        <item name="windowNoTitle">false</item>~\n~'        <item name="windowActionBar">true</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'SetApplicationAttribute(android:theme, "@style/LightTheme")~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~'CreateResource(values, colors.xml,~\n~'<resources>~\n~'    <color name="actionbar">#ff039be5</color>~\n~'	<color name="statusbar">#ff006db3</color>~\n~'	<color name="textColorPrimary">#ffffffff</color>~\n~'	<color name="navigationBar">#ff006db3</color>~\n~'</resources>~\n~')~\n~'CreateResource(values-v20, theme.xml,~\n~'<resources>~\n~'    <style name="MyAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">~\n~'        <item name="colorPrimary">#418BEA</item>~\n~'        <item name="colorPrimaryDark">#2C7FE8</item>~\n~'        <item name="colorAccent">#5698EC</item>~\n~'        <item name="windowNoTitle">true</item>~\n~'        <item name="windowActionBar">false</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Material.Light">~\n~'		 <item name="android:colorPrimary">@color/actionbar</item>~\n~'		 <item name="android:colorPrimaryDark">@color/statusbar</item>~\n~'		 <item name="android:textColorPrimary">@color/textColorPrimary</item>~\n~'		 <item name="android:navigationBarColor">@color/navigationBar</item>~\n~'    </style>~\n~'</resources>~\n~')~\n~'CreateResource(values-v14, theme.xml,~\n~'<resources>~\n~'    <style name="LightTheme" parent="@android:style/Theme.Holo.Light">~\n~'		<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>~\n~'    </style>~\n~'	<style name="CustomActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">~\n~'	    <item name="android:background">@color/actionbar</item>~\n~'	</style>~\n~'</resources>~\n~')
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
 Module1=Starter
-Module10=B4XComboBox
-Module11=todo
+Module10=todo
+Module11=TabStripViewPagerExtendet
 Module12=lok_123_karta2
 Module13=MiniSearchView
 Module2=gps_pozicija
@@ -127,8 +164,8 @@ Module6=kw2
 Module7=fav
 Module8=detalj
 Module9=detalj_stanice
-NumberOfFiles=46
-NumberOfLibraries=20
+NumberOfFiles=62
+NumberOfLibraries=25
 NumberOfModules=13
 Version=8.8
 @EndOfDesignText@
@@ -139,19 +176,18 @@ Version=8.8
 	'SupportedOrientations possible values: unspecified, landscape or portrait.
 	#SupportedOrientations: unspecified
 	#CanInstallToExternalStorage: False
-	#AdditionalJar: com.google.android.gms:play-services-location
-	#AdditionalJar: com.google.android.gms:play-services-maps
-'	#AdditionalRes: ..\res
-'	#AdditionalJar: com.android.support:support-v4
-'	#AdditionalJar: com.android.support:design - Needed for the MaterialDateTimePicker library
-'	#AdditionalRes: ..\resource
-'	#Extends: android.support.v7.app.AppCompatActivity
 #End Region
 
 #Region  Activity Attributes 
 	#FullScreen: False
 	#IncludeTitle: True
 #End Region
+
+#AdditionalJar: com.google.android.gms:play-services-location
+#AdditionalJar: com.google.android.gms:play-services-maps
+#AdditionalJar: com.android.support:support-v4
+#Extends: android.support.v7.app.AppCompatActivity
+'#AdditionalRes: ..\resource
 
 Sub Process_Globals
 	'These global variables will be declared once when the application starts.
@@ -163,12 +199,13 @@ Sub Process_Globals
 	Dim screen As PreferenceScreen
 	Private xui As XUI
 	Private awake As PhoneWakeState
+	Dim tse As TabStripViewPagerExtendet
 End Sub
 
 Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
-	Private B4XComboBox1 As B4XComboBox
+'	Private B4XComboBox1 As B4XComboBox
 	Private clvMejn As CustomListView
 	Private imgVozilo As ImageView
 	Private lblBrojLinije As B4XView
@@ -179,37 +216,124 @@ Sub Globals
 	Private t1, d1 As Int
 	Private ukupnoZaWidget As Int = 0
 	Type VoziloData (id As Int, brl As String, i1 As Bitmap, i2 As Bitmap, nal As String, f As Int, t As Int, d As Int, wdg As Int, i3 As Bitmap, lnkLinije As String)
+	Private TabStrip1 As TabStrip
+	Private clv_tab_strip1 As CustomListView
+	Private clv_tab_strip2 As CustomListView
+	Private clv_tab_strip3 As CustomListView
+	Private clv_tab_strip4 As CustomListView
+	Private clv_tab_strip5 As CustomListView
+'	Private actionPanel As Panel
+'	Private imgPostavke As ImageView
+'	Private imgBazaKontrola As ImageView
+'	Private imgMeni As ImageView
+'	Dim pop As DroppyMenuPopup
+	Private ACSpinner1 As ACSpinner
+	Dim bmenu As BottoMenu
+'	Private ACActionMenu1 As ACActionMenu
 End Sub
+
+'Inline Java code to initialize the Menu
+#If Java
+	public boolean _onCreateOptionsMenu(android.view.Menu menu) {
+		if (processBA.subExists("activity_createmenu")) {
+			processBA.raiseEvent2(null, true, "activity_createmenu", false, new de.amberhome.objects.appcompat.ACMenuWrapper(menu));
+			return true;
+		}
+		else
+			return false;
+	}
+#End If
 
 #Region aktivnost
 Sub Activity_Create(FirstTime As Boolean)
-	Activity.LoadLayout("mejn2")
-
 	If FirstTime Then
 		CreatePreferenceScreen
+'		SetDefaults
 		If manager.GetAll.Size = 0 Then SetDefaults
 	End If
 
-	Dim cs As CSBuilder
-	Dim l As List
-	l.Initialize
-	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
-	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
-	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
-	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
-	l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll))
-	
-	B4XComboBox1.SetItems(l)
+	tse.Initialize
 
-	Activity.AddMenuItem3("Postavke", "postavke", LoadBitmap(File.DirAssets, "postavke1.png"), True)
-	Activity.AddMenuItem3("Kontrole/zastoji/kašnjenja", "kontrole", LoadBitmap(File.DirAssets, "k1.png"), True)
-	Activity.AddMenuItem("Pretraživanje", "trazi")
-	Activity.AddMenuItem("Osvježi sve linije", "osvjezi")
-	Activity.AddMenuItem("O...", "o")
-'	Activity.AddMenuItem("testiranje za widget", "test")
-'	Activity.AddMenuItem("test karte", "test")
-'	Activity.AddMenuItem3("Pretraživanje", "trazi", LoadBitmap(File.DirAssets, "trazi.png"), True)
-'	Activity.AddMenuItem3("O...", "o", LoadBitmap(File.DirAssets, "o.png"), True)
+	Dim cs As CSBuilder
+	Dim izgledBroj As Int
+	izgledBroj = manager.GetString("list1")
+	If izgledBroj = 1 Then
+		Activity.LoadLayout("mejn1")
+'		Dim l As List
+'		l.Initialize
+'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
+'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
+'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
+'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
+'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll))
+'		B4XComboBox1.SetItems(l)
+
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "dan.png"))
+		ACSpinner1.Add2("Autobusne linije", bd)
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "noc.png"))
+		ACSpinner1.Add2("Autobusne linije", bd)
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "dan.png"))
+		ACSpinner1.Add2("Tramvajske linije", bd)
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "noc.png"))
+		ACSpinner1.Add2("Tramvajske linije", bd)
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "fav.png"))
+		ACSpinner1.Add2("Favoriti", bd)
+
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "postavke1.png"))
+'		ACActionMenu1.Menu.Add2(1, 1, "Postavke", bd)
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "k1.png"))
+'		ACActionMenu1.Menu.Add2(2, 2, "Kontrole", bd)
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "trazi.png"))
+'		ACActionMenu1.Menu.Add2(3, 3, "Pretraživanje", bd)
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "osvjezi.png"))
+'		ACActionMenu1.Menu.Add2(4, 4, "Osvježavanje", bd)
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "o.png"))
+'		ACActionMenu1.Menu.Add2(5, 5, "O...", bd)
+
+		Activity.AddMenuItem3("Postavke", "postavke", LoadBitmap(File.DirAssets, "postavke1.png"), True)
+		Activity.AddMenuItem3("Kontrole", "kontrole", LoadBitmap(File.DirAssets, "k1.png"), True)
+		Activity.AddMenuItem("Pretraživanje", "trazi")
+		Activity.AddMenuItem("Osvježavanje", "osvjezi")
+		Activity.AddMenuItem("O...", "o")
+
+	Else If izgledBroj = 2 Then
+		Activity.LoadLayout("mejn2")
+		TabStrip1.LoadLayout("clv_tab_strip1", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Typeface(Typeface.DEFAULT_BOLD).Append(" Dnevne linije").PopAll)
+		TabStrip1.LoadLayout("clv_tab_strip2", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Typeface(Typeface.DEFAULT_BOLD).Append(" Noćne linije").PopAll)
+		TabStrip1.LoadLayout("clv_tab_strip3", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Typeface(Typeface.DEFAULT_BOLD).Append(" Dnevne linije").PopAll)
+		TabStrip1.LoadLayout("clv_tab_strip4", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Typeface(Typeface.DEFAULT_BOLD).Append(" Noćne linije").PopAll)
+		TabStrip1.LoadLayout("clv_tab_strip5", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll)
+		''		tse.DividerColor(TabStrip1, Colors.White)
+''		tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 0)
+''		tse.IndicatorColor(TabStrip1, Colors.White)
+		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 1)
+		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 2)
+		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 3)
+		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 4)
+		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 5)
+		For Each lbl As Label In GetAllTabLabels(TabStrip1)
+			lbl.Typeface = Typeface.FONTAWESOME
+		Next
+		TabStrip1_PageSelected(0)
+		bmenu.AddMenu(Chr(0xF013),xui.CreateFontAwesome(18))
+		bmenu.AddMenu(Chr(0xF06a),xui.CreateFontAwesome(18))
+		bmenu.AddMenu(Chr(0xF002),xui.CreateFontAwesome(18))
+		bmenu.AddMenu(Chr(0xF021),xui.CreateFontAwesome(18))
+		bmenu.AddMenu(Chr(0xF05a),xui.CreateFontAwesome(18))
+
+	Else
+		Activity.LoadLayout("mejn3")
+	End If
 End Sub
 
 'Sub test_Click
@@ -234,7 +358,7 @@ Sub trazi_Click
 End Sub
 
 Sub osvjezi_Click
-	Msgbox("Osvježavanje linija još ne radi dobro!", "Info")
+'	Msgbox("Osvježavanje linija još ne radi dobro!", "Info")
 
 	Dim l As String = "http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251"
 	' autobus dnevne linije -> http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251
@@ -344,6 +468,7 @@ Sub SetDefaults
 	manager.SetBoolean("check3", False)
 	manager.SetBoolean("check4", False)
 	manager.SetString("edit1", "5")
+	manager.SetString("list1", "1")
 '	manager.SetString("list1", "Prikaži vrijeme za polazište/odredište")
 '	manager.SetString("edit1", 1000)
 '	manager.SetBoolean("check2", False)
@@ -357,6 +482,7 @@ Sub CreatePreferenceScreen
 	
 	screen.Initialize("Postavke ekrana", "")
 	cat1.Initialize("Svi ekrani")
+	cat1.AddList("list1", "Izgled aplikacije", "Koji izgled želite koristiti za app", "1", Array As String("1", "2", "3"))
 	cat1.AddCheckBox("check1", "Bez čuvara ekrana", "Ekran uvijek upaljen", False)
 '	cat1.AddCheckBox("check2", "Checkbox2", "This is Checkbox2", False)
 '	cat1.AddEditText("edit1", "EditText1", "This is EditText1", "")
@@ -397,32 +523,57 @@ Sub Activity_Pause (UserClosed As Boolean)
 End Sub
 #End Region
 
-Sub B4XComboBox1_SelectedIndexChanged (Index As Int)
-	clvMejn.Clear
+Sub ACSpinner1_ItemClick (Position As Int, Value As Object)
+	If clvMejn.Size > 0 Then clvMejn.Clear
 
-	Select Index
+	Select Position
 		Case 0	' autobusi dnevne linije
 			t1 = 1
 			d1 = 1
-			DodajStavke(1, 1)
+			DodajStavke1(1, 1)
 		Case 1	' autobusi noćne linije
 			t1 = 1
 			d1 = 2
-			DodajStavke(1, 2)
+			DodajStavke1(1, 2)
 		Case 2	' tramvaji dnevne linije
 			t1 = 2
 			d1 = 1
-			DodajStavke(2, 1)
+			DodajStavke1(2, 1)
 		Case 3	' tramvaji noćne linije
 			t1 = 2
 			d1 = 2
-			DodajStavke(2, 2)
+			DodajStavke1(2, 2)
 		Case 4	' favoriti
-			DodajStavke_F
+			DodajStavke_F1
 	End Select
 End Sub
 
-Sub DodajStavke(t As Int, d As Int)
+'Sub B4XComboBox1_SelectedIndexChanged (Index As Int)
+'	If clvMejn.Size > 0 Then clvMejn.Clear
+'
+'	Select Index
+'		Case 0	' autobusi dnevne linije
+'			t1 = 1
+'			d1 = 1
+'			DodajStavke1(1, 1)
+'		Case 1	' autobusi noćne linije
+'			t1 = 1
+'			d1 = 2
+'			DodajStavke1(1, 2)
+'		Case 2	' tramvaji dnevne linije
+'			t1 = 2
+'			d1 = 1
+'			DodajStavke1(2, 1)
+'		Case 3	' tramvaji noćne linije
+'			t1 = 2
+'			d1 = 2
+'			DodajStavke1(2, 2)
+'		Case 4	' favoriti
+'			DodajStavke_F1
+'	End Select
+'End Sub
+
+Sub DodajStavke1(t As Int, d As Int)
 	If t = 1 Then	' bitmap autobus dnevne/noćne linije
 		Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
 	Else
@@ -461,23 +612,84 @@ Sub DodajStavke(t As Int, d As Int)
 		tp.f = Cursor1.GetInt("favorit")
 		tp.t = Cursor1.GetInt("tip")
 		tp.d = Cursor1.GetInt("dnevna")
-		Dim p As B4XView = xui.CreatePanel("")
-		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
-		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 88dip)'108dip)
+'		Dim p As B4XView = xui.CreatePanel("")
+'		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 88dip)'108dip)
+		Dim p As Panel
+		p.Initialize("")
+		p.Elevation = 4dip
+		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 100dip)'108dip)
 		clvMejn.Add(p, tp)
 	Next
 	Cursor1.Close
 End Sub
 
+Sub DodajStavke2(t2 As Int, d2 As Int, sielvi As CustomListView)
+	If sielvi.Size > 0 Then sielvi.Clear
+
+	If t2 = 1 Then	' bitmap autobus dnevne/noćne linije
+		Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
+	Else
+		Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
+	End If
+
+	Dim Cursor1 As Cursor
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		Dim tp As VoziloData
+		tp.Initialize
+		tp.id = Cursor1.GetInt("id")
+		Dim tt As Int = Cursor1.GetInt("dnevna")
+		If tt = 1 Then
+			tp.brl = Cursor1.GetInt("brojLinije")
+		Else
+			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+		End If
+		tp.i1 = img1
+		tp.lnkLinije = Cursor1.GetString("link")
+		If tp.lnkLinije.Contains("pdf") Then
+			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
+		Else
+			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+		End If
+		tp.i2 = img2
+		tp.wdg = Cursor1.GetInt("widget")
+		If tp.wdg = 1 Then
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+		Else
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+		End If
+		tp.i3 = img3
+		tp.nal = Cursor1.GetString("nazivLinije")
+		tp.f = Cursor1.GetInt("favorit")
+		tp.t = Cursor1.GetInt("tip")
+		tp.d = Cursor1.GetInt("dnevna")
+'		Dim p As B4XView = xui.CreatePanel("")
+'		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'		p.SetLayoutAnimated(0, 0, 0, sielvi.AsView.Width, 88dip)'108dip)
+		Dim p As Panel
+		p.Initialize("")
+		p.Elevation = 4dip
+		p.SetLayoutAnimated(0, 0, 0, sielvi.AsView.Width, 100dip)'108dip)
+		sielvi.Add(p, tp)
+	Next
+	Cursor1.Close
+End Sub
+
 Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	ProgressDialogShow("Tražim...")
+
 	Dim ExtraSize As Int = 20
 	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clvMejn.Size - 1)
-		Dim p As B4XView = clvMejn.GetPanel(i)
+'		Dim p As B4XView = clvMejn.GetPanel(i)
+		Dim p As Panel = clvMejn.GetPanel(i)
 		If p.NumberOfViews = 0 Then
 			Dim tp As VoziloData = clvMejn.GetValue(i)
 			p.LoadLayout("clv_stavka")
-			p.Color = Colors.White
-			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'			p.Color = Colors.White
+'			p.Elevation = 4dip
+'			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
 			imgVozilo.Bitmap = tp.i1
 			lblBrojLinije.Text = tp.brl
 			btnDetalj.SetBackgroundImage(tp.i2)
@@ -489,10 +701,191 @@ Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
 			lblPolazisteOdrediste.Text = ss
 			If tp.f = 1 Then
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-				lblPolazisteOdrediste.Color = Colors.white
+'				lblPolazisteOdrediste.Color = Colors.white
 			Else
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-				lblPolazisteOdrediste.Color = Colors.Green
+'				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+	ProgressDialogHide
+End Sub
+
+Sub clv_tab_strip1_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clv_tab_strip1.Size - 1)
+		Dim p As B4XView = clv_tab_strip1.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clv_tab_strip1.GetValue(i)
+			p.LoadLayout("clv_stavka2")
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+End Sub
+
+Sub clv_tab_strip2_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clv_tab_strip2.Size - 1)
+		Dim p As B4XView = clv_tab_strip2.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clv_tab_strip2.GetValue(i)
+			p.LoadLayout("clv_stavka2")
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+End Sub
+
+Sub clv_tab_strip3_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clv_tab_strip3.Size - 1)
+		Dim p As B4XView = clv_tab_strip3.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clv_tab_strip3.GetValue(i)
+			p.LoadLayout("clv_stavka2")
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+End Sub
+
+Sub clv_tab_strip4_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clv_tab_strip4.Size - 1)
+		Dim p As B4XView = clv_tab_strip4.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clv_tab_strip4.GetValue(i)
+			p.LoadLayout("clv_stavka2")
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.Green
+			End If
+			btnFavorit.SetBackgroundImage(bmpFavorit)
+			If tp.wdg = 1 Then
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			btnAddToWidget.SetBackgroundImage(bmpWidget)
+		End If
+	Next
+End Sub
+
+Sub clv_tab_strip5_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+	Dim ExtraSize As Int = 20
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clv_tab_strip5.Size - 1)
+		Dim p As B4XView = clv_tab_strip5.GetPanel(i)
+		If p.NumberOfViews = 0 Then
+			Dim tp As VoziloData = clv_tab_strip5.GetValue(i)
+			p.LoadLayout("clv_stavka2")
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+			imgVozilo.Bitmap = tp.i1
+			lblBrojLinije.Text = tp.brl
+			btnDetalj.SetBackgroundImage(tp.i2)
+			btnFavorit.Tag = tp.id
+			btnDetalj.Tag = tp.id
+			btnAddToWidget.Tag = tp.id
+			Dim ss As String = tp.nal
+			ss = ss.Replace(" - ", " smjer ")
+			lblPolazisteOdrediste.Text = ss
+			If tp.f = 1 Then
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.white
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+'				lblPolazisteOdrediste.Color = Colors.Green
 			End If
 			btnFavorit.SetBackgroundImage(bmpFavorit)
 			If tp.wdg = 1 Then
@@ -508,7 +901,7 @@ End Sub
 '
 ' favoriti
 '
-Sub DodajStavke_F
+Sub DodajStavke_F1
 	Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
 	Dim Cursor1 As Cursor
 
@@ -543,10 +936,63 @@ Sub DodajStavke_F
 		tp.t = Cursor1.GetInt("tip")
 		tp.d = Cursor1.GetInt("dnevna")
 		tp.wdg = Cursor1.GetInt("widget")
-		Dim p As B4XView = xui.CreatePanel("")
-		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
-		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
+'		Dim p As B4XView = xui.CreatePanel("")
+'		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
+		Dim p As Panel
+		p.Initialize("")
+		p.Elevation = 4dip
+		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 100dip)'108dip)
 		clvMejn.Add(p, tp)
+	Next
+	Cursor1.Close
+End Sub
+
+Sub DodajStavke_F2
+	If clv_tab_strip5.Size > 0 Then clv_tab_strip5.Clear
+
+	Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+	Dim Cursor1 As Cursor
+
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget FROM linije WHERE favorit = ${2} ORDER by brojLinije"$)
+	For i = 0 To Cursor1.RowCount - 1
+		Cursor1.Position = i
+		Dim tt As Int = Cursor1.GetInt("dnevna")
+		If Cursor1.GetInt("tip") = 1 And Cursor1.GetInt("dnevna") = 1 Or Cursor1.GetInt("dnevna") = 2 Then
+			Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "bus1.png", 60dip, 60dip, True)
+		Else
+			Dim img1 As Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
+		End If
+		If Cursor1.GetInt("widget") = 1 Then
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+		Else
+			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+		End If
+		Starter.nocna = False
+		Dim tp As VoziloData
+		tp.Initialize
+		tp.id = Cursor1.GetInt("id")
+		If tt = 1 Then
+			tp.brl = Cursor1.GetInt("brojLinije")
+		Else
+			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+		End If
+		tp.i1 = img1
+		tp.i2 = img2
+		tp.i3 = img3
+		tp.nal = Cursor1.GetString("nazivLinije")
+		tp.f = Cursor1.GetInt("favorit")
+		tp.t = Cursor1.GetInt("tip")
+		tp.d = Cursor1.GetInt("dnevna")
+		tp.wdg = Cursor1.GetInt("widget")
+'		Dim p As B4XView = xui.CreatePanel("")
+'		p.SetColorAndBorder(Colors.Transparent, 0, Colors.Transparent, 0)
+'		p.SetLayoutAnimated(0, 0, 0, clv_tab_strip5.AsView.Width, 92dip)
+		Dim p As Panel
+		p.Initialize("")
+		p.Elevation = 4dip
+		p.SetLayoutAnimated(0, 0, 0, clv_tab_strip5.AsView.Width, 100dip)'108dip)
+		clv_tab_strip5.Add(p, tp)
 	Next
 	Cursor1.Close
 End Sub
@@ -615,12 +1061,12 @@ Sub btnFavorit_Click
 		Dim favorit As Int = Cursor1.GetInt("favorit")
 		If favorit = 1 Then	' nije favorit
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-			lblN.Color = Colors.Green
+'			lblN.Color = Colors.Green
 			btn.SetBackgroundImage(bmpFavorit)
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 2 WHERE id = ${btn.Tag}"$)
 		Else
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-			lblN.Color = Colors.white
+'			lblN.Color = Colors.white
 			btn.SetBackgroundImage(bmpFavorit)
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 1 WHERE id = ${btn.Tag}"$)
 		End If
@@ -678,4 +1124,160 @@ Sub QueryIntent(Intent1 As Intent) As List
 		listRes.Add(r.GetField("packageName"))
 	Next
 	Return listRes
+End Sub
+
+Sub clv_tab_strip_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+End Sub
+
+Sub TabStrip1_PageSelected (Position As Int)
+'	Log(Position)
+
+	TabStrip1.ScrollTo(Position, True)
+
+	Select Position
+		Case 0	' autobusi dnevne linije
+'			tse.DividerColor(TabStrip1, Colors.Blue)
+'			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 0)
+			t1 = 1
+			d1 = 1
+			DodajStavke2(1, 1, clv_tab_strip1)
+		Case 1	' autobusi noćne linije
+'			tse.DividerColor(TabStrip1, Colors.Blue)
+'			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 1)
+			t1 = 1
+			d1 = 2
+			DodajStavke2(1, 2, clv_tab_strip2)
+		Case 2	' tramvaji dnevne linije
+'			tse.DividerColor(TabStrip1, Colors.Blue)
+'			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 2)
+			t1 = 2
+			d1 = 1
+			DodajStavke2(2, 1, clv_tab_strip3)
+		Case 3	' tramvaji noćne linije
+'			tse.DividerColor(TabStrip1, Colors.Blue)
+'			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 3)
+			t1 = 2
+			d1 = 2
+			DodajStavke2(2, 2, clv_tab_strip4)
+		Case 4	' favoriti
+'			tse.DividerColor(TabStrip1, Colors.Blue)
+'			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 4)
+			DodajStavke_F2
+	End Select
+
+	Dim i As Int
+	For Each lbl As Label In GetAllTabLabels(TabStrip1)
+		If i = Position Then lbl.TextColor = Colors.White Else lbl.TextColor = Colors.ARGB(150,255,255,255)
+		i = i + 1
+	Next
+End Sub
+
+Public Sub GetAllTabLabels (tabstrip As TabStrip) As List
+	Dim jo As JavaObject = tabstrip
+	Dim r As Reflector
+	r.Target = jo.GetField("tabStrip")
+	Dim tc As Panel = r.GetField("tabsContainer")
+	Dim res As List
+	res.Initialize
+	For Each v As View In tc
+		If v Is Label Then res.Add(v)
+	Next
+
+	Return res
+End Sub
+
+'Sub imgMeni_Click
+'	Log("meni")
+'End Sub
+'
+'Sub imgBazaKontrola_Click
+''	Log("kontrole")
+'	StartActivity(lokacije_123)
+'End Sub
+'
+'Sub imgPostavke_Click
+''	Log("postavke")
+'	StartActivity(screen.CreateIntent)
+'End Sub
+
+'Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
+'	Dim origRatio As Float = original.Width / original.Height
+'	Dim targetRatio As Float = TargetX / TargetY
+'	Dim scale As Float
+'    
+'	If targetRatio > origRatio Then
+'		scale = TargetY / original.Height
+'	Else
+'		scale = TargetX / original.Width
+'	End If
+'    
+'	Dim c As Canvas
+'	Dim b As Bitmap
+'	b.InitializeMutable(TargetX, TargetY)
+'	c.Initialize2(b)
+'	Dim r As Rect
+'	Dim w = original.Width * scale, h = original.Height * scale As Int
+'	r.Initialize(TargetX / 2 - w / 2, TargetY / 2 - h / 2, TargetX / 2 + w / 2, TargetY / 2+ h / 2)
+'
+'	Dim ExtDraw As ABExtDrawing
+'	Dim paint As ABPaint
+'	paint.Initialize
+'	paint.setFilterBitmap(True)
+'	paint.SetAntiAlias(True)
+'	ExtDraw.drawBitmap(c, original, Null, r, paint)
+'   
+'	Dim jo = original As JavaObject
+'	jo.RunMethod("recycle", Null)
+'
+'	Return b
+'End Sub
+'
+'Sub SetStatusBarColor(clr As Int)
+'	Dim p As Phone
+'	If p.SdkVersion >= 21 Then
+'		Dim jo As JavaObject
+'		jo.InitializeContext
+'		Dim window As JavaObject = jo.RunMethodJO("getWindow", Null)
+'		window.RunMethod("addFlags", Array (0x80000000))
+'		window.RunMethod("clearFlags", Array (0x04000000))
+'		window.RunMethod("setStatusBarColor", Array(clr))
+'	End If
+'End Sub
+
+'Sub droppy_onClicked(view As Object, index As Int)
+'	Log($"Droppy_onClicked(${view}, ${index})"$)
+'	If view Is Button Then
+'		Log("btn")
+'	else if view Is Label Then
+'		Log("lbl")
+'	else if view Is DroppyMenuItemView Then
+'		Dim item As DroppyMenuItemView = view
+'		Log(item.ChildCount)
+'		If item.ChildCount = 1 Then
+'			If item.getChildAt(0) Is Label Then
+'				Dim lbl As Label = item.getChildAt(0)
+'				Log(lbl.Text)
+'			End If
+'		End If
+'	End If
+'End Sub
+'Sub droppy_onDismissed()
+'	Log($"Droppy_onDismissed()"$)
+'End Sub
+
+Sub bmenu_Selected(Value As Int)
+	Log(Value)
+	Select Value
+		Case 0	' opcije
+			StartActivity(screen.CreateIntent)
+		Case 1	' kontrole
+			StartActivity(lokacije_123)
+		Case 2	' pretraživanje
+			StartActivity(trazi)
+		Case 3	' osvježavanje linija
+			osvjezi_Click
+		Case 4	' o aplikaciji
+			o_Click
+	End Select
 End Sub

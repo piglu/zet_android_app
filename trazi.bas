@@ -210,10 +210,10 @@ Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
 			lblPolazisteOdrediste.Text = ss
 			If tp.f = 1 Then
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-				lblPolazisteOdrediste.Color = Colors.white
+'				lblPolazisteOdrediste.Color = Colors.white
 			Else
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-				lblPolazisteOdrediste.Color = Colors.Green
+'				lblPolazisteOdrediste.Color = Colors.Green
 			End If
 			btnFavorit.SetBackgroundImage(bmpFavorit)
 			If tp.wdg = 1 Then
@@ -292,12 +292,12 @@ Sub btnFavorit_Click
 		Dim favorit As Int = Cursor1.GetInt("favorit")
 		If favorit = 1 Then	' nije favorit
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-			lblN.Color = Colors.Green
+'			lblN.Color = Colors.Green
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${2} WHERE id = ${btn.Tag}"$)
 			btn.SetBackgroundImage(bmpFavorit)
 		Else
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-			lblN.Color = Colors.white
+'			lblN.Color = Colors.white
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${1} WHERE id = ${btn.Tag}"$)
 			btn.SetBackgroundImage(bmpFavorit)
 		End If
