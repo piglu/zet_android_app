@@ -38,26 +38,27 @@ File41=lokacije123.bal
 File42=mejn1.bal
 File43=mejn2.bal
 File44=meni.png
-File45=minisearchview.bal
-File46=narancasta.png
-File47=noc.png
-File48=o.png
-File49=osvjezi.png
+File45=meni2.png
+File46=minisearchview.bal
+File47=narancasta.png
+File48=noc.png
+File49=o.png
 File5=clv_stavka.bal
-File50=pdf.png
-File51=postavke.png
-File52=postavke1.png
-File53=postavke2.png
-File54=street_view2.png
-File55=test.bal
-File56=tram.png
-File57=tram1.png
-File58=trazi.png
-File59=widget_makni.png
+File50=osvjezi.png
+File51=pdf.png
+File52=postavke.png
+File53=postavke1.png
+File54=postavke2.png
+File55=street_view2.png
+File56=test.bal
+File57=tram.png
+File58=tram1.png
+File59=trazi.png
 File6=clv_stavka_d.bal
-File60=widget_umetni.png
-File61=zastoj.png
-File62=zelena.png
+File60=widget_makni.png
+File61=widget_umetni.png
+File62=zastoj.png
+File63=zelena.png
 File7=clv_stavka2.bal
 File8=clv_stavkad.bal
 File9=clv_tab_strip1.bal
@@ -120,6 +121,7 @@ FileGroup6=Default Group
 FileGroup60=Default Group
 FileGroup61=Default Group
 FileGroup62=Default Group
+FileGroup63=Default Group
 FileGroup7=Default Group
 FileGroup8=Default Group
 FileGroup9=Default Group
@@ -129,20 +131,19 @@ Library1=core
 Library10=okhttp
 Library11=fusedlocationprovider
 Library12=gps
-Library13=xui
-Library14=googlemapsextras
-Library15=phone
-Library16=eslocation2
-Library17=reflection
-Library18=preferenceactivity
-Library19=clipboard
+Library13=googlemapsextras
+Library14=phone
+Library15=eslocation2
+Library16=reflection
+Library17=preferenceactivity
+Library18=clipboard
+Library19=xcustomlistview
 Library2=stringutils
-Library20=xcustomlistview
-Library21=tabstripviewpager
-Library22=abextdrawing
-Library23=appcompat
-Library24=sd_bottomenu
-Library25=bitmapcreator
+Library20=tabstripviewpager
+Library21=appcompat
+Library22=bitmapcreator
+Library23=wobblemenu
+Library24=droppy
 Library3=okhttputils2
 Library4=runtimepermissions
 Library5=googlemaps
@@ -150,12 +151,11 @@ Library6=json
 Library7=javaobject
 Library8=sql
 Library9=firebasenotifications
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'.NoActionBar~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
 Module1=Starter
 Module10=todo
-Module11=TabStripViewPagerExtendet
-Module12=lok_123_karta2
-Module13=MiniSearchView
+Module11=lok_123_karta2
+Module12=MiniSearchView
 Module2=gps_pozicija
 Module3=lokacije_123
 Module4=trazi
@@ -164,9 +164,9 @@ Module6=kw2
 Module7=fav
 Module8=detalj
 Module9=detalj_stanice
-NumberOfFiles=62
-NumberOfLibraries=25
-NumberOfModules=13
+NumberOfFiles=63
+NumberOfLibraries=24
+NumberOfModules=12
 Version=8.8
 @EndOfDesignText@
 #Region  Project Attributes 
@@ -187,19 +187,15 @@ Version=8.8
 #AdditionalJar: com.google.android.gms:play-services-maps
 #AdditionalJar: com.android.support:support-v4
 #Extends: android.support.v7.app.AppCompatActivity
-'#AdditionalRes: ..\resource
+#AdditionalRes: ..\resource
 
 Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
-'	Public manager As AHPreferenceManager
-'	Dim screen As AHPreferenceScreen
-'	Dim Manager As PreferenceManager
 	Dim manager As PreferenceManager
 	Dim screen As PreferenceScreen
-	Private xui As XUI
 	Private awake As PhoneWakeState
-	Dim tse As TabStripViewPagerExtendet
+'	Dim tse As TabStripViewPagerExtendet
 End Sub
 
 Sub Globals
@@ -222,14 +218,9 @@ Sub Globals
 	Private clv_tab_strip3 As CustomListView
 	Private clv_tab_strip4 As CustomListView
 	Private clv_tab_strip5 As CustomListView
-'	Private actionPanel As Panel
-'	Private imgPostavke As ImageView
-'	Private imgBazaKontrola As ImageView
-'	Private imgMeni As ImageView
-'	Dim pop As DroppyMenuPopup
 	Private ACSpinner1 As ACSpinner
-	Dim bmenu As BottoMenu
-'	Private ACActionMenu1 As ACActionMenu
+	Private ImageView1 As ImageView
+	Dim pop As DroppyMenuPopup
 End Sub
 
 'Inline Java code to initialize the Menu
@@ -252,22 +243,13 @@ Sub Activity_Create(FirstTime As Boolean)
 		If manager.GetAll.Size = 0 Then SetDefaults
 	End If
 
-	tse.Initialize
+'	tse.Initialize
 
 	Dim cs As CSBuilder
 	Dim izgledBroj As Int
 	izgledBroj = manager.GetString("list1")
 	If izgledBroj = 1 Then
 		Activity.LoadLayout("mejn1")
-'		Dim l As List
-'		l.Initialize
-'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
-'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF207)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
-'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Append(" Dnevne linije").PopAll))
-'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Append(" Noćne linije").PopAll))
-'		l.AddAll(Array(cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll))
-'		B4XComboBox1.SetItems(l)
-
 		Dim bd As BitmapDrawable
 		bd.Initialize(LoadBitmap(File.DirAssets, "dan.png"))
 		ACSpinner1.Add2("Autobusne linije", bd)
@@ -283,22 +265,6 @@ Sub Activity_Create(FirstTime As Boolean)
 		Dim bd As BitmapDrawable
 		bd.Initialize(LoadBitmap(File.DirAssets, "fav.png"))
 		ACSpinner1.Add2("Favoriti", bd)
-
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "postavke1.png"))
-'		ACActionMenu1.Menu.Add2(1, 1, "Postavke", bd)
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "k1.png"))
-'		ACActionMenu1.Menu.Add2(2, 2, "Kontrole", bd)
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "trazi.png"))
-'		ACActionMenu1.Menu.Add2(3, 3, "Pretraživanje", bd)
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "osvjezi.png"))
-'		ACActionMenu1.Menu.Add2(4, 4, "Osvježavanje", bd)
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "o.png"))
-'		ACActionMenu1.Menu.Add2(5, 5, "O...", bd)
 
 		Activity.AddMenuItem3("Postavke", "postavke", LoadBitmap(File.DirAssets, "postavke1.png"), True)
 		Activity.AddMenuItem3("Kontrole", "kontrole", LoadBitmap(File.DirAssets, "k1.png"), True)
@@ -316,21 +282,20 @@ Sub Activity_Create(FirstTime As Boolean)
 		''		tse.DividerColor(TabStrip1, Colors.White)
 ''		tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 0)
 ''		tse.IndicatorColor(TabStrip1, Colors.White)
-		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 1)
-		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 2)
-		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 3)
-		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 4)
-		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 5)
+'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 1)
+'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 2)
+'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 3)
+'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 4)
+'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 5)
 		For Each lbl As Label In GetAllTabLabels(TabStrip1)
 			lbl.Typeface = Typeface.FONTAWESOME
 		Next
 		TabStrip1_PageSelected(0)
-		bmenu.AddMenu(Chr(0xF013),xui.CreateFontAwesome(18))
-		bmenu.AddMenu(Chr(0xF06a),xui.CreateFontAwesome(18))
-		bmenu.AddMenu(Chr(0xF002),xui.CreateFontAwesome(18))
-		bmenu.AddMenu(Chr(0xF021),xui.CreateFontAwesome(18))
-		bmenu.AddMenu(Chr(0xF05a),xui.CreateFontAwesome(18))
 
+		pop.Initialize("Droppy", ImageView1)
+		pop.setXOffset(10)
+		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
+		
 	Else
 		Activity.LoadLayout("mejn3")
 	End If
@@ -513,6 +478,7 @@ Sub Activity_Resume
 	ph.SetScreenOrientation(1)
 
 	If manager.GetBoolean("check1") Then
+		Log("activity_resume")
 		awake.KeepAlive(True)
 	End If
 End Sub
@@ -1245,31 +1211,10 @@ End Sub
 '	End If
 'End Sub
 
-'Sub droppy_onClicked(view As Object, index As Int)
-'	Log($"Droppy_onClicked(${view}, ${index})"$)
-'	If view Is Button Then
-'		Log("btn")
-'	else if view Is Label Then
-'		Log("lbl")
-'	else if view Is DroppyMenuItemView Then
-'		Dim item As DroppyMenuItemView = view
-'		Log(item.ChildCount)
-'		If item.ChildCount = 1 Then
-'			If item.getChildAt(0) Is Label Then
-'				Dim lbl As Label = item.getChildAt(0)
-'				Log(lbl.Text)
-'			End If
-'		End If
-'	End If
-'End Sub
-'Sub droppy_onDismissed()
-'	Log($"Droppy_onDismissed()"$)
-'End Sub
-
-Sub bmenu_Selected(Value As Int)
-	Log(Value)
-	Select Value
-		Case 0	' opcije
+Sub droppy_onClicked(view As Object, index As Int)
+	Log($"Droppy_onClicked(${view}, ${index})"$)
+	Select index
+		Case 0	' postavke
 			StartActivity(screen.CreateIntent)
 		Case 1	' kontrole
 			StartActivity(lokacije_123)
@@ -1277,7 +1222,21 @@ Sub bmenu_Selected(Value As Int)
 			StartActivity(trazi)
 		Case 3	' osvježavanje linija
 			osvjezi_Click
-		Case 4	' o aplikaciji
+		Case 4	' o app
 			o_Click
 	End Select
 End Sub
+
+Sub droppy_onDismissed()
+	Log($"Droppy_onDismissed()"$)
+End Sub
+
+'Sub btnNext1_Click
+'	Activity.RemoveAllViews
+'	Activity.LoadLayout("TwoLayouts2")
+'End Sub
+'
+'Sub btnNext2_Click
+'	Activity.RemoveAllViews
+'	Activity.LoadLayout("TwoLayouts1")
+'End Sub
