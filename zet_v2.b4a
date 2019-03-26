@@ -28,37 +28,40 @@ File32=karta1.png
 File33=karta2.png
 File34=kasni.png
 File35=kontrola.png
-File36=linije.db
-File37=linije-orig.db
-File38=lociranje.png
-File39=logo.png
+File36=lijevi_meni.bal
+File37=linije.db
+File38=linije-orig.db
+File39=lociranje.png
 File4=bus1.png
-File40=lok123_stavka.bal
-File41=lokacije123.bal
-File42=mejn1.bal
-File43=mejn2.bal
-File44=meni.png
-File45=meni2.png
-File46=minisearchview.bal
-File47=narancasta.png
-File48=noc.png
-File49=o.png
+File40=logo.png
+File41=lok123_stavka.bal
+File42=lokacije123.bal
+File43=mejn1.bal
+File44=mejn2.bal
+File45=meni.png
+File46=meni2.png
+File47=minisearchview.bal
+File48=narancasta.png
+File49=noc.png
 File5=clv_stavka.bal
-File50=osvjezi.png
-File51=pdf.png
-File52=postavke.png
-File53=postavke1.png
-File54=postavke2.png
-File55=street_view2.png
-File56=test.bal
-File57=tram.png
-File58=tram1.png
-File59=trazi.png
+File50=o.png
+File51=osvjezi.png
+File52=pdf.png
+File53=postavke.png
+File54=postavke1.png
+File55=postavke2.png
+File56=sielvi1.bal
+File57=stavka_menija.bal
+File58=street_view2.png
+File59=test.bal
 File6=clv_stavka_d.bal
-File60=widget_makni.png
-File61=widget_umetni.png
-File62=zastoj.png
-File63=zelena.png
+File60=tram.png
+File61=tram1.png
+File62=trazi.png
+File63=widget_makni.png
+File64=widget_umetni.png
+File65=zastoj.png
+File66=zelena.png
 File7=clv_stavka2.bal
 File8=clv_stavkad.bal
 File9=clv_tab_strip1.bal
@@ -122,6 +125,9 @@ FileGroup60=Default Group
 FileGroup61=Default Group
 FileGroup62=Default Group
 FileGroup63=Default Group
+FileGroup64=Default Group
+FileGroup65=Default Group
+FileGroup66=Default Group
 FileGroup7=Default Group
 FileGroup8=Default Group
 FileGroup9=Default Group
@@ -142,8 +148,10 @@ Library2=stringutils
 Library20=tabstripviewpager
 Library21=appcompat
 Library22=bitmapcreator
-Library23=wobblemenu
-Library24=droppy
+Library23=droppy
+Library24=xui
+Library25=viewsex
+Library26=ime
 Library3=okhttputils2
 Library4=runtimepermissions
 Library5=googlemaps
@@ -156,6 +164,7 @@ Module1=Starter
 Module10=todo
 Module11=lok_123_karta2
 Module12=MiniSearchView
+Module13=B4XDrawer
 Module2=gps_pozicija
 Module3=lokacije_123
 Module4=trazi
@@ -164,9 +173,9 @@ Module6=kw2
 Module7=fav
 Module8=detalj
 Module9=detalj_stanice
-NumberOfFiles=63
-NumberOfLibraries=24
-NumberOfModules=12
+NumberOfFiles=66
+NumberOfLibraries=26
+NumberOfModules=13
 Version=8.8
 @EndOfDesignText@
 #Region  Project Attributes 
@@ -222,6 +231,14 @@ Sub Globals
 	Private ImageView1 As ImageView
 	Dim pop As DroppyMenuPopup
 	Dim sielviGlobal As CustomListView
+'	Private ACToolBarLight1 As ACToolBarLight
+	Private ToolbarHelper As ACActionBar
+	Private Drawer As B4XDrawer
+	Private IME As IME
+	Private clv_meni As CustomListView
+	Private image As ImageView
+	Private labela As Label
+	Private sielvi1 As CustomListView
 End Sub
 
 'Inline Java code to initialize the Menu
@@ -298,7 +315,67 @@ Sub Activity_Create(FirstTime As Boolean)
 		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
 		
 	Else
-		Activity.LoadLayout("mejn3")
+		Drawer.Initialize(Me, "Drawer", Activity, 300dip)
+		IME.Initialize("ime")
+		IME.AddHeightChangedEvent
+		Drawer.CenterPanel.LoadLayout("sielvi1")
+
+		ToolbarHelper.Initialize
+		ToolbarHelper.ShowUpIndicator = True 'set to true to show the up arrow
+		Dim bd As BitmapDrawable
+		bd.Initialize(LoadBitmap(File.DirAssets, "meni2.png"))
+		ToolbarHelper.UpIndicatorDrawable = bd
+'		ACToolBarLight1.InitMenuListener
+		Drawer.LeftPanel.LoadLayout("lijevi_meni")
+		Dim l As List
+		l.Initialize2(Array As String("Dnevne linije", "Noćne linije", "Dnevne linije", "Noćne linije", "Favoriti"))
+		Dim l2 As List
+		l2.Initialize2(Array As String("bus", "tram", "bus", "tram", "fav"))
+		For i = 0 To l.Size - 1
+			clv_meni.Add(CreateItem(clv_meni.AsView.Width, l.Get(i), LoadBitmap(File.DirAssets, l2.Get(i) & ".png")), "")
+		Next
+
+		If Not(Drawer.LeftOpen) Then
+			Drawer.LeftOpen = True
+		End If
+
+	End If
+End Sub
+
+Private Sub CreateItem(Width As Int, n As String, l As Bitmap) As Panel
+'	Dim p As B4XView = xui.CreatePanel("")
+	Dim p As Panel
+	Dim height As Int = 40dip
+
+	If GetDeviceLayoutValues.ApproximateScreenSize < 4.5 Then height = 70dip
+	p.SetLayoutAnimated(0, 0, 0, Width, height)
+	p.LoadLayout("stavka_menija")
+	
+	labela.Text = n
+	image.Bitmap = l
+
+	Return p
+End Sub
+
+Sub ACToolBarLight1_NavigationItemClick
+	Drawer.LeftOpen = Not(Drawer.LeftOpen)
+End Sub
+
+Sub Activity_KeyPress (KeyCode As Int) As Boolean
+	If KeyCode = KeyCodes.KEYCODE_BACK And Drawer.LeftOpen Then
+		Drawer.LeftOpen = False
+	End If
+	Return False
+End Sub
+
+Sub clv1_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+	Log(Value)
+	idxBanke = Index
+	If pnlZaBankuSakriven Then	' false
+		pnlZaBankuSakriven = False
+		Panel2.Visible = True
+		Drawer.LeftOpen = Not(Drawer.LeftOpen)
 	End If
 End Sub
 
@@ -1155,7 +1232,7 @@ Sub btnAddToWidget_Click
 		Next
 		Cursor1.Close
 		
-	else if izgledBroj = 3 Then
+	Else If izgledBroj = 3 Then
 		
 	End If
 End Sub
@@ -1180,27 +1257,22 @@ End Sub
 
 Sub clv_tab_strip1_ItemClick (Index As Int, Value As Object)
 	Log(Index)
-	sielviGlobal = clv_tab_strip1
 End Sub
 
 Sub clv_tab_strip2_ItemClick (Index As Int, Value As Object)
 	Log(Index)
-	sielviGlobal = clv_tab_strip2
 End Sub
 
 Sub clv_tab_strip3_ItemClick (Index As Int, Value As Object)
 	Log(Index)
-	sielviGlobal = clv_tab_strip3
 End Sub
 
 Sub clv_tab_strip4_ItemClick (Index As Int, Value As Object)
 	Log(Index)
-	sielviGlobal = clv_tab_strip4
 End Sub
 
 Sub clv_tab_strip5_ItemClick (Index As Int, Value As Object)
 	Log(Index)
-	sielviGlobal = clv_tab_strip5
 End Sub
 
 Sub TabStrip1_PageSelected (Position As Int)
@@ -1214,28 +1286,33 @@ Sub TabStrip1_PageSelected (Position As Int)
 '			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 0)
 			t1 = 1
 			d1 = 1
+			sielviGlobal = clv_tab_strip1
 			DodajStavke2(1, 1, clv_tab_strip1)
 		Case 1	' autobusi noćne linije
 '			tse.DividerColor(TabStrip1, Colors.Blue)
 '			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 1)
 			t1 = 1
 			d1 = 2
+			sielviGlobal = clv_tab_strip2
 			DodajStavke2(1, 2, clv_tab_strip2)
 		Case 2	' tramvaji dnevne linije
 '			tse.DividerColor(TabStrip1, Colors.Blue)
 '			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 2)
 			t1 = 2
 			d1 = 1
+			sielviGlobal = clv_tab_strip3
 			DodajStavke2(2, 1, clv_tab_strip3)
 		Case 3	' tramvaji noćne linije
 '			tse.DividerColor(TabStrip1, Colors.Blue)
 '			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 3)
 			t1 = 2
 			d1 = 2
+			sielviGlobal = clv_tab_strip4
 			DodajStavke2(2, 2, clv_tab_strip4)
 		Case 4	' favoriti
 '			tse.DividerColor(TabStrip1, Colors.Blue)
 '			tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 4)
+			sielviGlobal = clv_tab_strip5
 			DodajStavke_F2
 	End Select
 
