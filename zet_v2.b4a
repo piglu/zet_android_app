@@ -221,6 +221,7 @@ Sub Globals
 	Private ACSpinner1 As ACSpinner
 	Private ImageView1 As ImageView
 	Dim pop As DroppyMenuPopup
+	Dim sielviGlobal As CustomListView
 End Sub
 
 'Inline Java code to initialize the Menu
@@ -965,113 +966,198 @@ End Sub
 
 #Region stavka_btn
 Sub btnDetalj_Click
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
-	Dim lblN As B4XView = pnl.GetView(2)
-	Dim btn As Button = pnl.getview(3)
-	Dim lblB As B4XView = pnl.GetView(4)
+	Dim izgledBroj As Int
+	izgledBroj = manager.GetString("list1")
+	If izgledBroj = 1 Then
+		Dim index As Int = clvMejn.GetItemFromView(Sender)
+		Dim pnl1 As Panel = clvMejn.GetPanel(index)
+		Dim pnl2 As Panel = pnl1.GetView(0)
+		Dim lblN As Label = pnl2.GetView(0)	'2
+		Dim lblB As Label = pnl2.GetView(2)	'4
+		Dim btn As Button = pnl2.getview(5)	'3
 
-	Starter.nazivLinije = lblN.Text.Replace(" smjer ", " - ")'lblB.Text & " - " & lblN.Text
-	Starter.indeks = btn.Tag'index
-'	Starter.iz = 2
-	Starter.brojLinije = lblB.Text
-	Dim tp As VoziloData = clvMejn.GetValue(index)
-'	t1 = tp.t
-	d1 = tp.d
-	If d1 = 1 Then
-		Starter.nocna = False
-	Else
-		Starter.nocna = True
-	End If
-
-	If tp.lnkLinije.Contains("pdf") Then
-		' prikazi pdf
-		Dim ss As String = tp.lnkLinije
-		ss = ss.SubString2(ss.LastIndexOf("/")+1, ss.Length)
-		' provjeriti podržava li uređaj PDF datoteke
-		Dim intent1 As Intent
-'		intent1.Initialize(intent1.ACTION_VIEW, "file://" & ss)
-		intent1.Initialize2(tp.lnkLinije, 0)
-		intent1.SetType("application/pdf")
-		Dim pdfAppsList As List
-		pdfAppsList = QueryIntent(intent1)
-		If pdfAppsList.size > 0 Then
-			' pdf viewer(s) exists
-			StartActivity(intent1)
+		Starter.nazivLinije = lblN.Text.Replace(" smjer ", " - ")'lblB.Text & " - " & lblN.Text
+		Starter.indeks = btn.Tag'index
+		Starter.brojLinije = lblB.Text
+		Dim tp As VoziloData = clvMejn.GetValue(index)
+		d1 = tp.d
+		If d1 = 1 Then
+			Starter.nocna = False
 		Else
-			Msgbox("Vaš uređaj ne podražava pregled PDF dokumenata!", "Greška")
+			Starter.nocna = True
 		End If
 
-	Else
-		StartActivity(detalj)
+		If tp.lnkLinije.Contains("pdf") Then
+			' prikazi pdf
+			Dim ss As String = tp.lnkLinije
+			ss = ss.SubString2(ss.LastIndexOf("/")+1, ss.Length)
+			' provjeriti podržava li uređaj PDF datoteke
+			Dim intent1 As Intent
+			intent1.Initialize2(tp.lnkLinije, 0)
+			intent1.SetType("application/pdf")
+			Dim pdfAppsList As List
+			pdfAppsList = QueryIntent(intent1)
+			If pdfAppsList.size > 0 Then
+				' pdf viewer(s) exists
+				StartActivity(intent1)
+			Else
+				Msgbox("Vaš uređaj ne podražava pregled PDF dokumenata!", "Greška")
+			End If
+		Else
+			StartActivity(detalj)
+		End If
+
+	Else if izgledBroj = 2 Then
+		Dim iks As Int = sielviGlobal.AsView.Tag
+		Log(iks)
+
+	else if izgledBroj = 3 Then
+	
 	End If
 End Sub
 
 Sub btnFavorit_Click
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
-	Dim btn As Button = pnl.GetView(3)
-	Dim lblN As B4XView = pnl.GetView(2)
-	Dim nS As String = lblN.Text
+	Dim izgledBroj As Int
+	izgledBroj = manager.GetString("list1")
+	If izgledBroj = 1 Then
+		Dim index As Int = clvMejn.GetItemFromView(Sender)
+		Dim pnl1 As Panel = clvMejn.GetPanel(index)
+		Dim pnl2 As Panel = pnl1.GetView(0)
+		Dim lblN As Label = pnl2.GetView(0)	'2
+		Dim btn As Button = pnl2.getview(5)	'3
+		Dim nS As String = lblN.Text
 
-	Dim tp As VoziloData = clvMejn.GetValue(index)
-	t1 = tp.t
-	d1 = tp.d
-	nS = nS.Replace(" smjer ", " - ")
-	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-		Log(Cursor1.GetInt("brojLinije"))
-		Log(Cursor1.GetString("nazivLinije"))
-		Dim favorit As Int = Cursor1.GetInt("favorit")
-		If favorit = 1 Then	' nije favorit
-			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-'			lblN.Color = Colors.Green
-			btn.SetBackgroundImage(bmpFavorit)
-			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 2 WHERE id = ${btn.Tag}"$)
-		Else
-			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-'			lblN.Color = Colors.white
-			btn.SetBackgroundImage(bmpFavorit)
-			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 1 WHERE id = ${btn.Tag}"$)
-		End If
-	Next
-	Cursor1.Close
+		Dim tp As VoziloData = clvMejn.GetValue(index)
+		t1 = tp.t
+		d1 = tp.d
+		nS = nS.Replace(" smjer ", " - ")
+		Dim Cursor1 As Cursor
+		Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Log(Cursor1.GetInt("brojLinije"))
+			Log(Cursor1.GetString("nazivLinije"))
+			Dim favorit As Int = Cursor1.GetInt("favorit")
+			If favorit = 1 Then	' nije favorit
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpFavorit)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 2 WHERE id = ${btn.Tag}"$)
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpFavorit)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 1 WHERE id = ${btn.Tag}"$)
+			End If
+		Next
+		Cursor1.Close
+
+	Else If izgledBroj = 2 Then
+		Dim index As Int = sielviGlobal.GetItemFromView(Sender)
+		Dim pnl1 As Panel = sielviGlobal.GetPanel(index)
+		Dim pnl2 As Panel = pnl1.GetView(0)
+		Dim lblN As Label = pnl2.GetView(0)	'2
+		Dim btn As Button = pnl2.getview(5)	'3
+		Dim nS As String = lblN.Text
+
+		Dim tp As VoziloData = sielviGlobal.GetValue(index)
+		t1 = tp.t
+		d1 = tp.d
+		nS = nS.Replace(" smjer ", " - ")
+		Dim Cursor1 As Cursor
+		Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Log(Cursor1.GetInt("brojLinije"))
+			Log(Cursor1.GetString("nazivLinije"))
+			Dim favorit As Int = Cursor1.GetInt("favorit")
+			If favorit = 1 Then	' nije favorit
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpFavorit)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 2 WHERE id = ${btn.Tag}"$)
+			Else
+				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpFavorit)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = 1 WHERE id = ${btn.Tag}"$)
+			End If
+		Next
+		Cursor1.Close
+
+	Else If izgledBroj = 3 Then
+		
+	End If
 End Sub
 
 Sub btnAddToWidget_Click
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
-	Dim btn As Button = pnl.GetView(5)
-	
-	Dim tp As VoziloData = clvMejn.GetValue(index)
-	Dim t1, d1 As Int
-	t1 = tp.t
-	d1 = tp.d
-	Dim ww As Int = tp.wdg
-	Log(ww)
-	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, widget, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-'		Dim w1 As Int = Cursor1.GetInt("widget")
-		If ww = 1 Then	' ako nije widget, onda ga postavi ako korisnik želi
-			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
-			btn.SetBackgroundImage(bmpWidget)
-			Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 2 WHERE id = ${btn.Tag}"$)
-			ukupnoZaWidget = ukupnoZaWidget + 1
-			If ukupnoZaWidget > 6 Then
-				Msgbox("Widget podržava samo 6 linija!", "Info")
+	Dim izgledBroj As Int
+	izgledBroj = manager.GetString("list1")
+	If izgledBroj = 1 Then
+		Dim index As Int = clvMejn.GetItemFromView(Sender)
+		Dim pnl1 As Panel = clvMejn.GetPanel(index)
+		Dim pnl2 As Panel = pnl1.GetView(0)
+		Dim btn As Button = pnl2.getview(5)	'3
+		Dim tp As VoziloData = clvMejn.GetValue(index)
+		Dim t1, d1 As Int
+		t1 = tp.t
+		d1 = tp.d
+		Dim ww As Int = tp.wdg
+		Log(ww)
+		Dim Cursor1 As Cursor
+		Cursor1 = Starter.upit.ExecQuery($"SELECT id, widget, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+	'		Dim w1 As Int = Cursor1.GetInt("widget")
+			If ww = 1 Then	' ako nije widget, onda ga postavi ako korisnik želi
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpWidget)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 2 WHERE id = ${btn.Tag}"$)
+				ukupnoZaWidget = ukupnoZaWidget + 1
+				If ukupnoZaWidget > 6 Then
+					Msgbox("Widget podržava samo 6 linija!", "Info")
+				End If
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpWidget)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 1 WHERE id = ${btn.Tag}"$)
+				ukupnoZaWidget = ukupnoZaWidget - 1
 			End If
-		Else
-			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
-			btn.SetBackgroundImage(bmpWidget)
-			Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 1 WHERE id = ${btn.Tag}"$)
-			ukupnoZaWidget = ukupnoZaWidget - 1
-		End If
-	Next
-	Cursor1.Close
+		Next
+		Cursor1.Close
+
+	Else If izgledBroj = 2 Then
+		Dim index As Int = sielviGlobal.GetItemFromView(Sender)
+		Dim pnl1 As Panel = sielviGlobal.GetPanel(index)
+		Dim pnl2 As Panel = pnl1.GetView(0)
+		Dim btn As Button = pnl2.getview(5)	'3
+		Dim tp As VoziloData = sielviGlobal.GetValue(index)
+		Dim t1, d1 As Int
+		t1 = tp.t
+		d1 = tp.d
+		Dim ww As Int = tp.wdg
+		Log(ww)
+		Dim Cursor1 As Cursor
+		Cursor1 = Starter.upit.ExecQuery($"SELECT id, widget, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			'		Dim w1 As Int = Cursor1.GetInt("widget")
+			If ww = 1 Then	' ako nije widget, onda ga postavi ako korisnik želi
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpWidget)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 2 WHERE id = ${btn.Tag}"$)
+				ukupnoZaWidget = ukupnoZaWidget + 1
+				If ukupnoZaWidget > 6 Then
+					Msgbox("Widget podržava samo 6 linija!", "Info")
+				End If
+			Else
+				Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+				btn.SetBackgroundImage(bmpWidget)
+				Starter.upit.ExecNonQuery($"UPDATE linije SET widget = 1 WHERE id = ${btn.Tag}"$)
+				ukupnoZaWidget = ukupnoZaWidget - 1
+			End If
+		Next
+		Cursor1.Close
+		
+	else if izgledBroj = 3 Then
+		
+	End If
 End Sub
 #End Region
 
@@ -1092,8 +1178,29 @@ Sub QueryIntent(Intent1 As Intent) As List
 	Return listRes
 End Sub
 
-Sub clv_tab_strip_ItemClick (Index As Int, Value As Object)
+Sub clv_tab_strip1_ItemClick (Index As Int, Value As Object)
 	Log(Index)
+	sielviGlobal = clv_tab_strip1
+End Sub
+
+Sub clv_tab_strip2_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+	sielviGlobal = clv_tab_strip2
+End Sub
+
+Sub clv_tab_strip3_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+	sielviGlobal = clv_tab_strip3
+End Sub
+
+Sub clv_tab_strip4_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+	sielviGlobal = clv_tab_strip4
+End Sub
+
+Sub clv_tab_strip5_ItemClick (Index As Int, Value As Object)
+	Log(Index)
+	sielviGlobal = clv_tab_strip5
 End Sub
 
 Sub TabStrip1_PageSelected (Position As Int)
