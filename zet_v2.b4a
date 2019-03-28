@@ -1549,6 +1549,7 @@ Sub droppy_onClicked(view As Object, index As Int)
 	Select index
 		Case 0	' postavke
 			StartActivity(screen.CreateIntent)
+			ToastMessageShow("Ako ste promijenili izgled, morate nanovo pokrenuti aplikaciju!", False)
 		Case 1	' kontrole
 			StartActivity(lokacije_123)
 		Case 2	' pretraživanje
