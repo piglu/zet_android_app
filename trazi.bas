@@ -20,7 +20,7 @@ Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
 '	Private clvT As CustomListView
-	Private clvMejn As CustomListView
+	Private clvTrazi As CustomListView
 	Private lblBrojLinije As Label
 	Private lblPolazisteOdrediste As B4XView
 	Private imgVozilo As ImageView
@@ -69,7 +69,7 @@ Sub UbaciSveBrojeveILinijeUMSV
 		linijeZaTraziti.Add(Cursor1.GetInt("brojLinije"))
 		linijeZaTraziti.Add(Cursor1.GetString("nazivLinije"))
 	Next
-	Log(linijeZaTraziti)
+'	Log(linijeZaTraziti)
 	edtMSV.SetItems(linijeZaTraziti)
 End Sub
 
@@ -79,7 +79,7 @@ Sub btnTrazi_Click
 	pojamTrazi = edtMSV.TextField.Text
 
 	If pojamTrazi.Length > 0 Then
-		clvMejn.Clear
+		clvTrazi.Clear
 		TraziPojam
 	Else
 		Msgbox("Niste unijeli traženi pojam!", "Info")
@@ -139,10 +139,14 @@ Sub TraziPojam
 			tp.t = Cursor1.GetInt("tip")
 			tp.d = Cursor1.GetInt("dnevna")
 			tp.wdg = Cursor1.GetInt("widget")
-			Dim p As B4XView = xui.CreatePanel("")
-			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
-			p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
-			clvMejn.Add(p, tp)
+'			Dim p As B4XView = xui.CreatePanel("")
+'			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'			p.SetLayoutAnimated(0, 0, 0, clvTrazi.AsView.Width, 100dip)
+			Dim p As Panel
+			p.Initialize("")
+			p.Elevation = 4dip
+			p.SetLayoutAnimated(0, 0, 0, clvTrazi.AsView.Width, 100dip)'108dip)
+			clvTrazi.Add(p, tp)
 		Next
 	Else
 		Dim Cursor1 As Cursor
@@ -177,10 +181,15 @@ Sub TraziPojam
 			tp.t = Cursor1.GetInt("tip")
 			tp.d = Cursor1.GetInt("dnevna")
 			tp.wdg = Cursor1.GetInt("widget")
-			Dim p As B4XView = xui.CreatePanel("")
-			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
-			p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 92dip)
-			clvMejn.Add(p, tp)
+'			Dim p As B4XView = xui.CreatePanel("")
+'			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'			p.SetLayoutAnimated(0, 0, 0, clvTrazi.AsView.Width, 100dip)
+'			clvTrazi.Add(p, tp)
+			Dim p As Panel
+			p.Initialize("")
+			p.Elevation = 4dip
+			p.SetLayoutAnimated(0, 0, 0, clvTrazi.AsView.Width, 100dip)'108dip)
+			clvTrazi.Add(p, tp)
 		Next
 	End If
 
@@ -190,15 +199,15 @@ Sub TraziPojam
 	End If
 End Sub
 
-Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
+Sub clvTrazi_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
 	Dim ExtraSize As Int = 20
-	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clvMejn.Size - 1)
-		Dim p As B4XView = clvMejn.GetPanel(i)
+	For i = Max(0, FirstIndex - ExtraSize) To Min(LastIndex + ExtraSize, clvTrazi.Size - 1)
+		Dim p As B4XView = clvTrazi.GetPanel(i)
 		If p.NumberOfViews = 0 Then
-			Dim tp As VoziloData = clvMejn.GetValue(i)
+			Dim tp As VoziloData = clvTrazi.GetValue(i)
 			p.LoadLayout("clv_stavka")
-			p.Color = Colors.White
-			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
+'			p.Color = Colors.White
+'			p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
 			imgVozilo.Bitmap = tp.i1
 			lblBrojLinije.Text = tp.brl
 			btnDetalj.SetBackgroundImage(tp.i2)
@@ -210,10 +219,8 @@ Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
 			lblPolazisteOdrediste.Text = ss
 			If tp.f = 1 Then
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-'				lblPolazisteOdrediste.Color = Colors.white
 			Else
 				Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-'				lblPolazisteOdrediste.Color = Colors.Green
 			End If
 			btnFavorit.SetBackgroundImage(bmpFavorit)
 			If tp.wdg = 1 Then
@@ -259,10 +266,8 @@ End Sub
 
 #Region stavka
 Sub btnDetalj_Click
-'	Dim index As Int = clvT.GetItemFromView(Sender)
-'	Dim pnl As B4XView = clvT.GetPanel(index)
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim index As Int = clvTrazi.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvTrazi.GetPanel(index)
 	Dim lblN As B4XView = pnl.GetView(2)
 	Dim btn As Button = pnl.GetView(3)
 	Dim lblB As B4XView = pnl.GetView(4)
@@ -275,8 +280,8 @@ Sub btnDetalj_Click
 End Sub
 
 Sub btnFavorit_Click
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim index As Int = clvTrazi.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvTrazi.GetPanel(index)
 	Dim btn As Button = pnl.GetView(3)
 	Dim lblN As B4XView = pnl.GetView(2)
 	Dim nS As String = lblN.Text
@@ -292,12 +297,10 @@ Sub btnFavorit_Click
 		Dim favorit As Int = Cursor1.GetInt("favorit")
 		If favorit = 1 Then	' nije favorit
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorite_dodaj.png", 40dip, 40dip, True)
-'			lblN.Color = Colors.Green
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${2} WHERE id = ${btn.Tag}"$)
 			btn.SetBackgroundImage(bmpFavorit)
 		Else
 			Dim bmpFavorit As Bitmap = LoadBitmapResize(File.DirAssets, "favorit_oduzmi.png", 40dip, 40dip, True)
-'			lblN.Color = Colors.white
 			Starter.upit.ExecNonQuery($"UPDATE linije SET favorit = ${1} WHERE id = ${btn.Tag}"$)
 			btn.SetBackgroundImage(bmpFavorit)
 		End If
@@ -306,11 +309,11 @@ Sub btnFavorit_Click
 End Sub
 
 Sub btnAddToWidget_Click
-	Dim index As Int = clvMejn.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvMejn.GetPanel(index)
+	Dim index As Int = clvTrazi.GetItemFromView(Sender)
+	Dim pnl As B4XView = clvTrazi.GetPanel(index)
 	Dim btn As Button = pnl.GetView(5)
 	
-	Dim tp As VoziloData = clvMejn.GetValue(index)
+	Dim tp As VoziloData = clvTrazi.GetValue(index)
 	Dim t1, d1 As Int
 	t1 = tp.t
 	d1 = tp.d
@@ -320,7 +323,6 @@ Sub btnAddToWidget_Click
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, widget, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
 	For i = 0 To Cursor1.RowCount - 1
 		Cursor1.Position = i
-'		Dim w1 As Int = Cursor1.GetInt("widget")
 		If ww = 1 Then	' ako nije widget, onda ga postavi ako korisnik želi
 			Dim bmpWidget As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
 			btn.SetBackgroundImage(bmpWidget)

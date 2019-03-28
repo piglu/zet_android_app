@@ -38,29 +38,30 @@ File41=lokacije123.bal
 File42=mejn1.bal
 File43=mejn2.bal
 File44=mejn3.bal
-File45=meni.png
-File46=meni2.png
-File47=minisearchview.bal
-File48=narancasta.png
-File49=noc.png
+File45=mejn3_2.bal
+File46=meni.png
+File47=meni2.png
+File48=minisearchview.bal
+File49=narancasta.png
 File5=clv_stavka.bal
-File50=o.png
-File51=osvjezi.png
-File52=pdf.png
-File53=postavke.png
-File54=postavke1.png
-File55=postavke2.png
-File56=stavka_menija.bal
-File57=street_view2.png
-File58=test.bal
-File59=tram.png
+File50=noc.png
+File51=o.png
+File52=osvjezi.png
+File53=pdf.png
+File54=postavke.png
+File55=postavke1.png
+File56=postavke2.png
+File57=stavka_menija.bal
+File58=street_view2.png
+File59=test.bal
 File6=clv_stavka_d.bal
-File60=tram1.png
-File61=trazi.png
-File62=widget_makni.png
-File63=widget_umetni.png
-File64=zastoj.png
-File65=zelena.png
+File60=tram.png
+File61=tram1.png
+File62=trazi.png
+File63=widget_makni.png
+File64=widget_umetni.png
+File65=zastoj.png
+File66=zelena.png
 File7=clv_stavkad.bal
 File8=clv_tab_strip1.bal
 File9=clv_tab_strip2.bal
@@ -126,6 +127,7 @@ FileGroup62=Default Group
 FileGroup63=Default Group
 FileGroup64=Default Group
 FileGroup65=Default Group
+FileGroup66=Default Group
 FileGroup7=Default Group
 FileGroup8=Default Group
 FileGroup9=Default Group
@@ -148,7 +150,8 @@ Library21=appcompat
 Library22=droppy
 Library23=xui
 Library24=viewsex
-Library25=ime
+Library25=sd_bottomenu
+Library26=bitmapcreator
 Library3=okhttputils2
 Library4=runtimepermissions
 Library5=googlemaps
@@ -170,8 +173,8 @@ Module6=kw2
 Module7=fav
 Module8=detalj
 Module9=detalj_stanice
-NumberOfFiles=65
-NumberOfLibraries=25
+NumberOfFiles=66
+NumberOfLibraries=26
 NumberOfModules=13
 Version=8.8
 @EndOfDesignText@
@@ -201,6 +204,7 @@ Sub Process_Globals
 	Dim manager As PreferenceManager
 	Dim screen As PreferenceScreen
 	Private awake As PhoneWakeState
+	Dim xui As XUI
 '	Dim tse As TabStripViewPagerExtendet
 End Sub
 
@@ -228,16 +232,17 @@ Sub Globals
 	Private ImageView1 As ImageView
 	Dim pop As DroppyMenuPopup
 	Dim sielviGlobal As CustomListView
-	Private ToolbarHelper As ACActionBar
-	Private Drawer As B4XDrawer
-	Private IME As IME
-	Private clv_meni As CustomListView
-	Private image As ImageView
-	Private labela As Label
-	Private ACToolBarLight1 As ACToolBarLight
+'	Private ToolbarHelper As ACActionBar
+'	Private Drawer As B4XDrawer
+'	Private IME As IME
+'	Private clv_meni As CustomListView
+'	Private image As ImageView
+'	Private labela As Label
+'	Private ACToolBarLight1 As ACToolBarLight
 '	Private Panel2 As Panel
 '	Private pnlIzbornika As Boolean = False
 	Private clv3 As CustomListView
+	Private BottoMenu1 As BottoMenu
 End Sub
 
 'Inline Java code to initialize the Menu
@@ -314,70 +319,47 @@ Sub Activity_Create(FirstTime As Boolean)
 		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
 		
 	Else if izgledBroj = 3 Then
-		Drawer.Initialize(Me, "Drawer", Activity, 300dip)
-		IME.Initialize("ime")
-		IME.AddHeightChangedEvent
-		Drawer.CenterPanel.LoadLayout("mejn3")
+		Activity.LoadLayout("mejn3_2")
+'		Drawer.Initialize(Me, "Drawer", Activity, 300dip)
+'		IME.Initialize("ime")
+'		IME.AddHeightChangedEvent
+'		Drawer.CenterPanel.LoadLayout("mejn3")
+'
+'		ToolbarHelper.Initialize
+'		ToolbarHelper.ShowUpIndicator = True 'set to true to show the up arrow
+'		Dim bd As BitmapDrawable
+'		bd.Initialize(LoadBitmap(File.DirAssets, "meni2.png"))
+'		ToolbarHelper.UpIndicatorDrawable = bd
+'		ACToolBarLight1.InitMenuListener
+'		Drawer.LeftPanel.LoadLayout("lijevi_meni")
+'		Dim l As List
+'		l.Initialize2(Array As String("Dnevne linije", "Noćne linije", "Dnevne linije", "Noćne linije", "Favoriti"))
+'		Dim l2 As List
+'		l2.Initialize2(Array As String("bus", "bus", "tram", "tram", "fav"))
+'		For i = 0 To l.Size - 1
+'			clv_meni.Add(CreateItem(clv_meni.AsView.Width, l.Get(i), LoadBitmap(File.DirAssets, l2.Get(i) & ".png")), "")
+'		Next
+'
+'		If Not(Drawer.LeftOpen) Then
+'			Drawer.LeftOpen = True
+'		End If
+		pop.Initialize("Droppy", ImageView1)
+		pop.setXOffset(10)
+		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
 
-		ToolbarHelper.Initialize
-		ToolbarHelper.ShowUpIndicator = True 'set to true to show the up arrow
-		Dim bd As BitmapDrawable
-		bd.Initialize(LoadBitmap(File.DirAssets, "meni2.png"))
-		ToolbarHelper.UpIndicatorDrawable = bd
-		ACToolBarLight1.InitMenuListener
-		Drawer.LeftPanel.LoadLayout("lijevi_meni")
-		Dim l As List
-		l.Initialize2(Array As String("Dnevne linije", "Noćne linije", "Dnevne linije", "Noćne linije", "Favoriti"))
-		Dim l2 As List
-		l2.Initialize2(Array As String("bus", "bus", "tram", "tram", "fav"))
-		For i = 0 To l.Size - 1
-			clv_meni.Add(CreateItem(clv_meni.AsView.Width, l.Get(i), LoadBitmap(File.DirAssets, l2.Get(i) & ".png")), "")
-		Next
+		BottoMenu1.AddMenu(Chr(0xF207) & " " & Chr(0xF185),xui.CreateFontAwesome(16))
+		BottoMenu1.AddMenu(Chr(0xF207) & " " & Chr(0xF186),xui.CreateFontAwesome(16))
+		BottoMenu1.AddMenu(Chr(0xF238) & " " & Chr(0xF185),xui.CreateFontAwesome(16))
+		BottoMenu1.AddMenu(Chr(0xF238) & " " & Chr(0xF186),xui.CreateFontAwesome(16))
+		BottoMenu1.AddMenu(Chr(0xF004),xui.CreateFontAwesome(16))
 
-		If Not(Drawer.LeftOpen) Then
-			Drawer.LeftOpen = True
-		End If
-
+		BottoMenu1_Selected(0)
 	End If
 End Sub
 
-Private Sub CreateItem(Width As Int, n As String, l As Bitmap) As Panel
-'	Dim p As B4XView = xui.CreatePanel("")
-	Dim p As Panel
-	Dim height As Int = 40dip
-
-	If GetDeviceLayoutValues.ApproximateScreenSize < 4.5 Then height = 70dip
-	p.Initialize("")
-	p.LoadLayout("stavka_menija")
-	p.SetLayoutAnimated(0, 0, 0, Width, height)
-	
-	labela.Text = n
-	image.Bitmap = l
-
-	Return p
-End Sub
-
-Sub ACToolBarLight1_NavigationItemClick
-	Drawer.LeftOpen = Not(Drawer.LeftOpen)
-End Sub
-
-Sub Activity_KeyPress (KeyCode As Int) As Boolean
-	If Drawer.IsInitialized And KeyCode = KeyCodes.KEYCODE_BACK And Drawer.LeftOpen Then
-		Drawer.LeftOpen = False
-	End If
-	Return False
-End Sub
-
-Sub clv_meni_ItemClick (Index As Int, Value As Object)
-'	Log(Index)
-'	idxStavke = Index
-'	If pnlIzbornika Then	' false
-'		pnlIzbornika = False
-'		Panel2.Visible = True
-'		Drawer.LeftOpen = Not(Drawer.LeftOpen)
-'	End If
-
-	Select Index
+Sub BottoMenu1_Selected(Value As Int)
+	Log(Value)
+	Select Value
 		Case 0	' autobus dnevne
 			DodajStavke3(1, 1)
 		Case 1	' autobus noćne
@@ -389,7 +371,58 @@ Sub clv_meni_ItemClick (Index As Int, Value As Object)
 		Case 4	' favoriti
 			DodajStavke_F3
 	End Select
+
 End Sub
+
+'Private Sub CreateItem(Width As Int, n As String, l As Bitmap) As Panel
+''	Dim p As B4XView = xui.CreatePanel("")
+'	Dim p As Panel
+'	Dim height As Int = 40dip
+'
+'	If GetDeviceLayoutValues.ApproximateScreenSize < 4.5 Then height = 70dip
+'	p.Initialize("")
+'	p.LoadLayout("stavka_menija")
+'	p.SetLayoutAnimated(0, 0, 0, Width, height)
+'	
+'	labela.Text = n
+'	image.Bitmap = l
+'
+'	Return p
+'End Sub
+
+'Sub ACToolBarLight1_NavigationItemClick
+'	Drawer.LeftOpen = Not(Drawer.LeftOpen)
+'End Sub
+'
+'Sub Activity_KeyPress (KeyCode As Int) As Boolean
+'	If Drawer.IsInitialized And KeyCode = KeyCodes.KEYCODE_BACK And Drawer.LeftOpen Then
+'		Drawer.LeftOpen = False
+'	End If
+'	Return False
+'End Sub
+
+'Sub clv_meni_ItemClick (Index As Int, Value As Object)
+''	Log(Index)
+''	idxStavke = Index
+''	If pnlIzbornika Then	' false
+''		pnlIzbornika = False
+''		Panel2.Visible = True
+''		Drawer.LeftOpen = Not(Drawer.LeftOpen)
+''	End If
+'
+'	Select Index
+'		Case 0	' autobus dnevne
+'			DodajStavke3(1, 1)
+'		Case 1	' autobus noćne
+'			DodajStavke3(1, 2)
+'		Case 2	' tramvaj dnevne
+'			DodajStavke3(2, 1)
+'		Case 3	' tramvaj noćne
+'			DodajStavke3(2, 2)
+'		Case 4	' favoriti
+'			DodajStavke_F3
+'	End Select
+'End Sub
 
 'Sub test_Click
 '	StartActivity(lok_123_karta2)
@@ -732,7 +765,7 @@ Sub DodajStavke3(t2 As Int, d2 As Int)
 		clv3.Add(p, tp)
 	Next
 	Cursor1.Close
-	Drawer.LeftOpen = Not(Drawer.LeftOpen)
+'	Drawer.LeftOpen = Not(Drawer.LeftOpen)
 End Sub
 
 Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
@@ -1093,7 +1126,7 @@ Sub DodajStavke_F3
 		clv3.Add(p, tp)
 	Next
 	Cursor1.Close
-	Drawer.LeftOpen = Not(Drawer.LeftOpen)
+'	Drawer.LeftOpen = Not(Drawer.LeftOpen)
 End Sub
 
 #Region stavka_btn
