@@ -13,7 +13,7 @@ Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
 	Private awake As PhoneWakeState
-	Private xui As XUI
+'	Private xui As XUI
 End Sub
 
 Sub Globals

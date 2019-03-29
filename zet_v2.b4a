@@ -1010,14 +1010,15 @@ Sub DodajStavke_F1
 		Else
 			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
 		End If
-		Starter.nocna = False
 		Dim tp As VoziloData
 		tp.Initialize
 		tp.id = Cursor1.GetInt("id")
 		If tt = 1 Then
 			tp.brl = Cursor1.GetInt("brojLinije")
+			Starter.nocna = False
 		Else
 			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			Starter.nocna = True
 		End If
 		tp.i1 = img1
 		tp.i2 = img2
@@ -1056,14 +1057,15 @@ Sub DodajStavke_F2
 		Else
 			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
 		End If
-		Starter.nocna = False
 		Dim tp As VoziloData
 		tp.Initialize
 		tp.id = Cursor1.GetInt("id")
 		If tt = 1 Then
 			tp.brl = Cursor1.GetInt("brojLinije")
+			Starter.nocna = False
 		Else
 			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			Starter.nocna = True
 		End If
 		tp.i1 = img1
 		tp.i2 = img2
@@ -1102,14 +1104,15 @@ Sub DodajStavke_F3
 		Else
 			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
 		End If
-		Starter.nocna = False
 		Dim tp As VoziloData
 		tp.Initialize
 		tp.id = Cursor1.GetInt("id")
 		If tt = 1 Then
 			tp.brl = Cursor1.GetInt("brojLinije")
+			Starter.nocna = False
 		Else
 			tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			Starter.nocna = True
 		End If
 		tp.i1 = img1
 		tp.i2 = img2
@@ -1549,7 +1552,7 @@ Sub droppy_onClicked(view As Object, index As Int)
 	Select index
 		Case 0	' postavke
 			StartActivity(screen.CreateIntent)
-			ToastMessageShow("Ako ste promijenili izgled, morate nanovo pokrenuti aplikaciju!", False)
+'			ToastMessageShow("Ako ste promijenili izgled, morate nanovo pokrenuti aplikaciju!", False)
 		Case 1	' kontrole
 			StartActivity(lokacije_123)
 		Case 2	' pretraživanje

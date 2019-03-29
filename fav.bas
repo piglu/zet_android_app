@@ -59,7 +59,7 @@ End Sub
 #Region Novi_Kod
 Sub DohvatiSveLinijeZaWidget
 '	pos = 0
-	Log("test2 -> DohvatiSveLinijeZaWidget")
+	Log("fav -> DohvatiSveLinijeZaWidget")
 	Dim Cursor1 As Cursor
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, dnevna, widget, brojLinije, nazivLinije, link FROM linije WHERE widget = 2 LIMIT 6"$)
 	If Cursor1.RowCount > 0 Then
@@ -83,9 +83,9 @@ Sub DohvatiSveLinijeZaWidget
 End Sub
 
 Sub Provjera_Lista_I_Datuma_Na_Dat
-	Log("test2 -> Provjera_Lista_I_Datuma_Na_Dat")
+	Log("fav -> Provjera_Lista_I_Datuma_Na_Dat")
 	For i = 0 To ajdi.Size - 1
-		File.Delete(Starter.SourceFolder, ajdi.Get(i) & "lnk1")
+'		File.Delete(Starter.SourceFolder, ajdi.Get(i) & "lnk1")
 		If File.Exists(Starter.SourceFolder, ajdi.Get(i) & "lnk1") = False Then
 			Wait For (DL_Polaziste_Odrediste_Tekuci_Datum2(Me, ajdiLink.Get(i), ajdi.Get(i), ajdinl.Get(i), ajdibl.Get(i), i)) JobDone (j As HttpJob)
 			If j.Success Then
@@ -115,7 +115,7 @@ Sub Provjera_Lista_I_Datuma_Na_Dat
 End Sub
 
 Sub DL_Polaziste_Odrediste_Tekuci_Datum2(Callback As Object, link As String, id As Int, nl As String, bl As String, idx As Int) As HttpJob
-	Log("test2 -> DL_Polaziste_Odrediste_Tekuci_Datum2")
+	Log("fav -> DL_Polaziste_Odrediste_Tekuci_Datum2")
 	Dim j As HttpJob
 	j.Initialize("", Callback)
 	Dim dat As Long
@@ -128,7 +128,7 @@ Sub DL_Polaziste_Odrediste_Tekuci_Datum2(Callback As Object, link As String, id 
 End Sub
 
 Sub Parsaj_Polaziste_Odrediste_Tekuci_Datum(stranica As String, ide As Int, nl As String, idx As Int)
-	Log("test2 -> Parsaj_Polaziste_Odrediste_Tekuci_Datum")
+	Log("fav -> Parsaj_Polaziste_Odrediste_Tekuci_Datum")
 	Dim matcher1 As Matcher
 
 	lnk1.Initialize
@@ -184,7 +184,7 @@ Sub Parsaj_Polaziste_Odrediste_Tekuci_Datum(stranica As String, ide As Int, nl A
 End Sub
 
 Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
-	Log("test2 -> Dohvati_Indeks_Za_DL_Postojece_Liste")
+	Log("fav -> Dohvati_Indeks_Za_DL_Postojece_Liste")
 	'
 	' dohvat indeksa za prikaz detaljnijeg voznog reda
 	'
@@ -212,7 +212,7 @@ Sub Dohvati_Indeks_Za_DL_Postojece_Liste(ide As Int, nl As String, idx As Int)
 End Sub
 
 Sub DL_VozniRedDetalj2(Callback As Object, link As String, ide As Int, idx As Int) As HttpJob
-	Log("test2 -> DL_VozniRedDetalj2")
+	Log("fav -> DL_VozniRedDetalj2")
 	Dim j As HttpJob
 	j.Initialize("", Callback)
 	j.Download(link)
@@ -221,7 +221,7 @@ Sub DL_VozniRedDetalj2(Callback As Object, link As String, ide As Int, idx As In
 End Sub
 
 Sub ParsajDetaljeLinije2(stranica As String, ide As Int, idx As Int)
-	Log("test2 -> ParsajDetaljeLinije2")
+	Log("fav -> ParsajDetaljeLinije2")
 	Dim matcher1 As Matcher
 '	Dim pos As Int
 

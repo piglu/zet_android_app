@@ -16,3 +16,5 @@ End Sub
 ' ----
 '
 ' provjeriti okretanje polazište - odredište u odredište - polazište za sve linije i favorit aktivnost
+' provjeriti link za noćnu tramvajsku liniju 33...promijenio se u pdf to sve ispraviti
+'

@@ -33,7 +33,7 @@ Sub Globals
 	Private lblO As Label
 	Private Panel1 As Panel
 	Dim okr1, okr2, lnk1, lnk2, polaziste1, polaziste2, odrediste1, odrediste2 As List
-	Dim okretiste As Boolean' = True
+	Dim okretiste As Boolean = True
 	Private ImageView1 As ImageView
 	Private lblBr As Label
 End Sub
@@ -44,7 +44,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.LoadLayout("detalj")
 
 	vozniRed.Initialize
-	If Not(Starter.nocna) Then
+	If Starter.nocna = False Then
 		timer1.Initialize("timer1", 1000)
 	End If
 
@@ -63,7 +63,7 @@ Sub Activity_Resume
 		awake.KeepAlive(True)
 	End If
 
-	If Not(Starter.nocna) Then
+	If Starter.nocna = False Then
 		timer1.Enabled = True
 	End If
 End Sub
@@ -71,9 +71,7 @@ End Sub
 Sub Activity_Pause (UserClosed As Boolean)
 	Log("detalj -> UserClosed: " & UserClosed)
 	awake.ReleaseKeepAlive
-	If Not(Starter.nocna) Then
-		timer1.Enabled = False
-	End If
+	If timer1.Enabled Then Not(timer1.Enabled)
 End Sub
 #End Region
 
@@ -181,10 +179,12 @@ Sub IspuniTablicu
 
 	ProgressDialogHide
 
-	Sleep(100)
-	clvD.ScrollToItem(pos)
-	If Not(Starter.nocna) Then
+	If Starter.nocna = False Then
+		Sleep(100)
+		clvD.ScrollToItem(pos)
 		timer1.Enabled = True
+	Else
+		timer1.Enabled = False
 	End If
 End Sub
 
@@ -252,6 +252,9 @@ Sub ProvjeraDatumaNaDatoteci
 		If razlika = 0 Then
 			Log("današnji datum datoteke!")
 			UcitajListe
+			If Starter.nocna = True Then
+				Starter.brojLinije = Starter.brojLinije.Replace("N", "")
+			End If
 			Dim brL As Int = Starter.brojLinije
 			If brL < 100 Then	' tramvaj
 				imgLinija.Bitmap = LoadBitmapResize(File.DirAssets, "tram1.png", 60dip, 60dip, True)
@@ -284,6 +287,15 @@ Sub UsnimiListe
 End Sub
 
 Sub UcitajListe
+	lnk1.Initialize
+	lnk2.Initialize
+	okr1.Initialize
+	okr2.Initialize
+	polaziste1.Initialize
+	polaziste2.Initialize
+	odrediste1.Initialize
+	odrediste2.Initialize
+
 	lnk1 = File.ReadList(Starter.SourceFolder, Starter.indeks & "lnk1")
 '	Log(lnk1)
 	lnk2 = File.ReadList(Starter.SourceFolder, Starter.indeks & "lnk2")
