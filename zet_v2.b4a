@@ -1,4 +1,4 @@
-﻿Build1=Default,com.stanks.zet_v2,Full,Ads
+﻿Build1=Default,com.piglu.zet,Full,Ads
 File1=arrow.png
 File10=clv_tab_strip3.bal
 File11=clv_tab_strip4.bal
@@ -161,10 +161,11 @@ Library8=sql
 Library9=firebasenotifications
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'.NoActionBar~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
 Module1=Starter
-Module10=B4XDrawer
-Module11=todo
+Module10=todo
+Module11=B4XDrawer
 Module12=lok_123_karta2
 Module13=MiniSearchView
+Module14=B4XLoadingIndicator
 Module2=gps_pozicija
 Module3=lokacije_123
 Module4=trazi
@@ -175,7 +176,7 @@ Module8=detalj
 Module9=detalj_stanice
 NumberOfFiles=66
 NumberOfLibraries=26
-NumberOfModules=13
+NumberOfModules=14
 Version=8.8
 @EndOfDesignText@
 #Region  Project Attributes 
@@ -243,6 +244,7 @@ Sub Globals
 '	Private pnlIzbornika As Boolean = False
 	Private clv3 As CustomListView
 	Private BottoMenu1 As BottoMenu
+	Private B4XLoadingIndicator1 As B4XLoadingIndicator
 End Sub
 
 'Inline Java code to initialize the Menu
@@ -293,6 +295,8 @@ Sub Activity_Create(FirstTime As Boolean)
 		Activity.AddMenuItem("Pretraživanje", "trazi")
 		Activity.AddMenuItem("Osvježavanje", "osvjezi")
 		Activity.AddMenuItem("O...", "o")
+	
+		B4XLoadingIndicator1.Hide
 
 	Else If izgledBroj = 2 Then
 		Activity.LoadLayout("mejn2")
@@ -317,6 +321,8 @@ Sub Activity_Create(FirstTime As Boolean)
 		pop.Initialize("Droppy", ImageView1)
 		pop.setXOffset(10)
 		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
+
+		B4XLoadingIndicator1.Hide
 		
 	Else if izgledBroj = 3 Then
 		Activity.LoadLayout("mejn3_2")
@@ -354,6 +360,8 @@ Sub Activity_Create(FirstTime As Boolean)
 		BottoMenu1.AddMenu(Chr(0xF004),xui.CreateFontAwesome(16))
 
 		BottoMenu1_Selected(0)
+
+		B4XLoadingIndicator1.Hide
 	End If
 End Sub
 
@@ -445,25 +453,31 @@ Sub trazi_Click
 	StartActivity(trazi)
 End Sub
 
-Sub osvjezi_Click
+Sub osvjezi_Click(linkovi As List)
 '	Msgbox("Osvježavanje linija još ne radi dobro!", "Info")
 
-	Dim l As String = "http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251"
+	' noćne autobusne linije -> http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252
+	' tramvaj dnevne linije -> http://www.zet.hr/tramvajski-prijevoz/dnevne-linije/249
+	' tramvaj noćne linije -> http://www.zet.hr/tramvajski-prijevoz/nocne-linije/250
+'	Dim l As String = "http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251"
 	' autobus dnevne linije -> http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251
 	'
-	ProgressDialogShow2("Preuzimam podatke o linijama...", False)
-
-	Dim j As HttpJob
-	j.Initialize("", Me) 'name is empty as it is no longer needed
-	j.Download(l) 'link
-	Wait For (j) JobDone(j As HttpJob)
-	If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
-		ParsajSveAutobusneDnevneLinije(j.GetString)
-	Else
-		Log("Greška kod D/L: " & j.ErrorMessage)
-	End If
-
-	j.Release
+	For Each link As String In linkovi
+'		ProgressDialogShow2("Preuzimam podatke o linijama...", False)
+		B4XLoadingIndicator1.Show
+		Dim j As HttpJob
+		j.Initialize("", Me) 'name is empty as it is no longer needed
+		j.Download(link) 'link
+		Wait For (j) JobDone(j As HttpJob)
+		If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
+			ParsajSveAutobusneDnevneLinije(j.GetString)
+		Else
+			Log("Greška kod D/L: " & j.ErrorMessage)
+		End If
+		B4XLoadingIndicator1.Hide
+'		ProgressBar1.Progress = 100 * (links.IndexOf(link) + 1) / links.Size
+		j.Release
+	Next
 End Sub
 
 Sub ParsajSveAutobusneDnevneLinije(stranica As String)
@@ -477,64 +491,100 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	' regex za linkove href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)"
 	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
 	stranica = stranica.Replace("&nbsp;", " ")
-	
-	Dim components() As String
-	components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
-	Dim mB, mL As Map
-	mB.Initialize
-	mL.Initialize
-	For i = 1 To components.Length - 1
-		Dim s As String = components(i)
-		Dim components2() As String
-		components2 = Regex.Split("<ul>", s)
-		For j = 1 To components2.Length - 1
-			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
-			Do While matcher1.Find = True
-				Dim s As String = matcher1.Group(2)
-				If s.Contains("SASI") Then
-					s = "ZAGREB (ZAPRUĐE) - SASI"
-				End If
-				s = s.Trim
-				mB.Put(matcher1.Group(1) & ";" & j, s)
-			Loop
-			matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
-			Do While matcher1.Find = True
-				Dim s As String = matcher1.Group(1)
-				If s.Contains("pdf") Or s.Contains("PDF") Then
-					If s.Contains("607") Then
-						s = "607"
-						s = s & ";" & j
-						s = s.Trim
-						mL.Put(s, matcher1.Group(1))
+
+	If stranica.Contains("dnevne-linije-251") Then
+		Dim components() As String
+		components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
+		Dim mB, mL As Map
+		mB.Initialize
+		mL.Initialize
+		For i = 1 To components.Length - 1
+			Dim s As String = components(i)
+			Dim components2() As String
+			components2 = Regex.Split("<ul>", s)
+			For j = 1 To components2.Length - 1
+				matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
+				Do While matcher1.Find = True
+					Dim s As String = matcher1.Group(2)
+					If s.Contains("SASI") Then
+						s = "ZAGREB (ZAPRUĐE) - SASI"
+					End If
+					s = s.Trim
+					mB.Put(matcher1.Group(1) & ";" & j, s)
+				Loop
+				matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
+				Do While matcher1.Find = True
+					Dim s As String = matcher1.Group(1)
+					If s.Contains("pdf") Or s.Contains("PDF") Then
+						If s.Contains("607") Then
+							s = "607"
+							s = s & ";" & j
+							s = s.Trim
+							mL.Put(s, matcher1.Group(1))
+						Else
+							s = s.SubString(s.LastIndexOf("/")+1)
+							s = s.SubString2(0, s.IndexOf("."))
+							s = s & ";" & j
+							s = s.Trim
+							mL.Put(s, matcher1.Group(1))
+						End If
 					Else
-						s = s.SubString(s.LastIndexOf("/")+1)
-						s = s.SubString2(0, s.IndexOf("."))
+						s = s.SubString(s.IndexOf("=")+1)
 						s = s & ";" & j
-						s = s.Trim
 						mL.Put(s, matcher1.Group(1))
 					End If
-				Else
-					s = s.SubString(s.IndexOf("=")+1)
+				Loop
+			Next
+		Next
+	Else
+		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
+		Do While matcher1.Find = True
+			Dim s As String = matcher1.Group(2)
+			s = s.Trim
+			mB.Put(matcher1.Group(1) & ";" & j, s)
+		Loop
+		matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
+		Do While matcher1.Find = True
+			Dim s As String = matcher1.Group(1)
+			If s.Contains("pdf") Or s.Contains("PDF") Then
+				If s.Contains("607") Then
+					s = "607"
 					s = s & ";" & j
+					s = s.Trim
+					mL.Put(s, matcher1.Group(1))
+				Else
+					s = s.SubString(s.LastIndexOf("/")+1)
+					s = s.SubString2(0, s.IndexOf("."))
+					s = s & ";" & j
+					s = s.Trim
 					mL.Put(s, matcher1.Group(1))
 				End If
-			Loop
-		Next
-	Next
+			Else
+				s = s.SubString(s.IndexOf("=")+1)
+				s = s & ";" & j
+				mL.Put(s, matcher1.Group(1))
+			End If
+		Loop
+	End If
 
+	Log(mB)
+	Log(mL)
 	Dim Cursor1 As Cursor
 	For i = 0 To mB.Size - 1
 		Dim kljuc As String = mB.GetKeyAt(i)
 		Dim brL As Int = kljuc.SubString2(0, kljuc.IndexOf(";"))
+		Log(brL)
 		Dim naL As String = mB.Get(kljuc)
+		Log(naL)
 		Dim lnk As String = mL.Get(kljuc)
+		Log(lnk)
 		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
 		If Cursor1.RowCount = 0 Then
 			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
 		End If
 	Next
 	If Cursor1.IsInitialized Then Cursor1.Close
-	ProgressDialogHide
+'	ProgressDialogHide
 	End Sub
 
 Sub o_Click
@@ -583,6 +633,13 @@ Sub Activity_Resume
 		Log("activity_resume")
 		awake.KeepAlive(True)
 	End If
+
+	For Each v As View In Activity.GetAllViewsRecursive
+		If v.Tag Is B4XLoadingIndicator And v.Visible = True Then
+			Dim x As B4XLoadingIndicator = v.Tag
+			x.Show
+		End If
+	Next
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -624,7 +681,7 @@ Sub DodajStavke1(t As Int, d As Int)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
+	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT brojLinije, id, tip, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
 	For i = 0 To Cursor1.RowCount - 1
 		Cursor1.Position = i
 		Dim tp As VoziloData
@@ -677,7 +734,7 @@ Sub DodajStavke2(t2 As Int, d2 As Int, sielvi As CustomListView)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
+	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
 	For i = 0 To Cursor1.RowCount - 1
 		Cursor1.Position = i
 		Dim tp As VoziloData
@@ -727,7 +784,7 @@ Sub DodajStavke3(t2 As Int, d2 As Int)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
+	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
 	For i = 0 To Cursor1.RowCount - 1
 		Cursor1.Position = i
 		Dim tp As VoziloData
@@ -1558,7 +1615,10 @@ Sub droppy_onClicked(view As Object, index As Int)
 		Case 2	' pretraživanje
 			StartActivity(trazi)
 		Case 3	' osvježavanje linija
-			osvjezi_Click
+			Dim lll As List
+			lll.Initialize2(Array As String("http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251", "http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252", _
+											"http://www.zet.hr/tramvajski-prijevoz/dnevne-linije/249", "http://www.zet.hr/tramvajski-prijevoz/nocne-linije/250"))
+			osvjezi_Click(lll)
 		Case 4	' o app
 			o_Click
 	End Select
