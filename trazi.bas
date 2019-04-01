@@ -267,10 +267,12 @@ End Sub
 #Region stavka
 Sub btnDetalj_Click
 	Dim index As Int = clvTrazi.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvTrazi.GetPanel(index)
-	Dim lblN As B4XView = pnl.GetView(2)
-	Dim btn As Button = pnl.GetView(3)
-	Dim lblB As B4XView = pnl.GetView(4)
+	Dim pnl1 As Panel = clvTrazi.GetPanel(index)
+	Dim pnl2 As Panel = pnl1.GetView(0)
+	Dim lblN As Label = pnl2.GetView(0)	'2
+	Dim lblB As Label = pnl2.GetView(2)	'4
+	Dim btn As Button = pnl2.getview(5)	'3
+
 
 	Starter.nazivLinije = lblN.Text.Replace(" smjer ", " - ")'lblB.Text & " - " & lblN.Text
 	Starter.indeks = btn.Tag'index
@@ -281,14 +283,14 @@ End Sub
 
 Sub btnFavorit_Click
 	Dim index As Int = clvTrazi.GetItemFromView(Sender)
-	Dim pnl As B4XView = clvTrazi.GetPanel(index)
-	Dim btn As Button = pnl.GetView(3)
-	Dim lblN As B4XView = pnl.GetView(2)
+	Dim pnl1 As Panel = clvTrazi.GetPanel(index)
+	Dim pnl2 As Panel = pnl1.GetView(0)
+	Dim lblN As Label = pnl2.GetView(0)	'2
+	Dim btn As Button = pnl2.getview(5)	'3
 	Dim nS As String = lblN.Text
-	
+
 	nS = nS.Replace(" smjer ", " - ")
 	Dim Cursor1 As Cursor
-'	Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE tip = ${t1} AND dnevna = ${d1} AND id = ${btn.Tag}"$)
 	Cursor1 = Starter.upit.ExecQuery($"SELECT id, favorit, brojLinije, nazivLinije FROM linije WHERE id = ${btn.Tag}"$)
 	For i = 0 To Cursor1.RowCount - 1
 		Cursor1.Position = i

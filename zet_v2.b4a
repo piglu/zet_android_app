@@ -1,4 +1,4 @@
-﻿Build1=Default,com.piglu.zet,Full,Ads
+﻿Build1=Default,com.stanks.zet_v2,Full,Ads
 File1=arrow.png
 File10=clv_tab_strip3.bal
 File11=clv_tab_strip4.bal
@@ -161,8 +161,8 @@ Library8=sql
 Library9=firebasenotifications
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'.NoActionBar~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
 Module1=Starter
-Module10=todo
-Module11=B4XDrawer
+Module10=B4XDrawer
+Module11=todo
 Module12=lok_123_karta2
 Module13=MiniSearchView
 Module14=B4XLoadingIndicator
@@ -470,7 +470,14 @@ Sub osvjezi_Click(linkovi As List)
 		j.Download(link) 'link
 		Wait For (j) JobDone(j As HttpJob)
 		If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
-			ParsajSveAutobusneDnevneLinije(j.GetString)
+			If link.Contains("dnevne-linije-251") Then
+				ParsajSveAutobusneDnevneLinije(j.GetString)
+			Else
+				' noćne autobus
+				' dnevne tramvaj
+				' noćne tramvaj
+				ParsajOstaleLinije(j.GetString)
+			End If
 		Else
 			Log("Greška kod D/L: " & j.ErrorMessage)
 		End If
@@ -492,83 +499,52 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
 	stranica = stranica.Replace("&nbsp;", " ")
 
-	If stranica.Contains("dnevne-linije-251") Then
-		Dim components() As String
-		components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
-		Dim mB, mL As Map
-		mB.Initialize
-		mL.Initialize
-		For i = 1 To components.Length - 1
-			Dim s As String = components(i)
-			Dim components2() As String
-			components2 = Regex.Split("<ul>", s)
-			For j = 1 To components2.Length - 1
-				matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
-				Do While matcher1.Find = True
-					Dim s As String = matcher1.Group(2)
-					If s.Contains("SASI") Then
-						s = "ZAGREB (ZAPRUĐE) - SASI"
-					End If
-					s = s.Trim
-					mB.Put(matcher1.Group(1) & ";" & j, s)
-				Loop
-				matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
-				Do While matcher1.Find = True
-					Dim s As String = matcher1.Group(1)
-					If s.Contains("pdf") Or s.Contains("PDF") Then
-						If s.Contains("607") Then
-							s = "607"
-							s = s & ";" & j
-							s = s.Trim
-							mL.Put(s, matcher1.Group(1))
-						Else
-							s = s.SubString(s.LastIndexOf("/")+1)
-							s = s.SubString2(0, s.IndexOf("."))
-							s = s & ";" & j
-							s = s.Trim
-							mL.Put(s, matcher1.Group(1))
-						End If
-					Else
-						s = s.SubString(s.IndexOf("=")+1)
+	Dim components() As String
+	components = Regex.Split($"<h3>(.*)</h3>"$, stranica)
+	Dim mB, mL As Map
+	mB.Initialize
+	mL.Initialize
+	For i = 1 To components.Length - 1
+		Dim s As String = components(i)
+		Dim components2() As String
+		components2 = Regex.Split("<ul>", s)
+		For j = 1 To components2.Length - 1
+			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
+			Do While matcher1.Find = True
+				Dim s As String = matcher1.Group(2)
+				If s.Contains("SASI") Then
+					s = "ZAGREB (ZAPRUĐE) - SASI"
+				End If
+				s = s.Trim
+				mB.Put(matcher1.Group(1) & ";" & j, s)
+			Loop
+			matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
+			Do While matcher1.Find = True
+				Dim s As String = matcher1.Group(1)
+				If s.Contains("pdf") Or s.Contains("PDF") Then
+					If s.Contains("607") Then
+						s = "607"
 						s = s & ";" & j
+						s = s.Trim
+						mL.Put(s, matcher1.Group(1))
+					Else
+						s = s.SubString(s.LastIndexOf("/")+1)
+						s = s.SubString2(0, s.IndexOf("."))
+						s = s & ";" & j
+						s = s.Trim
 						mL.Put(s, matcher1.Group(1))
 					End If
-				Loop
-			Next
-		Next
-	Else
-		matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
-		Do While matcher1.Find = True
-			Dim s As String = matcher1.Group(2)
-			s = s.Trim
-			mB.Put(matcher1.Group(1) & ";" & j, s)
-		Loop
-		matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
-		Do While matcher1.Find = True
-			Dim s As String = matcher1.Group(1)
-			If s.Contains("pdf") Or s.Contains("PDF") Then
-				If s.Contains("607") Then
-					s = "607"
-					s = s & ";" & j
-					s = s.Trim
-					mL.Put(s, matcher1.Group(1))
 				Else
-					s = s.SubString(s.LastIndexOf("/")+1)
-					s = s.SubString2(0, s.IndexOf("."))
+					s = s.SubString(s.IndexOf("=")+1)
 					s = s & ";" & j
-					s = s.Trim
 					mL.Put(s, matcher1.Group(1))
 				End If
-			Else
-				s = s.SubString(s.IndexOf("=")+1)
-				s = s & ";" & j
-				mL.Put(s, matcher1.Group(1))
-			End If
-		Loop
-	End If
+			Loop
+		Next
+	Next
 
-	Log(mB)
-	Log(mL)
+'	Log(mB)
+'	Log(mL)
 	Dim Cursor1 As Cursor
 	For i = 0 To mB.Size - 1
 		Dim kljuc As String = mB.GetKeyAt(i)
@@ -579,13 +555,98 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 		Dim lnk As String = mL.Get(kljuc)
 		Log(lnk)
 		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
-		If Cursor1.RowCount = 0 Then
+		If Cursor1.RowCount = 0 Then	' dodaj novu liniju
 			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
+		Else
+			' ili apdejtaj staru
+			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${lnk}' WHERE brojLinije = ${brL} AND nazivLinije = '${naL}'"$)
 		End If
 	Next
 	If Cursor1.IsInitialized Then Cursor1.Close
 '	ProgressDialogHide
-	End Sub
+End Sub
+
+Sub ParsajOstaleLinije(stranica As String)
+	Dim matcher1 As Matcher
+
+'	File.Copy(Starter.SourceFolder, "linije.db", Starter.SourceFolder, "linije.db.orig")
+
+	' regex za sve autobusne dnevne linije za PDF datoteku odnosno za okretišta (trenutno 29) <a data-fileid="\d+" href="(.*)">(.*)</a>\s+
+	'
+	' regex za linije sa brojem -> >(\d+)(.*)</a></li>
+	' regex za linkove href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)"
+	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
+	stranica = stranica.Replace("&nbsp;", " ")
+
+	Dim mB, mL As Map
+	mB.Initialize
+	mL.Initialize
+	Dim i As Int = 0
+
+	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
+	Do While matcher1.Find = True
+		Dim s As String = matcher1.Group(2)
+		s = s.Trim
+		mB.Put(matcher1.Group(1) & ";" & i, s)
+		i = i + 1
+	Loop
+
+	Dim i As Int = 0
+	matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, stranica)
+	Do While matcher1.Find = True
+		Dim s As String = matcher1.Group(1)
+		If s.Contains("pdf") Or s.Contains("PDF") Then
+			If s.Contains("607") Then
+				s = "607"
+				s = s & ";" & i
+				s = s.Trim
+				mL.Put(s, matcher1.Group(1))
+			Else
+				s = s.SubString(s.LastIndexOf("/")+1)
+				s = s.SubString2(0, s.IndexOf("."))
+				s = s & ";" & i
+				s = s.Trim
+				mL.Put(s, matcher1.Group(1))
+			End If
+			i = i + 1
+		Else
+			s = s.SubString(s.IndexOf("=")+1)
+			s = s & ";" & i
+			mL.Put(s, matcher1.Group(1))
+			i = i + 1
+		End If
+	Loop
+
+'	Log(mB)
+'	Log(mL)
+	Dim Cursor1 As Cursor
+	For i = 0 To mB.Size - 1
+		Dim kljuc As String = mB.GetKeyAt(i)
+		Dim brL As Int = kljuc.SubString2(0, kljuc.IndexOf(";"))
+		Log(brL)
+		Dim naL As String = mB.Get(kljuc)
+		Log(naL)
+		Dim lnk As String = mL.Get(kljuc)
+		Log(lnk)
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
+		If Cursor1.RowCount = 0 Then	' ubaci nove linije
+			If stranica.Contains("nocne-linije-252") Then
+				' ubaci nove autobus noćne linije
+				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 2, '${lnk}', 1, 1)"$)
+			Else If stranica.Contains("dnevne-linije") Then
+				' ubaci nove tramvaj dnevne linije
+				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
+			Else if stranica.Contains("nocne-linije") Then
+				' ubaci nove tramvaj noćne linije
+				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${brL}, '${naL}', 2, '${lnk}', 1, 1)"$)
+			End If
+		Else
+			' ili apdejtaj staru liniju
+			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${lnk}' WHERE brojLinije = ${brL} AND nazivLinije = '${naL}'"$)
+		End If
+	Next
+	If Cursor1.IsInitialized Then Cursor1.Close
+End Sub
 
 Sub o_Click
 	MsgboxAsync("Vozni red ZET autobusnih i tramvajskih linija.", "ZET v1.0")
