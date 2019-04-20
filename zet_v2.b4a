@@ -1,4 +1,4 @@
-﻿Build1=Default,com.stanks.zet_v2,Full,Ads
+﻿Build1=Default,com.dstanko.voznired,Full,Ads
 File1=arrow.png
 File10=clv_tab_strip3.bal
 File11=clv_tab_strip4.bal
@@ -152,6 +152,7 @@ Library23=xui
 Library24=viewsex
 Library25=sd_bottomenu
 Library26=bitmapcreator
+Library27=firebaseanalytics
 Library3=okhttputils2
 Library4=runtimepermissions
 Library5=googlemaps
@@ -159,7 +160,7 @@ Library6=json
 Library7=javaobject
 Library8=sql
 Library9=firebasenotifications
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'.NoActionBar~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:exported="false" />~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~AddApplicationText(~\n~<meta-data~\n~  android:name="com.google.android.geo.API_KEY"~\n~  android:value="AIzaSyDcDgSJf0YZKaPnFB3DZpUhM3oLRbzkobM" />~\n~)~\n~'********* TabStrip ***********************~\n~CreateResource(drawable, background_tab.xml, ~\n~<selector xmlns:android="http://schemas.android.com/apk/res/android" ~\n~	android:exitFadeDuration="@android:integer/config_shortAnimTime">~\n~    <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />~\n~    <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>~\n~    <item android:drawable="@android:color/transparent"/>~\n~</selector>)~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="background_tab_pressed">#6633B5E5</color>~\n~</resources>)~\n~'******************************************~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddManifestText(<uses-feature android:name="android.hardware.location.gps"/>)~\n~AddManifestText(<uses-feature android:name="android.permission.ACCESS_FINE_LOCATION" android:required="false" />)~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~~\n~'SetApplicationAttribute(android:theme, "@style/Theme.AppCompat")~\n~SetApplicationAttribute(android:theme, "@style/MyAppTheme")~\n~'.NoActionBar~\n~CreateResource(values, theme1.xml,~\n~<resources>~\n~    <style name="MyAppTheme" parent="Theme.AppCompat.Light">~\n~        <item name="colorPrimary">#0098FF</item>~\n~        <item name="colorPrimaryDark">#007CF5</item>~\n~        <item name="colorAccent">#AAAA00</item>~\n~        <item name="windowNoTitle">true</item>~\n~        <item name="windowActionBar">false</item>~\n~    </style>~\n~</resources>~\n~)
 Module1=Starter
 Module10=B4XDrawer
 Module11=todo
@@ -175,9 +176,9 @@ Module7=fav
 Module8=detalj
 Module9=detalj_stanice
 NumberOfFiles=66
-NumberOfLibraries=26
+NumberOfLibraries=27
 NumberOfModules=14
-Version=8.8
+Version=9
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: ZET
@@ -305,20 +306,12 @@ Sub Activity_Create(FirstTime As Boolean)
 		TabStrip1.LoadLayout("clv_tab_strip3", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF185)).Typeface(Typeface.DEFAULT_BOLD).Append(" Dnevne linije").PopAll)
 		TabStrip1.LoadLayout("clv_tab_strip4", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF238)).Typeface(Typeface.DEFAULT).Append(" ").Typeface(Typeface.FONTAWESOME).Append(Chr(0xF186)).Typeface(Typeface.DEFAULT_BOLD).Append(" Noćne linije").PopAll)
 		TabStrip1.LoadLayout("clv_tab_strip5", cs.Initialize.Typeface(Typeface.FONTAWESOME).Append(Chr(0xF004)).Typeface(Typeface.DEFAULT).Append(" ").Append(" Favoriti").PopAll)
-		''		tse.DividerColor(TabStrip1, Colors.White)
-''		tse.TabTextColor(TabStrip1, Colors.Blue, Colors.Red, 0)
-''		tse.IndicatorColor(TabStrip1, Colors.White)
-'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 1)
-'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 2)
-'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 3)
-'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 4)
-'		tse.SetTextGravity(TabStrip1, Bit.Or(Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL), 5)
 		For Each lbl As Label In GetAllTabLabels(TabStrip1)
 			lbl.Typeface = Typeface.FONTAWESOME
 		Next
 		TabStrip1_PageSelected(0)
 
-		pop.Initialize("Droppy", ImageView1)
+		pop.Initialize("droppy", ImageView1)
 		pop.setXOffset(10)
 		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
 
@@ -326,30 +319,8 @@ Sub Activity_Create(FirstTime As Boolean)
 		
 	Else if izgledBroj = 3 Then
 		Activity.LoadLayout("mejn3_2")
-'		Drawer.Initialize(Me, "Drawer", Activity, 300dip)
-'		IME.Initialize("ime")
-'		IME.AddHeightChangedEvent
-'		Drawer.CenterPanel.LoadLayout("mejn3")
-'
-'		ToolbarHelper.Initialize
-'		ToolbarHelper.ShowUpIndicator = True 'set to true to show the up arrow
-'		Dim bd As BitmapDrawable
-'		bd.Initialize(LoadBitmap(File.DirAssets, "meni2.png"))
-'		ToolbarHelper.UpIndicatorDrawable = bd
-'		ACToolBarLight1.InitMenuListener
-'		Drawer.LeftPanel.LoadLayout("lijevi_meni")
-'		Dim l As List
-'		l.Initialize2(Array As String("Dnevne linije", "Noćne linije", "Dnevne linije", "Noćne linije", "Favoriti"))
-'		Dim l2 As List
-'		l2.Initialize2(Array As String("bus", "bus", "tram", "tram", "fav"))
-'		For i = 0 To l.Size - 1
-'			clv_meni.Add(CreateItem(clv_meni.AsView.Width, l.Get(i), LoadBitmap(File.DirAssets, l2.Get(i) & ".png")), "")
-'		Next
-'
-'		If Not(Drawer.LeftOpen) Then
-'			Drawer.LeftOpen = True
-'		End If
-		pop.Initialize("Droppy", ImageView1)
+
+		pop.Initialize("droppy", ImageView1)
 		pop.setXOffset(10)
 		pop.addMenuItem2("Postavke", "postavke").addMenuItem2("Kontrole", "kontrole").addMenuItem2("Pretraživanje", "trazi").addMenuItem2("Osvježavanje", "osvjezi").addSeparator.addMenuItem2("O...", "o").addclickcallback.addonDismissCallback.addSeparator.triggerOnAnchorClick(True).build
 
@@ -453,7 +424,14 @@ Sub trazi_Click
 	StartActivity(trazi)
 End Sub
 
-Sub osvjezi_Click(linkovi As List)
+Sub osvjezi_Click
+	Dim lll As List
+	lll.Initialize2(Array As String("http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251", "http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252", _
+											"http://www.zet.hr/tramvajski-prijevoz/dnevne-linije/249", "http://www.zet.hr/tramvajski-prijevoz/nocne-linije/250"))
+	osvjezavanje(lll)
+End Sub
+
+Sub osvjezavanje(linkovi As List)
 '	Msgbox("Osvježavanje linija još ne radi dobro!", "Info")
 
 	' noćne autobusne linije -> http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252
@@ -463,7 +441,6 @@ Sub osvjezi_Click(linkovi As List)
 	' autobus dnevne linije -> http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251
 	'
 	For Each link As String In linkovi
-'		ProgressDialogShow2("Preuzimam podatke o linijama...", False)
 		B4XLoadingIndicator1.Show
 		Dim j As HttpJob
 		j.Initialize("", Me) 'name is empty as it is no longer needed
@@ -472,11 +449,12 @@ Sub osvjezi_Click(linkovi As List)
 		If j.Success Then 'And j.getstring.Contains("<table class='table raspored table-striped'>") Then
 			If link.Contains("dnevne-linije-251") Then
 				ParsajSveAutobusneDnevneLinije(j.GetString)
-			Else
-				' noćne autobus
-				' dnevne tramvaj
-				' noćne tramvaj
-				ParsajOstaleLinije(j.GetString)
+			Else if link.Contains("nocne-linije/250") Then	' noćne tramvaj
+				ParsajSveTramvajskeNocneLinije(j.GetString)
+			else if link.Contains("nocne-linije-252") Then	' noćne autobus
+				ParsajSveAutobusneNocneLinije(j.GetString)
+			Else	' dnevne tramvaj
+				ParsajSveTramvajskeDnevneLinije(j.GetString)
 			End If
 		Else
 			Log("Greška kod D/L: " & j.ErrorMessage)
@@ -509,7 +487,7 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 		Dim components2() As String
 		components2 = Regex.Split("<ul>", s)
 		For j = 1 To components2.Length - 1
-			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))
+			matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, components2(j))	' brojevi i nazivi linija
 			Do While matcher1.Find = True
 				Dim s As String = matcher1.Group(2)
 				If s.Contains("SASI") Then
@@ -518,6 +496,7 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 				s = s.Trim
 				mB.Put(matcher1.Group(1) & ";" & j, s)
 			Loop
+			' linkovi linija
 			matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, components2(j))
 			Do While matcher1.Find = True
 				Dim s As String = matcher1.Group(1)
@@ -540,6 +519,7 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 					mL.Put(s, matcher1.Group(1))
 				End If
 			Loop
+			j = j + 1
 		Next
 	Next
 
@@ -549,11 +529,11 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 	For i = 0 To mB.Size - 1
 		Dim kljuc As String = mB.GetKeyAt(i)
 		Dim brL As Int = kljuc.SubString2(0, kljuc.IndexOf(";"))
-		Log(brL)
+'		Log(brL)
 		Dim naL As String = mB.Get(kljuc)
-		Log(naL)
+'		Log(naL)
 		Dim lnk As String = mL.Get(kljuc)
-		Log(lnk)
+'		Log(lnk)
 		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
 		If Cursor1.RowCount = 0 Then	' dodaj novu liniju
 			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
@@ -563,89 +543,138 @@ Sub ParsajSveAutobusneDnevneLinije(stranica As String)
 		End If
 	Next
 	If Cursor1.IsInitialized Then Cursor1.Close
-'	ProgressDialogHide
+'	Log(mB)
+'	Log(mL)
 End Sub
 
-Sub ParsajOstaleLinije(stranica As String)
+Sub ParsajSveAutobusneNocneLinije(stranica As String)
 	Dim matcher1 As Matcher
+	Dim mB, mL, mN As Map
 
-'	File.Copy(Starter.SourceFolder, "linije.db", Starter.SourceFolder, "linije.db.orig")
-
-	' regex za sve autobusne dnevne linije za PDF datoteku odnosno za okretišta (trenutno 29) <a data-fileid="\d+" href="(.*)">(.*)</a>\s+
-	'
-	' regex za linije sa brojem -> >(\d+)(.*)</a></li>
-	' regex za linkove href="(http://www.zet.hr/raspored-voznji/325\?route_id=\d+)"
-	' regex za pdf-ove i brojeve linija href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)" ili možda malo bolji regex href="(http://www.zet.hr/UserDocsImages/Voznired/(\d+|\d+[A].*).pdf)"
-	stranica = stranica.Replace("&nbsp;", " ")
-
-	Dim mB, mL As Map
 	mB.Initialize
 	mL.Initialize
+	mN.Initialize
 	Dim i As Int = 0
-
-	matcher1 = Regex.Matcher($">(\d+)(.*)</a></li>"$, stranica)
+	stranica = stranica.Replace("&nbsp;", " ")
+	' broj linija, link linija, naziv linija
+	matcher1 = Regex.Matcher($"<li><a\s+(?:[^>]*?\s+)?href="([^"]+\?[^"]+|.*\d+.pdf)".*>(.*)</a></li>"$, stranica)
 	Do While matcher1.Find = True
+		mL.Put(i, matcher1.Group(1))
 		Dim s As String = matcher1.Group(2)
+		s = s.SubString2(0, s.IndexOf(" "))
 		s = s.Trim
-		mB.Put(matcher1.Group(1) & ";" & i, s)
+		mB.Put(i, s)
+		Dim s As String = matcher1.Group(2)
+		s = s.SubString2(s.IndexOf(" "), s.Length)
+		s = s.Trim
+		mN.Put(i, s)
 		i = i + 1
 	Loop
 
-	Dim i As Int = 0
-	matcher1 = Regex.Matcher($"(http://www.zet.hr/raspored-voznji/325\?route_id=\d+|http://www.zet.hr/UserDocsImages/Voznired/(\d+.*).pdf)""$, stranica)
-	Do While matcher1.Find = True
-		Dim s As String = matcher1.Group(1)
-		If s.Contains("pdf") Or s.Contains("PDF") Then
-			If s.Contains("607") Then
-				s = "607"
-				s = s & ";" & i
-				s = s.Trim
-				mL.Put(s, matcher1.Group(1))
-			Else
-				s = s.SubString(s.LastIndexOf("/")+1)
-				s = s.SubString2(0, s.IndexOf("."))
-				s = s & ";" & i
-				s = s.Trim
-				mL.Put(s, matcher1.Group(1))
-			End If
-			i = i + 1
-		Else
-			s = s.SubString(s.IndexOf("=")+1)
-			s = s & ";" & i
-			mL.Put(s, matcher1.Group(1))
-			i = i + 1
-		End If
-	Loop
-
-'	Log(mB)
-'	Log(mL)
 	Dim Cursor1 As Cursor
 	For i = 0 To mB.Size - 1
-		Dim kljuc As String = mB.GetKeyAt(i)
-		Dim brL As Int = kljuc.SubString2(0, kljuc.IndexOf(";"))
-		Log(brL)
-		Dim naL As String = mB.Get(kljuc)
-		Log(naL)
-		Dim lnk As String = mL.Get(kljuc)
-		Log(lnk)
-		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${brL} AND nazivLinije = '${naL}' AND link = '${lnk}'"$)
-		If Cursor1.RowCount = 0 Then	' ubaci nove linije
-			If stranica.Contains("nocne-linije-252") Then
-				' ubaci nove autobus noćne linije
-				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${brL}, '${naL}', 2, '${lnk}', 1, 1)"$)
-			Else If stranica.Contains("dnevne-linije") Then
-				' ubaci nove tramvaj dnevne linije
-				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${brL}, '${naL}', 1, '${lnk}', 1, 1)"$)
-			Else if stranica.Contains("nocne-linije") Then
-				' ubaci nove tramvaj noćne linije
-				Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${brL}, '${naL}', 2, '${lnk}', 1, 1)"$)
-			End If
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}' AND link = '${mL.GetValueAt(i)}'"$)
+		If Cursor1.RowCount = 0 Then	' dodaj novu liniju
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 1, ${mB.GetValueAt(i)}, '${mN.GetValueAt(i)}', 2, '${mL.GetValueAt(i)}', 1, 1)"$)
 		Else
-			' ili apdejtaj staru liniju
-			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${lnk}' WHERE brojLinije = ${brL} AND nazivLinije = '${naL}'"$)
+			' ili apdejtaj staru
+			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${mL.GetValueAt(i)}' WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}'"$)
 		End If
 	Next
 	If Cursor1.IsInitialized Then Cursor1.Close
+'	Log(mB)
+'	Log(mL)
+'	Log(mN)
+End Sub
+
+Sub ParsajSveTramvajskeDnevneLinije(stranica As String)
+	Dim matcher1 As Matcher
+	Dim mB, mL, mN As Map
+
+	mB.Initialize
+	mL.Initialize
+	mN.Initialize
+	Dim i As Int = 0
+	stranica = stranica.Replace("&nbsp;", " ")
+	' broj linije, link za liniju, naziv linije
+	matcher1 = Regex.Matcher($"<span class="num">(\d+)</span><a\s+(?:[^>]*?\s+)?href="([^"]+\?[^"]+|.*\d+.pdf)".*>(.*)</a></li>"$, stranica)
+	Do While matcher1.Find = True
+		mB.Put(i, matcher1.Group(1))
+		mL.Put(i, matcher1.Group(2))
+		mN.Put(i, matcher1.Group(3))
+		i = i + 1
+	Loop
+	Log(i)
+	' broj 1
+	' broj linije, link za liniju, naziv linije
+	matcher1 = Regex.Matcher($"<span class="num">(\d+)</span></a><a\s+data-fileid="\d+" (?:[^>]*?\s+)?href="([^"]+\?[^"]+)".*>(.*)</a></li>"$, stranica)
+	Do While matcher1.Find = True
+		mB.Put(i, matcher1.Group(1))
+		mL.Put(i, matcher1.Group(2))
+		mN.Put(i, matcher1.Group(3))
+		i = i + 1
+	Loop
+	Log(i)
+	' broj 17
+	'<a\s+href="(.*)"><span class="num">(17)</span>(.*)</a></li>
+	' link za linju, broj linije, naziv linije
+	matcher1 = Regex.Matcher($"<a\s+href="(.*)"><span class="num">(17)</span>(.*)</a></li>"$, stranica)
+	Do While matcher1.Find = True
+		mL.Put(i, matcher1.Group(1))
+		mB.Put(i, matcher1.Group(2))
+		mN.Put(i, matcher1.Group(3))
+		i = i + 1
+	Loop
+	
+	Dim Cursor1 As Cursor
+	For i = 0 To mB.Size - 1
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}' AND link = '${mL.GetValueAt(i)}'"$)
+		If Cursor1.RowCount = 0 Then	' dodaj novu liniju
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${mB.GetValueAt(i)}, '${mN.GetValueAt(i)}', 1, '${mL.GetValueAt(i)}', 1, 1)"$)
+		Else
+			' ili apdejtaj staru
+			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${mL.GetValueAt(i)}' WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}'"$)
+		End If
+	Next
+	If Cursor1.IsInitialized Then Cursor1.Close
+'	Log(mB)
+'	Log(mL)
+'	Log(mN)
+End Sub
+
+Sub ParsajSveTramvajskeNocneLinije(stranica As String)
+	Dim matcher1 As Matcher
+	Dim mB, mL, mN As Map
+
+	mB.Initialize
+	mL.Initialize
+	mN.Initialize
+	Dim i As Int = 0
+	stranica = stranica.Replace("&nbsp;", " ")
+	' broj linija, link linija, naziv linija
+	matcher1 = Regex.Matcher($"<li><span class="num">(\d+)</span><a\s+(?:[^>]*?\s+)?href="([^"]+\?[^"]+|.*\d+.pdf)".*>(.*)</a></li>"$, stranica)
+	Do While matcher1.Find = True
+		mB.Put(i, matcher1.Group(1))
+		mL.Put(i, matcher1.Group(2))
+		mN.Put(i, matcher1.Group(3))
+		i = i + 1
+	Loop
+
+	Dim Cursor1 As Cursor
+	For i = 0 To mB.Size - 1
+		Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, nazivLinije, link FROM linije WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}' AND link = '${mL.GetValueAt(i)}'"$)
+		' dodaj novu liniju
+		If Cursor1.RowCount = 0 Then
+			Starter.upit.ExecNonQuery($"INSERT INTO linije VALUES (?, 2, ${mB.GetValueAt(i)}, '${mN.GetValueAt(i)}', 2, '${mL.GetValueAt(i)}', 1, 1)"$)
+		Else
+			' ili apdejtaj staru
+			Starter.upit.ExecNonQuery($"UPDATE linije SET link = '${mL.GetValueAt(i)}' WHERE brojLinije = ${mB.GetValueAt(i)} AND nazivLinije = '${mN.GetValueAt(i)}'"$)
+		End If
+	Next
+	If Cursor1.IsInitialized Then Cursor1.Close
+'	Log(mB)
+'	Log(mL)
+'	Log(mN)
 End Sub
 
 Sub o_Click
@@ -742,47 +771,49 @@ Sub DodajStavke1(t As Int, d As Int)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT brojLinije, id, tip, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-		Dim tp As VoziloData
-		tp.Initialize
-		tp.id = Cursor1.GetInt("id")
-		Dim tt As Int = Cursor1.GetInt("dnevna")
-		If tt = 1 Then
-			tp.brl = Cursor1.GetInt("brojLinije")
-		Else
-			tp.brl = Cursor1.GetInt("brojLinije") & "N"
-		End If
-		tp.i1 = img1
-		tp.lnkLinije = Cursor1.GetString("link")
-		If tp.lnkLinije.Contains("pdf") Then
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
-		Else
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
-		End If
-		tp.i2 = img2
-		tp.wdg = Cursor1.GetInt("widget")
-		If tp.wdg = 1 Then
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
-		Else
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
-		End If
-		tp.i3 = img3
-		tp.nal = Cursor1.GetString("nazivLinije")
-		tp.f = Cursor1.GetInt("favorit")
-		tp.t = Cursor1.GetInt("tip")
-		tp.d = Cursor1.GetInt("dnevna")
-'		Dim p As B4XView = xui.CreatePanel("")
-'		p.SetColorAndBorder(Colors.Transparent, 2dip, Colors.Black, 10dip)
-'		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 88dip)'108dip)
-		Dim p As Panel
-		p.Initialize("")
-		p.Elevation = 4dip
-		p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 100dip)'108dip)
-		clvMejn.Add(p, tp)
-	Next
-	Cursor1.Close
+	Cursor1 = Starter.upit.ExecQuery($"SELECT brojLinije, id, tip, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
+'	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT brojLinije FROM linije WHERE tip = ${t} AND dnevna = ${d} ORDER by brojLinije"$)
+	If Cursor1.RowCount > 1 Then
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Dim tp As VoziloData
+			tp.Initialize
+			tp.id = Cursor1.GetInt("id")
+			Dim tt As Int = Cursor1.GetInt("dnevna")
+			If tt = 1 Then
+				tp.brl = Cursor1.GetInt("brojLinije")
+			Else
+				tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			End If
+			tp.i1 = img1
+			tp.lnkLinije = Cursor1.GetString("link")
+			If tp.lnkLinije.Contains("pdf") Then
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
+			Else
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+			End If
+			tp.i2 = img2
+			tp.wdg = Cursor1.GetInt("widget")
+			If tp.wdg = 1 Then
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			tp.i3 = img3
+			tp.nal = Cursor1.GetString("nazivLinije")
+			tp.f = Cursor1.GetInt("favorit")
+			tp.t = Cursor1.GetInt("tip")
+			tp.d = Cursor1.GetInt("dnevna")
+			Dim p As Panel
+			p.Initialize("")
+			p.Elevation = 4dip
+			p.SetLayoutAnimated(0, 0, 0, clvMejn.AsView.Width, 100dip)'108dip)
+			clvMejn.Add(p, tp)
+		Next
+		Cursor1.Close
+	Else
+		ToastMessageShow("Nema podataka!", False)
+	End If
 End Sub
 
 Sub DodajStavke2(t2 As Int, d2 As Int, sielvi As CustomListView)
@@ -795,44 +826,46 @@ Sub DodajStavke2(t2 As Int, d2 As Int, sielvi As CustomListView)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-		Dim tp As VoziloData
-		tp.Initialize
-		tp.id = Cursor1.GetInt("id")
-		Dim tt As Int = Cursor1.GetInt("dnevna")
-		If tt = 1 Then
-			tp.brl = Cursor1.GetInt("brojLinije")
-		Else
-			tp.brl = Cursor1.GetInt("brojLinije") & "N"
-		End If
-		tp.i1 = img1
-		tp.lnkLinije = Cursor1.GetString("link")
-		If tp.lnkLinije.Contains("pdf") Then
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
-		Else
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
-		End If
-		tp.i2 = img2
-		tp.wdg = Cursor1.GetInt("widget")
-		If tp.wdg = 1 Then
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
-		Else
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
-		End If
-		tp.i3 = img3
-		tp.nal = Cursor1.GetString("nazivLinije")
-		tp.f = Cursor1.GetInt("favorit")
-		tp.t = Cursor1.GetInt("tip")
-		tp.d = Cursor1.GetInt("dnevna")
-		Dim p As Panel
-		p.Initialize("")
-		p.Elevation = 4dip
-		p.SetLayoutAnimated(0, 0, 0, sielvi.AsView.Width, 100dip)'108dip)
-		sielvi.Add(p, tp)
-	Next
-	Cursor1.Close
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
+	If Cursor1.RowCount > 1 Then
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Dim tp As VoziloData
+			tp.Initialize
+			tp.id = Cursor1.GetInt("id")
+			Dim tt As Int = Cursor1.GetInt("dnevna")
+			If tt = 1 Then
+				tp.brl = Cursor1.GetInt("brojLinije")
+			Else
+				tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			End If
+			tp.i1 = img1
+			tp.lnkLinije = Cursor1.GetString("link")
+			If tp.lnkLinije.Contains("pdf") Then
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
+			Else
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+			End If
+			tp.i2 = img2
+			tp.wdg = Cursor1.GetInt("widget")
+			If tp.wdg = 1 Then
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			tp.i3 = img3
+			tp.nal = Cursor1.GetString("nazivLinije")
+			tp.f = Cursor1.GetInt("favorit")
+			tp.t = Cursor1.GetInt("tip")
+			tp.d = Cursor1.GetInt("dnevna")
+			Dim p As Panel
+			p.Initialize("")
+			p.Elevation = 4dip
+			p.SetLayoutAnimated(0, 0, 0, sielvi.AsView.Width, 100dip)'108dip)
+			sielvi.Add(p, tp)
+		Next
+		Cursor1.Close
+	End If
 End Sub
 
 Sub DodajStavke3(t2 As Int, d2 As Int)
@@ -845,45 +878,46 @@ Sub DodajStavke3(t2 As Int, d2 As Int)
 	End If
 
 	Dim Cursor1 As Cursor
-	Cursor1 = Starter.upit.ExecQuery($"SELECT DISTINCT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
-	For i = 0 To Cursor1.RowCount - 1
-		Cursor1.Position = i
-		Dim tp As VoziloData
-		tp.Initialize
-		tp.id = Cursor1.GetInt("id")
-		Dim tt As Int = Cursor1.GetInt("dnevna")
-		If tt = 1 Then
-			tp.brl = Cursor1.GetInt("brojLinije")
-		Else
-			tp.brl = Cursor1.GetInt("brojLinije") & "N"
-		End If
-		tp.i1 = img1
-		tp.lnkLinije = Cursor1.GetString("link")
-		If tp.lnkLinije.Contains("pdf") Then
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
-		Else
-			Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
-		End If
-		tp.i2 = img2
-		tp.wdg = Cursor1.GetInt("widget")
-		If tp.wdg = 1 Then
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
-		Else
-			Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
-		End If
-		tp.i3 = img3
-		tp.nal = Cursor1.GetString("nazivLinije")
-		tp.f = Cursor1.GetInt("favorit")
-		tp.t = Cursor1.GetInt("tip")
-		tp.d = Cursor1.GetInt("dnevna")
-		Dim p As Panel
-		p.Initialize("")
-		p.Elevation = 4dip
-		p.SetLayoutAnimated(0, 0, 0, clv3.AsView.Width, 100dip)'108dip)
-		clv3.Add(p, tp)
-	Next
-	Cursor1.Close
-'	Drawer.LeftOpen = Not(Drawer.LeftOpen)
+	Cursor1 = Starter.upit.ExecQuery($"SELECT id, tip, brojLinije, nazivLinije, dnevna, favorit, widget, link FROM linije WHERE tip = ${t2} AND dnevna = ${d2} ORDER by brojLinije"$)
+	If Cursor1.RowCount > 1 Then
+		For i = 0 To Cursor1.RowCount - 1
+			Cursor1.Position = i
+			Dim tp As VoziloData
+			tp.Initialize
+			tp.id = Cursor1.GetInt("id")
+			Dim tt As Int = Cursor1.GetInt("dnevna")
+			If tt = 1 Then
+				tp.brl = Cursor1.GetInt("brojLinije")
+			Else
+				tp.brl = Cursor1.GetInt("brojLinije") & "N"
+			End If
+			tp.i1 = img1
+			tp.lnkLinije = Cursor1.GetString("link")
+			If tp.lnkLinije.Contains("pdf") Then
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "pdf.png", 40dip, 40dip, True)
+			Else
+				Dim img2 As Bitmap = LoadBitmapResize(File.DirAssets, "detalj.png", 40dip, 40dip, True)
+			End If
+			tp.i2 = img2
+			tp.wdg = Cursor1.GetInt("widget")
+			If tp.wdg = 1 Then
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_makni.png", 40dip, 40dip, True)
+			Else
+				Dim img3 As Bitmap = LoadBitmapResize(File.DirAssets, "widget_umetni.png", 40dip, 40dip, True)
+			End If
+			tp.i3 = img3
+			tp.nal = Cursor1.GetString("nazivLinije")
+			tp.f = Cursor1.GetInt("favorit")
+			tp.t = Cursor1.GetInt("tip")
+			tp.d = Cursor1.GetInt("dnevna")
+			Dim p As Panel
+			p.Initialize("")
+			p.Elevation = 4dip
+			p.SetLayoutAnimated(0, 0, 0, clv3.AsView.Width, 100dip)'108dip)
+			clv3.Add(p, tp)
+		Next
+		Cursor1.Close
+	End If
 End Sub
 
 Sub clvMejn_VisibleRangeChanged (FirstIndex As Int, LastIndex As Int)
@@ -1676,10 +1710,11 @@ Sub droppy_onClicked(view As Object, index As Int)
 		Case 2	' pretraživanje
 			StartActivity(trazi)
 		Case 3	' osvježavanje linija
-			Dim lll As List
-			lll.Initialize2(Array As String("http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251", "http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252", _
-											"http://www.zet.hr/tramvajski-prijevoz/dnevne-linije/249", "http://www.zet.hr/tramvajski-prijevoz/nocne-linije/250"))
-			osvjezi_Click(lll)
+			osvjezi_Click
+'			Dim lll As List
+'			lll.Initialize2(Array As String("http://www.zet.hr/autobusni-prijevoz/dnevne-linije-251/251", "http://www.zet.hr/autobusni-prijevoz/nocne-linije-252/252", _
+'							"http://www.zet.hr/tramvajski-prijevoz/dnevne-linije/249", "http://www.zet.hr/tramvajski-prijevoz/nocne-linije/250"))
+'			osvjezavanje(lll)
 		Case 4	' o app
 			o_Click
 	End Select

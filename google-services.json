@@ -1,52 +1,37 @@
 {
   "project_info": {
-    "project_number": "236710872058",
-    "firebase_url": "https://zet-v2.firebaseio.com",
-    "project_id": "zet-v2",
-    "storage_bucket": "zet-v2.appspot.com"
+    "project_number": "1034646661606",
+    "firebase_url": "https://vozni-red-50311.firebaseio.com",
+    "project_id": "vozni-red-50311",
+    "storage_bucket": "vozni-red-50311.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:236710872058:android:14f60a2b2491b395",
+        "mobilesdk_app_id": "1:1034646661606:android:d68082a93d7390fa",
         "android_client_info": {
-          "package_name": "com.stanks.zet_v2"
+          "package_name": "com.dstanko.voznired"
         }
       },
       "oauth_client": [
         {
-          "client_id": "236710872058-83cc37ku973mvukqmdcen371pcpop718.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.stanks.zet_v2",
-            "certificate_hash": "4759094f793262cceb4189c7ae33f30b578e877e"
-          }
-        },
-        {
-          "client_id": "236710872058-01a6sk969022mskaj1sclmbg1pa8i41g.apps.googleusercontent.com",
+          "client_id": "1034646661606-c7f6868i3i37lbgav6ipnpef1kcgckej.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAC0JS6AX9sXcN_cEALLWjzA9VpqoHzuHU"
+          "current_key": "AIzaSyCXBtOo6kouTrXK2U_U1uACtAAnl5rztP4"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "236710872058-01a6sk969022mskaj1sclmbg1pa8i41g.apps.googleusercontent.com",
+              "client_id": "1034646661606-c7f6868i3i37lbgav6ipnpef1kcgckej.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

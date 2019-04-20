@@ -15,7 +15,7 @@ Sub Process_Globals
 	Public rp As RuntimePermissions
 	Public flp As FusedLocationProvider
 	Dim rv As RemoteViews
-	Private const API_KEY As String = "AIzaSyAHPnRfbzzEggfD218kHdYoArcHRhb0ww4"
+	Private const API_KEY As String = "AIzaSyAvxzVFokmoZ1PLi2HIsk5JtllJr9lP5rY"
 	Public lat, lon As Double
 	Private gps1 As GPS
 	Private lm As ESLocation2
@@ -217,15 +217,15 @@ Private Sub SendMessage(Topic As String, Title As String, Body As String)
 	Dim jg As JSONGenerator
 	jg.Initialize(m)
 	Job.PostString("https://fcm.googleapis.com/fcm/send", jg.ToString)
-	Job.GetRequest.SetContentType("application/json")';charset=UTF-8")
+	Job.GetRequest.SetContentType("application/json;charset=UTF-8")
 	Job.GetRequest.SetHeader("Authorization", "key=" & API_KEY)
 End Sub
 
 Sub JobDone(job As HttpJob)
-	Log(job.GetString)
+	Log(job)
 	If job.Success Then
 		Log("kontrola_widget -> džob dan!")
-'		Log(job.GetString)
+		Log(job.GetString)
 	End If
 	job.Release
 End Sub
